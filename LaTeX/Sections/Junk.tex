@@ -1,0 +1,1018 @@
+%!TEX root = ../Theory.tex
+
+Explicitly,
+\begin{align*}
+	\vb{T}_j &= \frac{1}{2\alpha_j\beta_j}\pmqty{
+		\beta_j e^{-ik_{z,j}z_j} & 
+		\alpha_j e^{-ik_{z,j}z_j} \\
+		-\beta_j e^{ik_{z,j}z_j} & 
+		\alpha_j e^{ik_{z,j}z_j}
+		} \cdot \pmqty{
+		\alpha_{j-1} e^{ik_{z,j-1}z_j} & 
+		-\alpha_{j-1} e^{-ik_{z,j-1}z_j} \\
+		\beta_{j-1} e^{ik_{z,j-1}z_j} & 
+		\beta_{j-1} e^{-ik_{z,j-1}z_j}
+		} \\
+		&= \frac{1}{2\alpha_j\beta_j}\pmqty{
+		\pqty{\alpha_{j-1}\beta_j + \alpha_{j}\beta_{j-1}}e^{i\pqty{k_{z,j-1}-k_{z,j}}z_j} &
+		\pqty{-\alpha_{j-1}\beta_j + \alpha_{j}\beta_{j-1}}e^{-i\pqty{k_{z,j-1}+k_{z,j}}z_j} \\
+		\pqty{-\alpha_{j-1}\beta_j + \alpha_{j}\beta_{j-1}}e^{i\pqty{k_{z,j-1}+k_{z,j}}z_j} &
+		\pqty{\alpha_{j-1}\beta_j + \alpha_{j}\beta_{j-1}}e^{-i\pqty{k_{z,j-1}-k_{z,j}}z_j}
+		}
+\end{align*}
+
+\begin{align*}
+	\vb{T}\pqty{z} &= \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		\beta\pqty{z} e^{-ik_{z}\pqty{z}z} & 
+		\alpha\pqty{z} e^{-ik_{z}\pqty{z}z} \\
+		-\beta\pqty{z} e^{ik_{z}\pqty{z}z} & 
+		\alpha\pqty{z} e^{ik_{z}\pqty{z}z}
+		} \cdot \pmqty{
+		\alpha\pqty{z-\delta z} e^{ik_{z}\pqty{z - \delta z}z} & 
+		-\alpha\pqty{z-\delta z} e^{-ik_{z}\pqty{z - \delta z}z} \\
+		\beta\pqty{z - \delta z} e^{ik_{z}\pqty{z - \delta z}z} & 
+		\beta\pqty{z - \delta z} e^{-ik_{z}\pqty{z - \delta z}z}
+		} \\
+		&= \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		\pqty{\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{i\pqty{k_{z}\pqty{z - \delta z}-k_{z}\pqty{z}}z} &
+		\pqty{-\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{-i\pqty{k_{z}\pqty{z - \delta z}+k_{z}\pqty{z}}z} \\
+		\pqty{-\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{i\pqty{k_{z}\pqty{z - \delta z}+k_{z}\pqty{z}}z} &
+		\pqty{\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{-i\pqty{k_{z}\pqty{z - \delta z}-k_{z}\pqty{z}}z}
+		}
+		&= \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		\pqty{\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{i\pqty{k_{z}\pqty{z - \delta z}-k_{z}\pqty{z}}z} &
+		\pqty{-\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{-i\pqty{k_{z}\pqty{z - \delta z}+k_{z}\pqty{z}}z} \\
+		\pqty{-\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{i\pqty{k_{z}\pqty{z - \delta z}+k_{z}\pqty{z}}z} &
+		\pqty{\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z}}e^{-i\pqty{k_{z}\pqty{z - \delta z}-k_{z}\pqty{z}}z}
+		}
+\end{align*}
+
+\begin{align*}
+	\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z} 
+	&= 2\alpha\pqty{z}\beta\pqty{z} - \beta\pqty{z}\dv{\alpha}{z}\delta z - \alpha\pqty{z}\dv{\beta}{z}\delta z \\
+	&= 2\alpha\pqty{z}\beta\pqty{z} - \dv{\pqty{\alpha\beta}}{z}\delta z
+\end{align*}
+
+\begin{align*}
+	-\alpha\pqty{z-\delta z}\beta\pqty{z} + \alpha\pqty{z}\beta\pqty{z - \delta z} 
+	&= \beta\pqty{z}\dv{\alpha}{z}\delta z - \alpha\pqty{z}\dv{\beta}{z}\delta z \\
+	&= \beta^2\pqty{z}\dv{z}\pqty{\frac{\alpha}{\beta}}\delta z
+\end{align*}
+
+\begin{align*}
+	k_{z}\pqty{z - \delta z}-k_{z}\pqty{z} &= -\dv{k_z}{z}\delta z
+\end{align*}
+
+\begin{align*}
+	k_{z}\pqty{z - \delta z} + k_{z}\pqty{z} &= 2k_{z}\pqty{z} - \dv{k_z}{z}\delta z
+\end{align*}
+
+\begin{align*}
+	\vb{T}\pqty{z} &= \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		\pqty{2\alpha\pqty{z}\beta\pqty{z} - \dv{\pqty{\alpha\beta}}{z}\delta z}e^{-i\pqty{\dv{k_z}{z}\delta z}z} &
+		\pqty{\beta^2\pqty{z}\dv{z}\pqty{\frac{\alpha}{\beta}}\delta z}e^{-i\pqty{2k_{z}\pqty{z} - \dv{k_z}{z}\delta z}z} \\
+		\pqty{\beta^2\pqty{z}\dv{z}\pqty{\frac{\alpha}{\beta}}\delta z}e^{i\pqty{2k_{z}\pqty{z} - \dv{k_z}{z}\delta z}z} &
+		\pqty{2\alpha\pqty{z}\beta\pqty{z} - \dv{\pqty{\alpha\beta}}{z}\delta z}e^{i\pqty{\dv{k_z}{z}\delta z}z}
+		} \\
+		&= \pmqty{e^{-i\pqty{\dv{k_z}{z}\delta z}z} & \\ & e^{i\pqty{\dv{k_z}{z}\delta z}z}} + \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		\pqty{ - \dv{\pqty{\alpha\beta}}{z}\delta z}e^{-i\pqty{\dv{k_z}{z}\delta z}z} &
+		\pqty{\beta^2\pqty{z}\dv{z}\pqty{\frac{\alpha}{\beta}}\delta z}e^{-i\pqty{2k_{z}\pqty{z} - \dv{k_z}{z}\delta z}z} \\
+		\pqty{\beta^2\pqty{z}\dv{z}\pqty{\frac{\alpha}{\beta}}\delta z}e^{i\pqty{2k_{z}\pqty{z} - \dv{k_z}{z}\delta z}z} &
+		\pqty{ - \dv{\pqty{\alpha\beta}}{z}\delta z}e^{i\pqty{\dv{k_z}{z}\delta z}z}
+		} \\
+		&= \pmqty{e^{-i\dd{k_z}z} & \\ & e^{i\dd{k_z}z}} + \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		- \dd\pqty{\alpha\beta}e^{-i\dd{k_z}z} &
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{-i\pqty{2k_{z}\pqty{z} - \dd{k_z}}z} \\
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{i\pqty{2k_{z}\pqty{z} - \dd{k_z}}z} &
+		- \dd\pqty{\alpha\beta}e^{i\dd{k_z}z}
+		}
+\end{align*}
+
+\begin{align*}
+	\vb{T}\pqty{z} &= \mathbb{I} + \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		- \dd\pqty{\alpha\beta} &
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{-i2k_{z}\pqty{z}z} \\
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{i2k_{z}\pqty{z}z} &
+		- \dd\pqty{\alpha\beta}
+		}
+\end{align*}
+
+\begin{align*}
+	\delta \vb{T} = \frac{1}{2\alpha\pqty{z}\beta\pqty{z}}\pmqty{
+		- \dd\pqty{\alpha\beta} &
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{-i2k_{z}\pqty{z}z} \\
+		\beta^2\pqty{z}\dd\pqty{\frac{\alpha}{\beta}}e^{i2k_{z}\pqty{z}z} &
+		- \dd\pqty{\alpha\beta}
+		}
+\end{align*}
+
+\begin{align*}
+	\prod_{z_j }\vb{T}\pqty{z_j} = \prod_{z_j} \pqty{\mathbb{I} + \delta\vb{T}\pqty{z_j}} \approx \mathbb{I} + \sum_{z_j}\delta\vb{T}\pqty{z_j} + \mathcal{O}\pqty{\delta z^2}
+\end{align*}
+
+
+
+For a sample with multiple interfaces
+\begin{align*}
+	\vb{E}_N = \pqty{\prod_{n=1}^N\cdot \vb{T}_{n}} \cdot \vb{E}_0
+\end{align*}
+
+Explicitly,
+\begin{align*}
+	E_{N,z} = T_{N,zy}T_{N-1,yx}T_{N-2,xw}\ldots T_{3,dc}T_{2,cb} T_{1,ba} E_{0,a}
+\end{align*}
+
+This is a matrix screw product
+
+The second polarisation
+\begin{align*}
+	\vb{M}_{j,j+1} 
+		&= \pmqty{
+		\cos\pqty{k_{z,j}d_j} & 
+		k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j} \\
+		k_{z,j}\sin\pqty{k_{z,j}d_j} &
+		\cos\pqty{k_{z,j}d_j}
+		}
+\end{align*}
+
+\begin{align*}
+	\vb{M}\pqty{z}
+		&= \pmqty{
+		\cos\pqty{k_{z}\pqty{z}d} & 
+		k_{z}\pqty{z}^{-1}\sin\pqty{k_{z}\pqty{z}d} \\
+		k_{z}\pqty{z}\sin\pqty{k_{z}\pqty{z}d} &
+		\cos\pqty{k_{z}\pqty{z}d}
+		}
+\end{align*}
+
+\begin{align*}
+	\dv{\vb{M}}{z}
+		&= \pmqty{
+		-\sin\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z}d & 
+		-k_{z}\pqty{z}^{-2}\sin\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z}  + k_{z}\pqty{z}^{-1}\cos\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z}d \\
+		\sin\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z} + k_{z}\pqty{z}\cos\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z}d &
+		-\sin\pqty{k_{z}\pqty{z}d}\dv{k_{z}}{z}d
+		} \\
+		&= \pmqty{
+		-\sin\pqty{k_{z}\pqty{z}d} & 
+		k_{z}\pqty{z}^{-1}\cos\pqty{k_{z}\pqty{z}d} \\
+		k_{z}\pqty{z}\cos\pqty{k_{z}\pqty{z}d} &
+		-\sin\pqty{k_{z}\pqty{z}d}
+		}\dv{k_{z}}{z}d + \pmqty{
+		0 & 
+		-k_{z}\pqty{z}^{-2}\sin\pqty{k_{z}\pqty{z}d} \\
+		\sin\pqty{k_{z}\pqty{z}d} &
+		0
+		}\dv{k_{z}}{z}
+\end{align*}
+
+\begin{align*}
+	\lim_{\delta z \to 0}\vb{M}\pqty{z}
+		&= \pmqty{
+		1 & 
+		\delta z \\
+		k_{z}^2\pqty{z}\delta z &
+		1
+		} = \mathbb{I} + \delta\vb{M}\pqty{z}
+\end{align*}
+
+\begin{align*}
+	\delta\vb{M}\pqty{z} = \pmqty{
+		0 & 
+		1 \\
+		k_{z}^2\pqty{z} &
+		0
+		}\delta z
+\end{align*}
+
+\begin{align*}
+	\prod_{z_j }\vb{M}\pqty{z_j} = \prod_{z_j} \pqty{\mathbb{I} + \delta\vb{M}\pqty{z_j}} \approx \mathbb{I} + \sum_{z_j}\delta\vb{M}\pqty{z_j} + \mathcal{O}\pqty{\delta z^2}
+\end{align*}
+
+\begin{align*}
+	\sum_{z_j}\delta\vb{M}\pqty{z_j} = \int_a^b \dd{z} \pmqty{0 & 1 \\ k_{z}^2\pqty{z} & 0}
+\end{align*}
+
+\begin{align*}
+	k_z^2\pqty{z} &= \frac{\pqty{2\pi}^2n^2\pqty{z}\alpha^2\pqty{z}}{\lambda^2} = \frac{\pqty{2\pi}^2n^2\pqty{z}}{\lambda^2}\pqty{1 - \frac{\cos^2\theta_0}{n^2\pqty{z}}} \\
+	&= \frac{\pqty{2\pi}^2}{\lambda^2}\bqty{n^2\pqty{z} - \cos^2\theta_0 }
+\end{align*}
+
+\begin{align*}
+	\vb{T} &= \vb{S}^{-1}\pqty{b}\cdot \pmqty{1 & b-a \\ \int_a^b \dd{z} k_{z}^2\pqty{z} & 1}\vb{S}\pqty{a} \\
+	&=
+	\frac{1}{2k_z\pqty{b}} 
+	\pmqty{
+		k_z\pqty{b} e^{-ik_z\pqty{b}b} &
+		e^{-ik_z\pqty{b}b}  \\
+		k_z\pqty{b} e^{ik_z\pqty{b}b} & 
+		-e^{ik_z\pqty{b}b}
+		}
+	\pmqty{1 & b-a \\ \int_a^b \dd{z} k_{z}^2\pqty{z} & 1}
+	\pmqty{
+		e^{ik_z\pqty{a}a} & 
+		e^{-ik_z\pqty{a}a}  \\
+		k_z\pqty{a} e^{ik_z\pqty{a}a} & 
+		-k_z\pqty{a} e^{-ik_z\pqty{a}a}
+		} \\
+	&=
+	\frac{1}{2k_z\pqty{b}} 
+	\pmqty{
+		k_z\pqty{b} e^{-ik_z\pqty{b}b} &
+		e^{-ik_z\pqty{b}b}  \\
+		k_z\pqty{b} e^{ik_z\pqty{b}b} & 
+		-e^{ik_z\pqty{b}b}
+		}
+	\pmqty{
+		e^{ik_z\pqty{a}a} +  \pqty{b-a} k_z\pqty{a} e^{ik_z\pqty{a}a} &
+		e^{-ik_z\pqty{a}a} - \pqty{b-a}k_z\pqty{a} e^{-ik_z\pqty{a}a} \\
+		e^{ik_z\pqty{a}a}\int_a^b \dd{z} k_{z}^2\pqty{z} + k_z\pqty{a} e^{ik_z\pqty{a}a} &
+		e^{-ik_z\pqty{a}a}\int_a^b \dd{z} k_{z}^2\pqty{z} -k_z\pqty{a} e^{-ik_z\pqty{a}a}
+		} \\
+	&=
+	\frac{1}{2k_z\pqty{b}} 
+	\pmqty{
+		k_z\pqty{b} e^{-ik_z\pqty{b}b} &
+		e^{-ik_z\pqty{b}b}  \\
+		k_z\pqty{b} e^{ik_z\pqty{b}b} & 
+		-e^{ik_z\pqty{b}b}
+		}
+	\pmqty{
+		e^{ik_z\pqty{a}a}\pqty{1 +  \pqty{b-a} k_z\pqty{a} } &
+		e^{-ik_z\pqty{a}a}\pqty{1 - \pqty{b-a}k_z\pqty{a} } \\
+		e^{ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} + k_z\pqty{a} } &
+		e^{-ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} -k_z\pqty{a} }
+		} \\
+	&=
+	\frac{1}{2k_z\pqty{b}} 
+	\pmqty{
+		k_z\pqty{b} e^{-ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{1 +  \pqty{b-a} k_z\pqty{a} } + e^{-ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} + k_z\pqty{a} } &
+		k_z\pqty{b} e^{-ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{1 - \pqty{b-a}k_z\pqty{a} } + e^{-ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} -k_z\pqty{a} }  \\
+		k_z\pqty{b} e^{ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{1 +  \pqty{b-a} k_z\pqty{a} } - e^{ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} + k_z\pqty{a} } &
+		k_z\pqty{b} e^{ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{1 - \pqty{b-a}k_z\pqty{a} } - e^{ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{\int_a^b \dd{z} k_{z}^2\pqty{z} -k_z\pqty{a} }
+		} \\
+	&=
+	\frac{1}{2k_z\pqty{b}} 
+	\pmqty{
+		e^{-ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{k_z\pqty{b} \pqty{1 +  \pqty{b-a} k_z\pqty{a} } + k_z\pqty{a} + \int_a^b \dd{z} k_{z}^2\pqty{z} } &
+		e^{-ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{k_z\pqty{b} \pqty{1 - \pqty{b-a}k_z\pqty{a} } - k_z\pqty{a} + \int_a^b \dd{z} k_{z}^2\pqty{z}  }  \\
+		e^{ik_z\pqty{b}b}e^{ik_z\pqty{a}a}\pqty{k_z\pqty{b} \pqty{1 +  \pqty{b-a} k_z\pqty{a} } - k_z\pqty{a} - \int_a^b \dd{z} k_{z}^2\pqty{z}  } &
+		e^{ik_z\pqty{b}b}e^{-ik_z\pqty{a}a}\pqty{k_z\pqty{b} \pqty{1 - \pqty{b-a}k_z\pqty{a} } + k_z\pqty{a} - \int_a^b \dd{z} k_{z}^2\pqty{z}  }
+		}
+\end{align*}
+
+\begin{align*}
+	r &= -\frac{L_{21}}{L_{22}} & t = L_{11} - \frac{L_{12}L_{21}}{L_{22}}
+\end{align*}
+
+\begin{align*}
+	r = -e^{i2k_z\pqty{a}a}\frac{
+		k_z\pqty{b} - k_z\pqty{a} + \pqty{b-a} k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}  
+		}{
+		k_z\pqty{b} + k_z\pqty{a} - \pqty{b-a}k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}  
+		}
+\end{align*}
+
+% Increment
+% \begin{align*}
+% 	\vb{T}_{0\to M} = \vb{T}_{M} \cdot \vb{T}_{0\to M-1}
+% \end{align*}
+
+% \begin{align*}
+% 	\vb{T}_{0\to M-1} &= \frac{1}{2\prod_{n=0}^{M-1}\alpha_n\beta_n}\pmqty{d_{M-1} & h^\ast_{M-1} \\ h_{M-1} & d^\ast_{M-1}} \\
+% 	\vb{T}_{M} &= \frac{1}{2\alpha_M\beta_M}\pmqty{
+% 		\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}-k_{z,M}}z_M} &
+% 		\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}+k_{z,M}}z_M} \\
+% 		\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M} &
+% 		\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M}
+% 		}
+% \end{align*}
+
+% \begin{align*}
+% 	\vb{T}_{0\to M} &= \frac{1}{2\alpha_M\beta_M}\pmqty{
+% 		\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}-k_{z,M}}z_M} &
+% 		\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}+k_{z,M}}z_M} \\
+% 		\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M} &
+% 		\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M}
+% 		} \\
+% 		&\cdot \frac{1}{2\prod_{n=0}^{M-1}\alpha_n\beta_n}\pmqty{d_{M-1} & h^\ast_{M-1} \\ h_{M-1} & d^\ast_{M-1}} \\
+% 		&= \frac{1}{2\prod_{n=0}^{M}\alpha_n\beta_n} 
+% \end{align*}
+
+% \begin{align*}
+% 	d_{M} &= d_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}-k_{z,M}}z_M} 
+% 		+ h_{M-1} \pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}+k_{z,M}}z_M} \\
+% 	% d^\ast_{M} = d^\ast_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M} + h^\ast_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M} \\
+% 	h_{M} &= d_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M} 
+% 		+ h_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M}
+% \end{align*}
+
+% \begin{align*}
+% 	d_{M+1} &= d_{M}\pqty{\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{i\pqty{k_{z,M}-k_{z,M+1}}z_{M+1}} 
+% 		+ h_{M} \pqty{-\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{-i\pqty{k_{z,M}+k_{z,M+1}}z_{M+1}} \\
+% 		&= d_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}-k_{z,M}}z_M} \pqty{\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{i\pqty{k_{z,M}-k_{z,M+1}}z_{M+1}} \\
+% 		&+h_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}+k_{z,M}}z_M} \pqty{\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{i\pqty{k_{z,M}-k_{z,M+1}}z_{M+1}} \\
+% 		&+ d_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M} \pqty{-\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{-i\pqty{k_{z,M}+k_{z,M+1}}z_{M+1}} \\
+% 		&+ h_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M} \pqty{-\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{-i\pqty{k_{z,M}+k_{z,M+1}}z_{M+1}}
+% \end{align*}
+
+% \begin{align*}
+% 	d_{M+1} 
+% 		&= d_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}} \pqty{\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{i\pqty{k_{z,M-1}-k_{z,M}}z_M} e^{i\pqty{k_{z,M}-k_{z,M+1}}z_{M+1}} \\
+% 		&+h_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}} \pqty{\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{-i\pqty{k_{z,M-1}+k_{z,M}}z_M}e^{i\pqty{k_{z,M}-k_{z,M+1}}z_{M+1}} \\
+% 		&+ d_{M-1}\pqty{-\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}} \pqty{-\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{i\pqty{k_{z,M-1}+k_{z,M}}z_M}e^{-i\pqty{k_{z,M}+k_{z,M+1}}z_{M+1}} \\
+% 		&+ h_{M-1}\pqty{\alpha_{M-1}\beta_M + \alpha_{M}\beta_{M-1}} \pqty{-\alpha_{M}\beta_{M+1} + \alpha_{M+1}\beta_{M}}e^{-i\pqty{k_{z,M-1}-k_{z,M}}z_M}e^{-i\pqty{k_{z,M}+k_{z,M+1}}z_{M+1}}
+% \end{align*}
+
+\newpage
+
+We new define the propagation matrix as,
+\begin{align*}
+	\vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_{j+1},t} &= \vb{M}_{j,j+1} \cdot \vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_{j},t}
+\end{align*}
+
+It can be easily shown that,
+\begin{align*}
+	\vb{M}_{j,j+1} = \vb{S}_{j}\pqty{\boldsymbol{\mathsf{r}}_{j+1},t} \cdot \vb{S}^{-1}_{j}\pqty{\boldsymbol{\mathsf{r}}_{j},t}
+\end{align*}
+
+The the parallele polarisation this yield,
+\begin{align*}
+	\vb{M}^{(1)}_{j,j+1} 
+		&= \frac{1}{2\alpha_j\beta_j}\pmqty{
+		\alpha_j e^{ik_{z,j}z_{j+1}} & 
+		-\alpha_j e^{-ik_{z,j}z_{j+1}} \\
+		\beta_j e^{ik_{z,j}z_{j+1}} & 
+		\beta_j e^{-ik_{z,j}z_{j+1}}
+		} \cdot \pmqty{
+		\beta_j e^{-ik_{z,j}z_j} & 
+		\alpha_j e^{-ik_{z,j}z_j} \\
+		-\beta_j e^{ik_{z,j}z_j} & 
+		\alpha_j e^{ik_{z,j}z_j}
+		}
+		 \\
+		&= \frac{1}{2\alpha_j\beta_j}\pmqty{
+		\alpha_j\beta_j \pqty{e^{ik_{z,j}\pqty{z_{j+1}-z_{j}}} + e^{-ik_{z,j}\pqty{z_{j+1}-z_{j}}}} &
+		\alpha_j^2 \pqty{e^{ik_{z,j}\pqty{z_{j+1}-z_{j}}} - e^{-ik_{z,j}\pqty{z_{j+1}-z_{j}}}} \\
+		\beta_j^2 \pqty{e^{ik_{z,j}\pqty{z_{j+1}-z_{j}}} - e^{-ik_{z,j}\pqty{z_{j+1}-z_{j}}}} &
+		\alpha_j\beta_j \pqty{e^{ik_{z,j}\pqty{z_{j+1}-z_{j}}} + e^{-ik_{z,j}\pqty{z_{j+1}-z_{j}}}}
+		} \\
+		&= \pmqty{
+		\cos\pqty{k_{z,j}d_j} &
+		\frac{\alpha_j}{\beta_j} \sin\pqty{k_{z,j}d_j} \\
+		\frac{\beta_j}{\alpha_j} \sin\pqty{k_{z,j}d_j} &
+		\cos\pqty{k_{z,j}d_j}
+		}
+\end{align*}
+
+The second polarisation
+\begin{align*}
+	\vb{M}^{(2)}_{j,j+1} 
+		&= \frac{1}{-2k_{z,j}}\pmqty{
+		e^{ik_{z,j}z_{j+1}} & 
+		e^{-ik_{z,j}z_{j+1}}  \\
+		k_{z,j} e^{ik_{z,j}z_{j+1}} & 
+		-k_{z,j} e^{-ik_{z,j}z_{j+1}}
+		} \cdot
+		\pmqty{
+		-k_{z,j} e^{-ik_{z,j}z_j} & 
+		-e^{-ik_{z,j}z_j}  \\
+		-k_{z,j} e^{ik_{z,j}z_j} & 
+		e^{ik_{z,j}z_j}
+		} \\
+		&= \pmqty{
+		\cos\pqty{k_{z,j}d_j} & 
+		k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j} \\
+		k_{z,j}\sin\pqty{k_{z,j}d_j} &
+		\cos\pqty{k_{z,j}d_j}
+		}
+\end{align*}
+
+\begin{align*}
+	\gamma^{(1)} &= \frac{\beta}{\alpha} = \frac{\epsilon \cos\theta}{\sin\theta} = \frac{n^2 \cos\theta}{\mu \sin\theta} = \frac{\lambda^2 k^2 \cos\theta}{\mu \sin\theta} \\
+	\gamma^{(2)} &= k\sin\theta
+\end{align*}
+
+If it goes through,
+\begin{align*}
+	\vb{E}_0 &= A\pmqty{1 \\ r} & \vb{E}_2 &= A\pmqty{t \\ 0}
+\end{align*}
+
+\begin{align*}
+	\vb{W}_{N+1}\pqty{z_N} = \vb{W}_N\pqty{z_N} = \vb{M}_{0,N}\cdot{}\vb{W}_0\pqty{z_0}
+\end{align*}
+
+\begin{align*}
+	\vb{E}_N &= \vb{S}_{N+1}^{-1}\pqty{z_N} \cdot \vb{M}_{0,N}\cdot{}\vb{S}_0\pqty{z_0}\cdot\vb{E}_0
+\end{align*}
+
+\begin{align*}
+	\vb{L} &= \vb{S}_{N+1}^{-1}\pqty{z_N} \cdot \vb{M}_{0,N}\cdot{}\vb{S}_0\pqty{z_0}
+\end{align*}
+
+\begin{align*}
+	\pmqty{t\\ 0} &= \pmqty{L_{11} & L_{12}\\L_{21}&L_{22}}\cdot\pmqty{1\\r}
+\end{align*}
+
+\begin{align*}
+	r &= -\frac{L_{21}}{L_{22}} & t = L_{11} - \frac{L_{12}L_{21}}{L_{22}}
+\end{align*}
+
+If a plane reflects,
+\begin{align*}
+	\pmqty{0\\ 0} &= \pmqty{L_{11} & L_{12}\\L_{21}&L_{22}}\cdot\pmqty{1\\r}
+\end{align*}
+
+\begin{align*}
+	 r &= - \frac{L_{11}}{L_{12}} & r &= -\frac{L_{21}}{L_{22}}
+\end{align*}
+
+
+\begin{align*}
+	\vb{M}_{0,1} = \vb{S}_{1}\pqty{z_1} \cdot \vb{S}^{-1}_{1}\pqty{z_0}
+\end{align*}
+
+Test 1 layer, case 1.
+\begin{align*}
+	\vb{SMS} &= \vb{S}_2^{-1}\pqty{z_1} \cdot \vb{M}_{0,1}\cdot{}\vb{S}_0\pqty{z_0} \\
+	&= \frac{1}{\alpha_0\beta_0}\pmqty{
+		\beta_0 e^{-ik_{z,0}z_1} & 
+		\alpha_0 e^{-ik_{z,0}z_1} \\
+		-\beta_0 e^{ik_{z,0}z_1} & 
+		\alpha_0 e^{ik_{z,0}z_1}
+		} \cdot \pmqty{
+		\cos\pqty{k_{z,1}d_1} &
+		\frac{\alpha_1}{\beta_1} \sin\pqty{k_{z,1}d_1} \\
+		\frac{\beta_1}{\alpha_1} \sin\pqty{k_{z,1}d_1} &
+		\cos\pqty{k_{z,1}d_1}
+		} \cdot \pmqty{
+		\alpha_0 e^{ik_{z,0}z_{0}} & 
+		-\alpha_0 e^{-ik_{z,0}z_{0}} \\
+		\beta_0 e^{ik_{z,0}z_{0}} & 
+		\beta_0 e^{-ik_{z,0}z_{0}}
+		}
+\end{align*}
+
+
+Iterative
+\begin{align*}
+	\vb{M}^{(2)}_{j-1,j+1} 
+		&= \pmqty{
+		\cos\pqty{k_{z,j}d_j} & 
+		k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j} \\
+		k_{z,j}\sin\pqty{k_{z,j}d_j} &
+		\cos\pqty{k_{z,j}d_j}
+		} \cdot
+		\pmqty{
+		\cos\pqty{k_{z,j-1}d_{j-1}} & 
+		k_{z,j-1}^{-1}\sin\pqty{k_{z,j-1}d_{j-1}} \\
+		k_{z,j-1}\sin\pqty{k_{z,j-1}d_{j-1}} &
+		\cos\pqty{k_{z,j-1}d_{j-1}}
+		} \\
+		&= \pmqty{
+		\cos\pqty{k_{z,j}d_j}\cos\pqty{k_{z,j-1}d_{j-1}} + \frac{k_{z,j-1}}{k_{z,j}} \sin\pqty{k_{z,j}d_j}\sin\pqty{k_{z,j-1}d_{j-1}} & 
+		k_{z,j-1}^{-1}\cos\pqty{k_{z,j}d_j}\sin\pqty{k_{z,j-1}d_{j-1}} + k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j}\cos\pqty{k_{z,j-1}d_{j-1}} \\
+		k_{z,j-1}     \cos\pqty{k_{z,j}d_j}\sin\pqty{k_{z,j-1}d_{j-1}} + k_{z,j}     \sin\pqty{k_{z,j}d_j}\cos\pqty{k_{z,j-1}d_{j-1}} &
+		\cos\pqty{k_{z,j}d_j}\cos\pqty{k_{z,j-1}d_{j-1}} + \frac{k_{z,j}}{k_{z,j-1}} \sin\pqty{k_{z,j}d_j}\sin\pqty{k_{z,j-1}d_{j-1}}
+		} 
+\end{align*}
+
+\begin{align*}
+	\vb{M}_{0,N} &= \vb{M}_{N-1,N} \cdot \vb{M}_{0,N-1} \\
+	&= \pmqty{
+		\cos\pqty{k_{z,N}d_N} & 
+		k_{z,N}^{-1}\sin\pqty{k_{z,N}d_N} \\
+		k_{z,N}\sin\pqty{k_{z,N}d_N} &
+		\cos\pqty{k_{z,N}d_N}
+		} \cdot \pmqty{a_{N-1} & b_{n-1} \\ c_{n-1} & a_{N-1}} \\
+	&= \pmqty{
+		a_{N-1}\cos\pqty{k_{z,N}d_N} + c_{n-1}k_{z,N}^{-1}\sin\pqty{k_{z,N}d_N} &
+		b_{N-1}\cos\pqty{k_{z,N}d_N} + a_{n-1}k_{z,N}^{-1}\sin\pqty{k_{z,N}d_N} \\
+		a_{N-1}k_{z,N}\sin\pqty{k_{z,N}d_N} + c_{n-1}\cos\pqty{k_{z,N}d_N} &
+		b_{N-1}k_{z,N}\sin\pqty{k_{z,N}d_N} + a_{n-1}\cos\pqty{k_{z,N}d_N}
+		} \\
+	&= \pmqty{
+		a_{N-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}} + c_{n-1}d_N &
+		b_{N-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}} + a_{n-1}d_N \\
+		a_{N-1}k_{z,N}^2 d_N + c_{n-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}} &
+		b_{N-1}k_{z,N}^2 d_N + a_{n-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}}
+		} \\
+	% &\approx \pmqty{
+	% 	a_{N-1} + c_{n-1}d_N &
+	% 	b_{N-1} + a_{n-1}d_N \\
+	% 	c_{n-1} + a_{N-1}k_{z,N}^2d_N +  &
+	% 	a_{n-1} + b_{N-1}k_{z,N}^2d_N + 
+	% 	}
+\end{align*}
+
+\begin{align*}
+	a_n &= a_{n-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}} + c_{n-1}d_n & b_n &= b_{n-1}\pqty{1 - \frac{k_{z,N}^2d_N^2}{2}} + a_{n-1}d_n
+\end{align*}
+
+\begin{align*}
+	c_{n-1} &= \frac{a_n - a_{n-1}}{d_n} + a_{n-1}\frac{k_{z,N}^2d_N}{2} & a_{n-1} = \frac{b_n - b_{n-1}}{d_n}
+\end{align*}
+
+\begin{align*}
+	c\pqty{x} &= \dv{a}{x} & 
+\end{align*}
+
+
+
+\newpage
+\begin{align*}
+	\vb{W}_0\pqty{z} &= \vb{S}_j\pqty{z} \cdot \vb{E}_0 \\
+	&= \pmqty{
+		A \alpha_0 e^{i k_{z,0}z} - rA\alpha_0 e^{-i k_{z,0}z} \\
+		A \beta_0 e^{i k_{z,0}z} + rA\beta_0 e^{-i k_{z,0}z}}
+\end{align*}
+
+\begin{align*}
+	\vb{W}_2\pqty{z} &= \vb{S}_j\pqty{z} \cdot \vb{E}_2 \\
+	&= \pmqty{
+		tA \alpha_0 e^{i k_{z,0}z}  \\
+		tA \beta_0 e^{i k_{z,0}z} }
+\end{align*}
+
+\begin{align*}
+	\vb{M}^{(1)} 
+		&= \pmqty{
+		\cos\pqty{k_{z,1}d_1} &
+		\frac{\alpha_1}{\beta_1} \sin\pqty{k_{z,1}d_1} \\
+		\frac{\beta_1}{\alpha_1} \sin\pqty{k_{z,1}d_1} &
+		\cos\pqty{k_{z,1}d_1}
+		}
+\end{align*}
+
+\begin{align*}
+	\vb{W_2}\pqty{z_1} &= \vb{M}\cdot\vb{W_0}\pqty{z_0} \\
+	\pmqty{
+		tA \alpha_0 e^{i k_{z,0}z}  \\
+		tA \beta_0 e^{i k_{z,0}z} } &=
+	\pmqty{
+		\cos\pqty{k_{z,1}d_1} &
+		\frac{\alpha_1}{\beta_1} \sin\pqty{k_{z,1}d_1} \\
+		\frac{\beta_1}{\alpha_1} \sin\pqty{k_{z,1}d_1} &
+		\cos\pqty{k_{z,1}d_1}
+		} \cdot
+	\pmqty{
+		A \alpha_0 e^{i k_{z,0}z} - rA\alpha_0 e^{-i k_{z,0}z} \\
+		A \beta_0 e^{i k_{z,0}z} + rA\beta_0 e^{-i k_{z,0}z}}
+\end{align*}
+
+\begin{align*}
+	\pmqty{
+		t \alpha_0 e^{i k_{z,0}z}  \\
+		t \beta_0 e^{i k_{z,0}z} } &=
+	\pmqty{
+		\cos\pqty{k_{z,1}d_1} &
+		\frac{\alpha_1}{\beta_1} \sin\pqty{k_{z,1}d_1} \\
+		\frac{\beta_1}{\alpha_1} \sin\pqty{k_{z,1}d_1} &
+		\cos\pqty{k_{z,1}d_1}
+		} \cdot
+	\pmqty{
+		\alpha_0 e^{i k_{z,0}z} - rA\alpha_0 e^{-i k_{z,0}z} \\
+		\beta_0 e^{i k_{z,0}z} + rA\beta_0 e^{-i k_{z,0}z}}
+\end{align*}
+
+
+\newpage
+
+
+
+
+
+
+
+
+% \begin{align*}
+% 	\vb{W}_j = \vb{S}_{j}\cdot\boldsymbol{\mathcal{E}}_j
+% \end{align*}
+
+% \begin{align*}
+% 	\vb{S}_{j} = \pmqty{
+% 	e^{i\pqty{\vb{k}_j^{(I)}\cdot\vb{r} - \omega t}} & 
+% 	e^{i\pqty{\vb{k}_j^{(R)}\cdot\vb{r} - \omega t}} \\
+% 	e^{i\pqty{\vb{k}_j^{(I)}\cdot\vb{r} - \omega t}} \frac{\vu{k}_j^{(I)}\times}{v_j} & 
+% 	e^{i\pqty{\vb{k}_j^{(R)}\cdot\vb{r} - \omega t}} \frac{\vu{k}_j^{(E)}\times}{v_j}
+% 	}
+% \end{align*}
+
+
+\newpage
+Index of refraction for X-Rays is smaller then 1,
+\begin{align*}
+	n = 1 - \delta = 1 - \frac{1}{2\pi}r_e N \lambda^2
+\end{align*} where $r_e = \SI{2.818e-15}{\meter}$ is the electron radius, $N$ is the electronic density, and $\lambda$ is the wavelength.
+
+\begin{align*}
+	v = \frac{c}{n} = \frac{\lambda}{n\nu} = \frac{2\pi}{n\nu k}
+\end{align*}
+
+\begin{align*}
+	Z_j &= -\frac{i}{k_j} & Z_j^{-1} = ik_j
+\end{align*}
+
+
+
+\begin{align*}
+	E_j\pqty{z} = E^{(r)}_{j}e^{ik_jz} + E^{(l)}_{j}e^{-ik_jz}
+\end{align*}
+
+\begin{align*}
+	H_j\pqty{z} = \frac{1}{Z_j}\pqty{E^{(r)}_{j}e^{ik_jz} - E^{(l)}_{j}e^{-ik_jz}}
+\end{align*}
+
+\begin{align*}
+	\vb{W}_j\pqty{z} \equiv \pmqty{E_j\pqty{z} \\ H_j\pqty{z}}
+\end{align*}
+
+\begin{align*}
+	E_{j-1}\pqty{z_j} &= E_{j}\pqty{z_j} & H_{j-1}\pqty{z_j} &= H_{j}\pqty{z_j}
+\end{align*}
+
+This can also be writen,
+\begin{align*}
+	\vb{W}_{j-1}\pqty{z_j} = \vb{W}_{j}\pqty{z_j}
+\end{align*} where,
+
+\begin{align*}
+	E^{(r)}_{j-1}e^{ik_{j-1}z_j} + E^{(l)}_{j-1}e^{-ik_{j-1}z_j} &= E^{(r)}_{j}e^{ik_{j}z_j} + E^{(l)}_{j}e^{-ik_{j}z_j} \\
+	\frac{1}{Z_{j-1}}\pqty{E^{(r)}_{j-1}e^{ik_{j-1}z_j} - E^{(l)}_{j}e^{-ik_{j-1}z_j}} &= \frac{1}{Z_{j}}\pqty{E^{(r)}_{j}e^{ik_{j}z_j} - E^{(l)}_{j}e^{-ik_{j}z_j}}
+\end{align*}
+
+% \begin{align*}
+% 	\pmqty{e^{ik_{j-1}z_j} & e^{-ik_{j-1}z_j} \\ Z_j^{-1}e^{ik_{j-1}z_j} & -Z_j^{-1}e^{-ik_{j-1}z_j}}\pmqty{E^{(r)}_{j-1} \\  E^{(l)}_{j-1}} 
+% 	&= \pmqty{e^{ik_{j}z_j} & e^{-ik_{j}z_j} \\ Z_{j}^{-1}e^{ik_{j}z_j} & -Z_{j}^{-1}e^{-ik_{j}z_j}}\pmqty{E^{(r)}_{j} \\  E^{(l)}_{j}}
+% \end{align*}
+
+\begin{align*}
+	\vb{S}_{j-1}\pqty{z_j} \cdot \vb{E}_{j-1} &= \vb{S}_{j}\pqty{z_j} \cdot \vb{E}_{j}
+\end{align*} with,
+\begin{align*}
+	\vb{S}_j\pqty{z} &= \pmqty{e^{ik_jz} & e^{-ik_jz} \\ Z_j^{-1}e^{ik_jz} & -Z_j^{-1}e^{-ik_jz}} & \vb{E}_j &= \pmqty{E^{(r)}_{j} \\  E^{(l)}_{j}}
+\end{align*}
+
+
+\begin{align*}
+	\vb{W}_j\pqty{z} = \vb{S}_j\pqty{z} \cdot \vb{E}_j
+\end{align*}
+
+We define the propagation matrix as,
+\begin{align*}
+	\vb{W}_{j}\pqty{z_{j+1}} &= \vb{M}_{j,j+1} \cdot \vb{W}_{j}\pqty{z_{j}}
+\end{align*}
+
+\begin{align*}
+	\vb{S}_{j}\pqty{z_{j+1}}\cdot\vb{E}_j &= \vb{M}_{j,j+1} \cdot \vb{S}_{j}\pqty{z_{j}}\cdot\vb{E}_j
+\end{align*}
+
+It can be easily shown that,
+\begin{align*}
+	\vb{M}_{j,j+1} = \vb{S}_{j}\pqty{z_{j+1}} \cdot \vb{S}^{-1}_{j}\pqty{z_j}
+\end{align*}
+
+\begin{align*}
+	\vb{S}^{-1}_j\pqty{z} &= \frac{Z_j}{2}\pmqty{Z_j^{-1}e^{-ik_jz} & e^{-ik_jz} \\ Z_j^{-1}e^{ik_jz} & -e^{ik_jz}}
+\end{align*}
+
+\begin{align*}
+	\vb{M}_{j,j+1} &= \frac{Z_{j}}{2}\pmqty{e^{ik_{j}z_{j+1}} & e^{-ik_{j}z_{j+1}} \\ Z_{j}^{-1}e^{ik_{j}z_{j+1}} & -Z_{j}^{-1}e^{-ik_{j}z_{j+1}}} \cdot
+	\pmqty{Z_{j}^{-1}e^{-ik_{j}z_{j}} & e^{-ik_{j}z_{j}} \\ Z_{j}^{-1}e^{ik_{j}z_{j}} & -e^{ik_{j}z_{j}}} 
+\end{align*}
+
+\begin{align*}
+	d_{j,j+1} &= z_{j+1} - z_{j}
+\end{align*}
+
+\begin{align*}
+	\vb{M}_{j,j+1} &= \frac{Z_{j}}{2}\pmqty{
+		Z_{j}^{-1} \pqty{e^{ik_{j}d_{j,j+1}} + e^{-ik_{j}d_{j,j+1}}} 
+		& e^{ik_{j}d_{j,j+1}} - e^{-ik_{j}d_{j,j+1}} \\ 
+		Z_{j}^{-2} \pqty{e^{ik_{j}d_{j,j+1}} - e^{-ik_{j}d_{j,j+1}}} & 
+		Z_{j}^{-1} \pqty{e^{ik_{j}d_{j,j+1}} + e^{-ik_{j}d_{j,j+1}}}} \\
+	&= \pmqty{
+		\cos\pqty{k_{j}d_{j,j+1}}
+		& iZ_{j}\sin\pqty{k_{j}d_{j,j+1}} \\ 
+		iZ_{j}^{-1}\sin\pqty{k_{j}d_{j,j+1}} & 
+		\cos\pqty{k_{j}d_{j,j+1}}}
+\end{align*}
+
+If there is $N$ layer
+\begin{align*}
+	\vb{W}_{N}\pqty{z_{N}} = \vb{M}_{0,N} \cdot \vb{W}_{0}\pqty{z_{0}}
+\end{align*}
+
+\begin{align*}
+	\boldsymbol{\mathcal{M}} = \vb{M}_{0,N} = \vb{M}_{N-1,N}\cdot\ldots\cdot\vb{M}_{1,2}\cdot\vb{M}_{0,1}
+\end{align*}
+
+The wave above the layer is,
+\begin{align*}
+	E_0\pqty{z} = Ae^{ik_0z} + rAe^{-ik_0z}
+\end{align*} as the wave below,
+\begin{align*}
+	E_N\pqty{z} = tAe^{ik_Nz}
+\end{align*}
+
+\begin{align*}
+	\vb{W}_0\pqty{0} = A\pmqty{1 & 1 \\ Z_0^{-1} & -Z_0^{-1}}\pmqty{1 \\ r} = \frac{A}{Z_0} \pmqty{Z_0\pqty{1+r} \\ 1-r}
+\end{align*}
+
+\begin{align*}
+	\vb{W}_N\pqty{L} = A\pmqty{e^{ik_N L} & e^{-ik_N L} \\ Z_N^{-1}e^{ik_N L} & -Z_N^{-1}e^{-ik_N L}}\pmqty{t \\ 0} = \frac{A t e^{ik_N L}}{Z_N} \pmqty{Z_N \\ 1}
+\end{align*}
+
+\begin{align*}
+	\frac{Z_0 t e^{ik_N L}}{Z_N} \pmqty{Z_N \\ 1} &= \pmqty{\mathcal{M}_{11} & \mathcal{M}_{12} \\ \mathcal{M}_{21} & \mathcal{M}_{22}}\cdot  \pmqty{Z_0\pqty{1+r} \\ 1-r}
+\end{align*}
+
+\begin{align*}
+	Z_0 t e^{ik_N L} &= \mathcal{M}_{11}Z_0\pqty{1+r} + \mathcal{M}_{12}\pqty{1-r} \\
+	Z_0 t e^{ik_N L} &= \mathcal{M}_{21}Z_0Z_N\pqty{1+r} + \mathcal{M}_{22}Z_N\pqty{1-r}
+\end{align*}
+
+\begin{align*}
+	Z_0 t e^{ik_N L} &= \mathcal{M}_{11}Z_0 + \mathcal{M}_{12} + r\pqty{\mathcal{M}_{11}Z_0 - \mathcal{M}_{12}} \\
+	Z_0 t e^{ik_N L} &= \mathcal{M}_{21}Z_0Z_N + \mathcal{M}_{22}Z_N + r\pqty{\mathcal{M}_{21}Z_0Z_N - \mathcal{M}_{22}Z_N}
+\end{align*}
+
+\begin{align*}
+	Z_0 t e^{ik_N L} - r\pqty{\mathcal{M}_{11}Z_0 - \mathcal{M}_{12}} &= \mathcal{M}_{11}Z_0 + \mathcal{M}_{12}  \\
+	Z_0 t e^{ik_N L} - rZ_N\pqty{\mathcal{M}_{21}Z_0 - \mathcal{M}_{22}} &= Z_N\pqty{\mathcal{M}_{21}Z_0 + \mathcal{M}_{22}}
+\end{align*}
+
+\begin{align*}
+	\pmqty{Z_0 e^{ik_N L} & \mathcal{M}_{12} - \mathcal{M}_{11}Z_0 \\ Z_0 e^{ik_N L} & Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0} }\pmqty{t\\r} 
+	= 
+	\pmqty{\mathcal{M}_{11}Z_0 + \mathcal{M}_{12} \\ Z_N\pqty{\mathcal{M}_{21}Z_0 + \mathcal{M}_{22}}}
+\end{align*}
+
+\begin{align*}
+	\pmqty{t\\r} &= \frac{1}{Z_0 e^{ik_N L}\pqty{\mathcal{M}_{22}Z_N - \mathcal{M}_{21}Z_0Z_N} - Z_0 e^{ik_N L} \pqty{\mathcal{M}_{12} - \mathcal{M}_{11}Z_0}}  \\
+	&\times
+	\pmqty{
+		Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0} & 
+		\mathcal{M}_{11}Z_0 - \mathcal{M}_{12} \\ 
+		-Z_0 e^{ik_N L} &  
+		Z_0 e^{ik_N L} 
+		}\pmqty{\mathcal{M}_{11}Z_0 + \mathcal{M}_{12} \\ Z_N\pqty{\mathcal{M}_{21}Z_0 + \mathcal{M}_{22}}}
+\end{align*}
+
+\begin{align*}
+	\pmqty{t\\r} &= \frac{1}{Z_0 e^{ik_N L}}\frac{1}{Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0} -  \pqty{\mathcal{M}_{12} - \mathcal{M}_{11}Z_0}}  \\
+	&\times
+	\pmqty{
+	Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0}\pqty{\mathcal{M}_{11}Z_0 + \mathcal{M}_{12}} 
+	+ Z_N\pqty{\mathcal{M}_{11}Z_0 - \mathcal{M}_{12}}\pqty{\mathcal{M}_{21}Z_0 + \mathcal{M}_{22}} \\
+	-Z_0 e^{ik_N L}\pqty{\mathcal{M}_{11}Z_0 + \mathcal{M}_{12}} 
+	+ Z_0 e^{ik_N L}\pqty{\mathcal{M}_{21}Z_0Z_N + \mathcal{M}_{22}Z_N}
+	}
+\end{align*}
+
+\begin{align*}
+	&Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0}\pqty{\mathcal{M}_{11}Z_0 + \mathcal{M}_{12}} 
+	+ Z_N\pqty{\mathcal{M}_{22} + \mathcal{M}_{21}Z_0}\pqty{\mathcal{M}_{11}Z_0 - \mathcal{M}_{12}} \\
+	&= 2Z_NZ_0\pqty{\mathcal{M}_{22}\mathcal{M}_{11} - \mathcal{M}_{21}\mathcal{M}_{12}} \\
+	&= 2Z_NZ_0\det{\boldsymbol{\mathcal{M}}}
+\end{align*}
+
+% \begin{align*}
+% 	t = \frac{
+% 	2e^{-ik_N L}Z_N\det{\boldsymbol{\mathcal{M}}}
+% 	}{
+% 	Z_N\pqty{\mathcal{M}_{22} - \mathcal{M}_{21}Z_0} -  \pqty{\mathcal{M}_{12} - \mathcal{M}_{11}Z_0}} 
+% \end{align*}
+
+\begin{align*}
+	t = \frac{
+	2ie^{-ik_N L}k_0\det{\boldsymbol{\mathcal{M}}}
+	}{
+	- \mathcal{M}_{21} + k_0k_N \mathcal{M}_{12} + i\pqty{k_0\mathcal{M}_{22}  + k_N\mathcal{M}_{11}}} 
+\end{align*}
+
+% \begin{align*}
+% 	r = \frac{-\mathcal{M}_{11}Z_0 - \mathcal{M}_{12}
+% 	+ \mathcal{M}_{21}Z_0Z_N + \mathcal{M}_{22}Z_N
+% 	}{
+% 	Z_N\mathcal{M}_{22} - \mathcal{M}_{21}Z_0Z_N - \mathcal{M}_{12} + \mathcal{M}_{11}Z_0}
+% \end{align*}
+
+\begin{align*}
+	r = \frac{
+	\mathcal{M}_{21} + k_0k_N \mathcal{M}_{12} + i\pqty{k_0\mathcal{M}_{22} - k_N\mathcal{M}_{11}}
+	}{
+	- \mathcal{M}_{21} + k_0 k_N \mathcal{M}_{12} + i\pqty{k_0\mathcal{M}_{22} + k_N\mathcal{M}_{11}}}
+\end{align*}
+
+Let's write it down in fonction of $z$ for a slice $d$ thick.
+\begin{align*}
+	\vb{T}\pqty{z} &=
+	\frac{1}{2k_{z}\pqty{z_+}}\pmqty{
+		k_{z}\pqty{z_+} e^{-ik_{z}\pqty{z_+}z} & 
+		e^{-ik_{z}\pqty{z_+}z}  \\
+		k_{z}\pqty{z_+} e^{ik_{z}\pqty{z_+}z} & 
+		-e^{ik_{z}\pqty{z_+}z}
+		} \pmqty{
+	e^{ik_{z}\pqty{z_-}z} & 
+	e^{-ik_{z}\pqty{z_-}z}  \\
+	k_{z}\pqty{z_-} e^{ik_{z}\pqty{z_-}z} & 
+	-k_{z}\pqty{z_-} e^{-ik_{z}\pqty{z_-}z}
+	}  \\
+	% &= \frac{1}{2k_{z}\pqty{z_+}}\pmqty{
+	% 	k_{z}\pqty{z_+} e^{-ik_{z}\pqty{z_+}z}e^{ik_{z}\pqty{z_-}z} 
+	% 		+ e^{-ik_{z}\pqty{z_+}z}k_{z}\pqty{z_-} e^{ik_{z}\pqty{z_-}z} &
+	% 	k_{z}\pqty{z_+} e^{-ik_{z}\pqty{z_+}z}e^{-ik_{z}\pqty{z_-}z} 
+	% 	    - e^{-ik_{z}\pqty{z_+}z}k_{z}\pqty{z_-} e^{-ik_{z}\pqty{z_-}z}  \\
+	% 	k_{z}\pqty{z_+} e^{ik_{z}\pqty{z_+}z}e^{ik_{z}\pqty{z_-}z} 
+	% 	    - e^{ik_{z}\pqty{z_+}z}k_{z}\pqty{z_-} e^{ik_{z}\pqty{z_-}z} &
+	% 	k_{z}\pqty{z_+} e^{ik_{z}\pqty{z_+}z}e^{-ik_{z}\pqty{z_-}z} 
+	% 	    + e^{ik_{z}\pqty{z_+}z}k_{z}\pqty{z_-} e^{-ik_{z}\pqty{z_-}z}
+	% 	} \\
+	% &= \frac{1}{2k_{z}\pqty{z_+}}\pmqty{
+	% 	\pqty{k_{z}\pqty{z_+} + k_{z}\pqty{z_-}}e^{-ik_{z}\pqty{z_+}z}e^{ik_{z}\pqty{z_-}z} &
+	% 	\pqty{k_{z}\pqty{z_+} - k_{z}\pqty{z_-}}e^{-ik_{z}\pqty{z_+}z}e^{-ik_{z}\pqty{z_-}z}  \\
+	% 	\pqty{k_{z}\pqty{z_+} - k_{z}\pqty{z_-}}e^{ik_{z}\pqty{z_+}z}e^{ik_{z}\pqty{z_-}z} &
+	% 	\pqty{k_{z}\pqty{z_+} + k_{z}\pqty{z_-}}e^{ik_{z}\pqty{z_+}z}e^{-ik_{z}\pqty{z_-}z}
+	% 	} \\
+	&= \frac{1}{2k_{z}\pqty{z_+}}\pmqty{
+		2k_z\pqty{z}e^{-ik_z^\prime\pqty{z} \Delta z z} &
+		k_z^\prime\pqty{z} \Delta z e^{-i2k_{z}\pqty{z}z}  \\
+		k_z^\prime\pqty{z} \Delta z e^{i2k_{z}\pqty{z}z} &
+		2k_z\pqty{z}e^{ik_z^\prime\pqty{z} \Delta z z}
+		}
+\end{align*}
+
+\begin{align*}
+	k_{z}\pqty{z_+} + k_{z}\pqty{z_-} &= 2k_z\pqty{z} & k_{z}\pqty{z_+} - k_{z}\pqty{z_-} &= \dv{k_z}{z}\Delta z = k_z^\prime\pqty{z} \Delta z 
+\end{align*}
+
+\begin{align*}
+	\lim_{\Delta z \to 0}\vb{T}\pqty{z} &= \frac{1}{2k_{z}\pqty{z}}\pmqty{
+		2k_z\pqty{z}\pqty{1 - ik_z^\prime\pqty{z} \Delta z z} &
+		k_z^\prime\pqty{z} \Delta z e^{-i2k_{z}\pqty{z}z}  \\
+		k_z^\prime\pqty{z} \Delta z e^{i2k_{z}\pqty{z}z} &
+		2k_z\pqty{z}\pqty{1 + ik_z^\prime\pqty{z} \Delta z z}
+		}\\ &= 
+		\mathbb{I} + \frac{1}{2k_{z}\pqty{z}}\pmqty{
+		- i2k_z\pqty{z}k_z^\prime\pqty{z} z &
+		k_z^\prime\pqty{z} e^{-i2k_{z}\pqty{z}z}  \\
+		k_z^\prime\pqty{z} e^{i2k_{z}\pqty{z}z} &
+		i2k_z\pqty{z}k_z^\prime\pqty{z} z
+		} \Delta z \\
+		&= 
+		\mathbb{I} + \frac{1}{2k_{z}\pqty{z}}\pmqty{
+		- i2k_z\pqty{z} z &
+		 e^{-i2k_{z}\pqty{z}z}  \\
+		 e^{i2k_{z}\pqty{z}z} &
+		i2k_z\pqty{z} z
+		}k_z^\prime\pqty{z} \Delta z
+\end{align*}
+
+\begin{align*}
+	\delta\vb{T} &= \frac{1}{2k_{z}\pqty{z}}\pmqty{
+		- i2k_z\pqty{z} z &
+		 e^{-i2k_{z}\pqty{z}z}  \\
+		 e^{i2k_{z}\pqty{z}z} &
+		i2k_z\pqty{z} z
+		}k_z^\prime\pqty{z} \delta z
+\end{align*}
+
+\begin{align*}
+	\prod_{z_j }\vb{T}\pqty{z_j} = \prod_{z_j} \pqty{\mathbb{I} + \delta\vb{T}\pqty{z_j}} \approx \mathbb{I} + \sum_{z_j}\delta\vb{T}\pqty{z_j} + \mathcal{O}\pqty{\delta z^2}
+\end{align*}
+
+\begin{align*}
+	k_{z}\pqty{z} &= \frac{2\pi }{\lambda}\pqty{n^2\pqty{z} - n_0^2\cos^2\theta_0}^{1/2}
+\end{align*}
+
+\begin{align*}
+	\dv{k_z}{z} &= \pqty{\frac{2\pi }{\lambda}}^2 \frac{n\pqty{z}}{k_z\pqty{z}}\dv{n}{z}
+\end{align*}
+
+\begin{align*}
+	\vb{T}_j &=
+	\frac{1}{2k_{z,j}}\pmqty{
+		k_{z,j} e^{-ik_{z,j}z_j} & 
+		e^{-ik_{z,j}z_j}  \\
+		k_{z,j} e^{ik_{z,j}z_j} & 
+		-e^{ik_{z,j}z_j}
+		} \pmqty{
+	e^{ik_{z,j-1}z_j} & 
+	e^{-ik_{z,j-1}z_j}  \\
+	k_{z,j-1} e^{ik_{z,j-1}z_j} & 
+	-k_{z,j-1} e^{-ik_{z,j-1}z_j}
+	}  \\
+	% &= \frac{1}{2k_{z,j}}\pmqty{
+	% 	k_{z,j} e^{-ik_{z,j}z_j}e^{ik_{z,j-1}z_j} 
+	% 		+ e^{-ik_{z,j}z_j}k_{z,j-1} e^{ik_{z,j-1}z_j} &
+	% 	k_{z,j} e^{-ik_{z,j}z_j}e^{-ik_{z,j-1}z_j} 
+	% 	    - e^{-ik_{z,j}z_j}k_{z,j-1} e^{-ik_{z,j-1}z_j}  \\
+	% 	k_{z,j} e^{ik_{z,j}z_j}e^{ik_{z,j-1}z_j} 
+	% 	    - e^{ik_{z,j}z_j}k_{z,j-1} e^{ik_{z,j-1}z_j} &
+	% 	k_{z,j} e^{ik_{z,j}z_j}e^{-ik_{z,j-1}z_j} 
+	% 	    + e^{ik_{z,j}z_j}k_{z,j-1} e^{-ik_{z,j-1}z_j}
+	% 	} \\
+	% &= \frac{1}{2k_{z,j}}\pmqty{
+	% 	\pqty{k_{z,j} + k_{z,j-1}}e^{-ik_{z,j}z_j}e^{ik_{z,j-1}z_j} &
+	% 	\pqty{k_{z,j} - k_{z,j-1}}e^{-ik_{z,j}z_j}e^{-ik_{z,j-1}z_j}  \\
+	% 	\pqty{k_{z,j} - k_{z,j-1}}e^{ik_{z,j}z_j}e^{ik_{z,j-1}z_j} &
+	% 	\pqty{k_{z,j} + k_{z,j-1}}e^{ik_{z,j}z_j}e^{-ik_{z,j-1}z_j}
+	% 	} \\
+	&= \frac{1}{2k_{z,j}}\pmqty{
+		\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
+		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}  \\
+		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+		} \\
+\end{align*}
+
+\begin{align*}
+	\vb{T}_j &\approx \pmqty{
+		e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
+		\frac{k_{z,j} - k_{z,j-1}}{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}  \\
+		\frac{k_{z,j} - k_{z,j-1}}{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+		e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+		} \\
+\end{align*}
+
+\begin{align*}
+	\vb{T}_{j+1} &= \frac{1}{2k_{z,j+1}}\pmqty{
+		\pqty{k_{z,j+1} + k_{z,j}}e^{-i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}} &
+		\pqty{k_{z,j+1} - k_{z,j}}e^{-i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}  \\
+		\pqty{k_{z,j+1} - k_{z,j}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}} &
+		\pqty{k_{z,j+1} + k_{z,j}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}
+		} \\
+\end{align*}
+
+\begin{align*}
+	\vb{T}_{j+1} \cdot \vb{T}_{j} &=
+	\frac{1}{4k_{z,j}k_{z,j+1}}\pmqty{
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} +
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j} +
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j} \\
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} +
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j} +
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+		}
+\end{align*}
+
+\begin{align*}
+	11 &= 
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	12 &= 
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j} \\
+	21 &= 
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	22 &= 
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+\end{align*}
+
+\begin{align*}
+	11 &= 
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}
+		e^{-i\pqty{k_{z,j+1}z_{j+1} - k_{z,j}\pqty{z_{j+1} - z_j} - k_{z,j-1}z_j}} \\
+	&+
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}
+		e^{-i\pqty{k_{z,j+1}z_{j+1} + k_{z,j}\pqty{z_{j+1} - z_j} - k_{z,j-1}z_j}} \\
+	12 &= 
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}
+		e^{-i\pqty{k_{z,j+1}z_{j+1} - k_{z,j}\pqty{z_{j+1} - z_j} + k_{z,j-1}z_j}} \\
+	&+
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}
+		e^{-i\pqty{k_{z,j+1}z_{j+1} + k_{z,j}\pqty{z_{j+1} - z_j} + k_{z,j-1}z_j}} \\
+	21 &= 
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	22 &= 
+		\pqty{k_{z,j+1} - k_{z,j}}\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j+1} + k_{z,j}}z_{j+1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j} \\
+	&+
+		\pqty{k_{z,j+1} + k_{z,j}}\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j+1} - k_{z,j}}z_{j+1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+\end{align*}
+
+% &= \frac{1}{2k_{z,j}}\pmqty{
+% 		\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
+% 		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}  \\
+% 		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+% 		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+% 		}
+
+
+
+
+
+
+
+
+

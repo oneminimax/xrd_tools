@@ -1,144 +1,139 @@
 import numpy as np
+from . import Geometry as Geo
 
 class Diffractometer(object):
-    def __init__(self,waveLength = 0.15406,cristalStructure = None,HKL_z = None,PQR_x = None):
-        
-        self.waveLength = waveLength
-        self.boolCS = False
-        self.boolHKL_z = False
-        self.boolPQR_x = False
-        if cristalStructure:
-            self.setSample(cristalStructure)
-        if HKL_z:
-            self.setHKL_z(HKL_z)
-        if PQR_x:
-            self.setPQR_x(PQR_x)
-
-    # Get/Set Sample definition, orientation
-
-    def setSample(self,cristalStructure):
-
-        self.CS = cristalStructure
-        self.boolCS = True
-
-    def getSample(self):
-
-        if self.boolCS:
-            return self.CS
-        else:
-            raise SampleError('Sample is not defined')
-
-    def setHKL_z(self,HKL_z):
-
-        if self.boolPQR_x:
-            CS = self.getSample()
-            if CS.GRdot(HKL_z,self.getPQR_x()) == 0:
-                self.HKL_z = HKL_z
-                self.boolHKL_z = True
-            else:
-                raise ValueError('HKL_z must be orthogonal to PQR_x')
-        else:
-            self.HKL_z = HKL_z
-            self.boolHKL_z = True
-
-    def getHKL_z(self):
-        if self.boolHKL_z:
-            return self.HKL_z
-        else:
-            raise SampleError('Z Sample axis is not defined')
-
-    def setPQR_x(self,PQR_x):
-
-        if self.boolHKL_z:
-            CS = self.getSample()
-            if CS.GRdot(self.getHKL_z(),PQR_x) == 0:
-                self.PQR_x = PQR_x
-                self.boolPQR_x = True
-            else:
-                raise ValueError('PQR_x must be orthogonal to HKL_z')
-        else:
-            self.PQR_x = PQR_x
-            self.boolPQR_x = True
     
-    def getPQR_x(self):
-        if self.boolPQR_x:
-            return self.PQR_x
-        else:
-            raise SampleError('X Sample axis is not defined')
-
-    # Geometry
-
-    def TwoTheta2GLength(self,twoTheta):
-
-        return 4*np.pi*np.sin(np.deg2rad(twoTheta)/2)/self.waveLength
-
-    def GLength2TwoTheta(self,GLength):
-
-        return 2*np.rad2deg(np.arcsin(self.waveLength/(4*np.pi)*GLength))
-
-    # Peak to angles
-
-    def HKL2TwoTheta(self,hkl):
-
-        CS = self.getSample()
-
-        return self.GLength2TwoTheta(CS.GLength(hkl))
+    def __init__(self,wave_length = 0.15406,cristal_structure = None,surface_normal_hkl = None,azimuth_pqr = None):
         
-    def HKL2ThetaSourceThetaDetector(self,hkl):
+        """ Construct a diffractometer object
+        
+        wave_length :           The wave lenght (in nm) of the x-ray source
+        cristal_structure :     Cristal sructure of the sample
+        surface_normal_hkl :    Miller index of the surface of the sample (along the z direction)
+        azimuth_pqr :           Direct latice vector that is in the sample-source-detector plane. 
+                                Must be orthogonal to surface 
+        """
+        self.wave_length = wave_length # nanometer
 
-        TT = self.HKL2TwoTheta(hkl)
-        CS = self.getSample()
-        HKL_z = self.getHKL_z()
-        alpha = CS.GGAngle(hkl,HKL_z)
+        self.surface_normal_hkl = None
+        self.azimuth_pqr = None
+        
+        if cristal_structure:
+            self.set_cristal_structure(cristal_structure)
+        if surface_normal_hkl:
+            self.set_surface_normal_hkl(surface_normal_hkl)
+        if azimuth_pqr:
+            self.set_azimuth_pqr(azimuth_pqr)
+
+    def set_cristal_structure(self,cristal_structure):
+
+        self.cristal_structure = cristal_structure
+
+    def get_cristal_structure(self):
+
+        if self.cristal_structure is None:
+            raise SampleError('Sample is not defined')
+        else:
+            return self.cristal_structure
+
+    def set_surface_normal_hkl(self,surface_normal_hkl):
+
+        if self.azimuth_pqr is None:
+            self.surface_normal_hkl = surface_normal_hkl
+        else:
+            CS = self.get_cristal_structure()
+            if CS.GRdot(surface_normal_hkl,self.get_azimuth_pqr()) == 0:
+                self.surface_normal_hkl = surface_normal_hkl
+            else:
+                raise ValueError('surface_normal_hkl must be orthogonal to azimuth_pqr')
+            
+    def get_surface_normal_hkl(self):
+        if self.surface_normal_hkl is None:
+            raise SampleError('Z Sample axis is not defined')
+        else:
+            return self.surface_normal_hkl
+            
+
+    def set_azimuth_pqr(self,azimuth_pqr):
+
+        if self.surface_normal_hkl is None:
+            self.azimuth_pqr = azimuth_pqr
+        else:
+            CS = self.get_cristal_structure()
+            if CS.GRdot(self.get_surface_normal_hkl(),azimuth_pqr) == 0:
+                self.azimuth_pqr = azimuth_pqr
+            else:
+                raise ValueError('azimuth_pqr must be orthogonal to surface_normal_hkl')
+            
+    
+    def get_azimuth_pqr(self):
+        if self.azimuth_pqr is None:
+            raise SampleError('X Sample axis is not defined')
+        else:
+            return self.azimuth_pqr
+            
+
+
+
+    def hkl_2_two_theta(self,hkl):
+
+        CS = self.get_cristal_structure()
+
+        return Geo.wave_vector_length_2_two_theta(self.wave_length,CS.g_length(hkl))
+        
+    def hkl_2_theta_source_theta_detector(self,hkl):
+
+        TT = self.hkl_2_two_theta(hkl)
+        CS = self.get_cristal_structure()
+        surface_normal_hkl = self.get_surface_normal_hkl()
+        alpha = CS.g_g_angle(hkl,surface_normal_hkl)
 
         thetaSource = TT/2 - alpha
         thetaDetector = TT/2 + alpha
 
         return thetaSource, thetaDetector
 
-    def HKL2ThetaSourceThetaDetectorPhi(self,hkl):
+    def hkl_2_theta_source_theta_detector_phi(self,hkl):
 
-        thetaSource, thetaDetector = self.HKL2ThetaSourceThetaDetector(hkl)
+        thetaSource, thetaDetector = self.hkl_2_theta_source_theta_detector(hkl)
 
-        CS = self.getSample()
-        HKL_z = self.getHKL_z()
-        PQR_x = self.getPQR_x()
+        CS = self.get_cristal_structure()
+        surface_normal_hkl = self.get_surface_normal_hkl()
+        azimuth_pqr = self.get_azimuth_pqr()
 
-        if CS.GGAngle(hkl,HKL_z) % 180 < 1e-2:
+        if CS.GGAngle(hkl,surface_normal_hkl) % 180 < 1e-2:
             phi = 0
             Warning('G Vector is along z axis')
         else:
-            phi = CS.GRAngle_onplaneHKL(hkl,PQR_x,HKL_z)
+            phi = CS.GRAngle_onplaneHKL(hkl,azimuth_pqr,surface_normal_hkl)
 
         return thetaSource, thetaDetector, phi
 
-    # Absolute coordinate
-
-    def getAbsoluteCoordHKL(self,hkl):
+    def get_absolute_coord_hkl(self,hkl):
 
         hkl = np.array(hkl)
 
-        CS = self.getSample()
-        HKL_z = self.getHKL_z()
-        PQR_x = self.getPQR_x()
+        CS = self.get_cristal_structure()
+        surface_normal_hkl = self.get_surface_normal_hkl()
+        azimuth_pqr = self.get_azimuth_pqr()
 
-        Z = CS.GGdot(hkl,HKL_z) / CS.GLength(HKL_z)
-        X = CS.GRdot(hkl,PQR_x) / CS.RLength(PQR_x)
-        Y = CS.RRdot(CS.GGcross(hkl,HKL_z),PQR_x) / (CS.GLength(HKL_z) * CS.RLength(PQR_x))
+        Z = CS.GGdot(hkl,surface_normal_hkl) / CS.GLength(surface_normal_hkl)
+        X = CS.GRdot(hkl,azimuth_pqr) / CS.RLength(azimuth_pqr)
+        Y = CS.RRdot(CS.GGcross(hkl,surface_normal_hkl),azimuth_pqr) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
 
         return np.array([X,Y,Z])
 
-    def getAbsoluteCoordPQR(self,pqr):
+    def get_absolute_coord_pqr(self,pqr):
 
         pqr = np.array(pqr)
 
-        CS = self.getSample()
-        HKL_z = self.getHKL_z()
-        PQR_x = self.getPQR_x()
+        CS = self.get_cristal_structure()
+        surface_normal_hkl = self.get_surface_normal_hkl()
+        azimuth_pqr = self.get_azimuth_pqr()
 
-        Z = CS.GRdot(HKL_z,pqr)/CS.GLength(HKL_z)
-        X = CS.RRdot(PQR_x,pqr)/CS.RLength(PQR_x)
-        Y = CS.GGdot(HKL_z,CS.RRcross(PQR_x,pqr)) / (CS.GLength(HKL_z) * CS.RLength(PQR_x))
+        Z = CS.GRdot(surface_normal_hkl,pqr)/CS.GLength(surface_normal_hkl)
+        X = CS.RRdot(azimuth_pqr,pqr)/CS.RLength(azimuth_pqr)
+        Y = CS.GGdot(surface_normal_hkl,CS.RRcross(azimuth_pqr,pqr)) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
 
         return np.array([X,Y,Z])
 

@@ -1,0 +1,283 @@
+%!TEX root = ../Theory.tex
+
+\section{Geometry} % (fold)
+\label{sec:geometry}
+
+% section geometry (end)
+
+\subsection{Vecteurs de base réseau direct}
+
+\begin{align*}
+	\vb{a}_1 && \vb{a}_2 && \vb{a}_3
+\end{align*} 
+
+\subsection{Vecteurs de base réseau réciproque}
+
+On construit les vecteur de base du réseau réciproque de manière à ce que les $\vb{b}_i$ soient orthogonaux aux $\vb{a}_j$ pour $i \neq j$. 
+\begin{align*}
+	\vb{b}_i = \frac{\pi}{V} \epsilon_{ijk} \vb{a}_j \times \vb{a}_k
+\end{align*} où on divise par deux car on compte $\vb{a}_j \times \vb{a}_k - \vb{a}_k \times \vb{a}_j$. 
+
+\subsection{Produit scalaire espace direct}
+\label{ssec:dotRR}
+
+Le produits sclaire entre deux vecteurs de base du réseau cristalin implique les longueurs et l'angle mutuelle,
+\begin{align*}
+	\vb{a}_i\cdot\vb{a}_j = a_i a_j \cos\alpha_{ij}.
+\end{align*}
+
+\subsection{Produit scalaire espace reciproque}
+Le produit scalaire de deux vecteurs de la base du réseau réciproque peut être exprimé à l'aide de produits des vecteurs de base du réseau direct,
+\begin{align*}
+	\vb{b}_i \cdot \vb{b}_j 
+	% &= \pqty{\frac{\pi}{V}}^2 \pqty{\epsilon_{imn} \vb{a}_m \times \vb{a}_n} \cdot \pqty{\epsilon_{jpq} \vb{a}_p \times \vb{a}_q} \\
+	&= \pqty{\frac{\pi}{V}}^2 \epsilon_{imn} \epsilon_{jpq} \pqty{ \vb{a}_m \times \vb{a}_n}\cdot\pqty{ \vb{a}_p \times \vb{a}_q}.
+\end{align*}
+
+On utilise l'identité vectorielle suivante,
+\begin{align*}
+	\pqty{ \vb{a}_m \times \vb{a}_n}\cdot\pqty{ \vb{a}_p \times \vb{a}_q} = \pqty{\vb{a}_m\cdot\vb{a}_p}\pqty{\vb{a}_n\cdot\vb{a}_q} - \pqty{\vb{a}_m\cdot\vb{a}_q}\pqty{\vb{a}_n\cdot\vb{a}_p}
+\end{align*} pour exprimé le résultat en fonction de produit scalaire uniquement,
+\begin{align*}
+	\vb{b}_i \cdot \vb{b}_j 
+	&= \pqty{\frac{\pi}{V}}^2 \epsilon_{imn} \epsilon_{jpq} \bqty{\pqty{\vb{a}_m\cdot\vb{a}_p}\pqty{\vb{a}_n\cdot\vb{a}_q} - \pqty{\vb{a}_m\cdot\vb{a}_q}\pqty{\vb{a}_n\cdot\vb{a}_p}}.
+\end{align*}
+
+À l'aide de \ref{ssec:dotRR}, on obtient donc,
+\begin{align*}
+	\vb{b}_i \cdot \vb{b}_j 
+	&= \pqty{\frac{\pi}{V}}^2 \epsilon_{imn} \epsilon_{jpq} a_m a_n a_p a_q \bqty{\cos\alpha_{mp}\cos\alpha_{nq} - \cos\alpha_{mq}\cos\alpha_{np}}.
+\end{align*}
+
+\subsection{Produit scalaire croisé}
+Par construction le produit scalaire entre un vecteur de la base directe et un vecteur de la base réciproque est,
+\begin{align*}
+	\vb{a}_i \cdot \vb{b}_j = 2\pi \delta_{ij}
+\end{align*}
+
+\subsection{Produit vectoriel espace direct}
+La définion des vecteurs de base du réseau réciproque contient le produit vectoriel des vecteurs de base du réseaud direct. Pour extraire, le résultat du produit on multiplie simplement par le tenseur de Levi-Civita,
+\begin{align*}
+	\vb{b}_i\epsilon_{imn} &= \frac{\pi}{V}\epsilon_{imn} \epsilon_{ijk} \vb{a}_j \times \vb{a}_k \\
+	&= \frac{\pi}{V}\pqty{\delta_{mj}\delta_{nk} - \delta_{mk}\delta_{nj}} \vb{a}_j \times \vb{a}_k \\
+	&= \frac{\pi}{V}\pqty{\vb{a}_m \times \vb{a}_n - \vb{a}_n \times \vb{a}_m} \\
+	&= \frac{2\pi}{V}\vb{a}_m \times \vb{a}_n
+\end{align*}
+
+On peut alors isoler le résultat,
+\begin{align*}
+	\vb{a}_m \times \vb{a}_n &=\frac{V}{2\pi} \epsilon_{imn} \vb{b}_i
+\end{align*}
+
+
+\subsection{Produit vectoriel espace réciproque}
+Le produit vectorielle entre les vecteurs de base du réseau réciproque prend la forme d'un produit quadruple
+\begin{align*}
+	\vb{b}_i \times \vb{b}_l &= \pqty{\frac{\pi}{V}}^2 \epsilon_{ijk} \epsilon_{lmn} \pqty{\vb{a}_j \times \vb{a}_k} \times \pqty{\vb{a}_m \times \vb{a}_n}
+\end{align*} qui peut être réexprimé sous la forme du produit triple.
+\begin{align*}
+	\pqty{\vb{a}_j \times \vb{a}_k} \times \pqty{\vb{a}_m \times \vb{a}_n} &= 
+	\bqty{\vb{a}_j,\vb{a}_k,\vb{a}_n} \vb{a}_m - \bqty{\vb{a}_j,\vb{a}_k,\vb{a}_m} \vb{a}_n
+\end{align*}
+
+Le produit triple des vecteurs de base du réseau cristallin donne le volume de la maille élémentaire. Ce produit peut être fait dans les deux sens.
+\begin{align*}
+	\bqty{\vb{a}_j,\vb{a}_k,\vb{a}_n} = V \epsilon_{jkn} - V\epsilon_{nkj}
+\end{align*}
+
+Cela nous permet d'écrire le produit vectorielle de deux vecteur de base du réseau réciproque comme une combinaison linéaire des vecteur de base du réseau cristlin.
+\begin{align*}
+	\vb{b}_i \times \vb{b}_l &= \frac{\pqty{2\pi}^2}{V} \epsilon_{ilm} \vb{a}_m
+\end{align*}
+
+\subsection{Produit vectoriel croisé}
+\begin{align*}
+	\vb{a}_i \times \vb{b}_j &= \frac{\pi}{V}\epsilon_{jmn}\vb{a}_i \times\pqty{\vb{a}_m \times \vb{a}_n} \\
+	&= \frac{\pi}{V}\epsilon_{jmn} \bqty{\pqty{\vb{a}_i \cdot \vb{a}_n}\vb{a}_m - \pqty{\vb{a}_i \cdot \vb{a}_m}\vb{a}_n} \\
+	&= \frac{2\pi}{V}\epsilon_{jmn} \pqty{\vb{a}_i \cdot \vb{a}_n}\vb{a}_m \\
+	&= \frac{2\pi}{V}\epsilon_{jmn} a_ia_n\cos\alpha_{in}\vb{a}_m
+\end{align*}
+
+\subsection{Volume cellule unité}
+Par définition le volume de la cellule unité est,
+\begin{align*}
+	V = \vb{a}_1 \cdot \pqty{\vb{a}_2 \times \vb{a}_3}
+\end{align*}
+
+Il est plus pratique d'exprimer le carré de ce volume,
+\begin{align*}
+	V^2 &= \pqty{\vb{a}_1 \cdot \pqty{\vb{a}_2 \times \vb{a}_3}}\pqty{\vb{a}_1 \cdot \pqty{\vb{a}_2 \times \vb{a}_3}} \\
+		&= \det{\pmqty{
+		\vb{a}_1 \cdot \vb{a}_1 & \vb{a}_1 \cdot \vb{a}_2 & \vb{a}_1 \cdot \vb{a}_3 \\
+		\vb{a}_2 \cdot \vb{a}_1 & \vb{a}_2 \cdot \vb{a}_2 & \vb{a}_2 \cdot \vb{a}_3 \\
+		\vb{a}_3 \cdot \vb{a}_1 & \vb{a}_3 \cdot \vb{a}_2 & \vb{a}_3 \cdot \vb{a}_3
+	}} \\
+		&= \det{\pmqty{
+		a_1^2 & a_1a_2\cos\alpha_{12} & a_1a_3\cos\alpha_{13} \\
+		a_1a_2\cos\alpha_{12} & a_2^2 & a_2a_3\cos\alpha_{23} \\
+		a_1a_3\cos\alpha_{13} & a_2a_3\cos\alpha_{23}  & a_3^2
+	}} \\
+	&= a_1^2 a_2^2 a_3^2 \pqty{1 + 2\cos\alpha_{12}\cos\alpha_{23}\cos\alpha_{13} - \cos^2\alpha_{12} - \cos^2\alpha_{23} - \cos^2\alpha_{13}}
+\end{align*}
+
+\subsection{Vecteur du réseau direct}
+
+Les vecteurs du réseau direct peuvent être construits grâce au trio d'entier $pqr$ :
+\begin{align*}
+	\vb{R}_{pqr} = p \vb{a_1} + q \vb{a_2} + r \vb{a_3}.
+\end{align*}
+
+\subsection{Vecteur du réseau réciproque}
+
+Les vecteurs du réseau réciproque peuvent être construits grâce au trio d'entier $hkl$ :
+\begin{align*}
+	\vb{G}_{hkl} = h \vb{b_1} + k \vb{b_2} + l \vb{b_3}.
+\end{align*}
+
+
+
+\subsection{Produit scalaire direct}
+\begin{align*}
+	\vb{R}_{pqr} \cdot \vb{R}_{p^\prime q^\prime r^\prime} = 
+	pp^\prime \vb{a_1}\cdot\vb{a_1} + qq^\prime \vb{a_2}\cdot\vb{a_2} + rr^\prime \vb{a_3}\cdot\vb{a_3}
+	+\pqty{pq^\prime + qp^\prime} \vb{a_1}\cdot\vb{a_2} + \pqty{qr^\prime + rq^\prime} \vb{a_2}\cdot\vb{a_3} + \pqty{rp^\prime + pr^\prime} \vb{a_3}\cdot\vb{a_1}.
+\end{align*}
+
+\subsection{Produit scalaire réciproque}
+Le produit scalaire entre deux de ces vecteur s'exprime, en générale, de la manière suivante,
+\begin{align*}
+	\vb{G}_{hkl} \cdot \vb{G}_{h^\prime k^\prime l^\prime} = 
+	hh^\prime \vb{b_1}\cdot\vb{b_1} + kk^\prime \vb{b_2}\cdot\vb{b_2} + ll^\prime \vb{b_3}\cdot\vb{b_3}
+	+\pqty{hk^\prime + kh^\prime} \vb{b_1}\cdot\vb{b_2} + \pqty{kl^\prime + lk^\prime} \vb{b_2}\cdot\vb{b_3} + \pqty{lh^\prime + hl^\prime} \vb{b_3}\cdot\vb{b_1}.
+\end{align*}
+
+\subsection{Produit scalaire croisé}
+\begin{align*}
+	\vb{R}_{pqr} \cdot \vb{G}_{hkl} = ph + qk + rl
+\end{align*}
+
+\subsection{Produit vectoriel direct}
+
+\begin{align*}
+	\vb{R} \times \vb{R}^\prime &= p_i p_j^\prime \vb{a}_i \times \vb{a}_j \\
+	&= \frac{V}{2\pi} \epsilon_{ijk} p_i p_j^\prime \vb{b}_k
+\end{align*}
+
+\subsection{Produit vectoriel réciproque}
+\begin{align*}
+	\vb{G} \times \vb{G}^\prime &= h_i h_j^\prime \vb{b}_i \times \vb{b}_j \\
+	&= \frac{\pqty{2\pi}^2}{V} \epsilon_{ijk}  h_i h_j^\prime  \vb{a}_k
+\end{align*}
+
+\subsection{Produit vectoriel croisé}
+\begin{align*}
+	\vb{G} \times \vb{R} &= h_i p_j \vb{b}_i \times \vb{a}_j \\
+	&= \frac{2\pi}{V} \epsilon_{jmn} h_i p_j  a_ia_n\cos\alpha_{in}\vb{a}_m \\
+	&= \frac{2\pi}{V} \epsilon_{jmn} h_i p_j  \pqty{\vb{a}_i \cdot \vb{a}_n}\vb{a}_m
+\end{align*}
+
+
+\subsection{Angle entre deux vecteur du réseau réciproque} % (fold)
+\label{sub:angle_entre_deux_vecteur_du_réseau_réciproque}
+
+Grâce au produit sclaire, on peut être l'angle entre ces deux vecteurs.
+\begin{align*}
+	\cos\theta_{hkl,h^\prime k^\prime l^\prime} = \frac{\vb{G}_{hkl} \cdot \vb{G}_{h^\prime k^\prime l^\prime}}{\abs{\vb{G}_{hkl}}  \abs{\vb{G}_{h^\prime k^\prime l^\prime}}} = \frac{\vb{G}_{hkl} \cdot \vb{G}_{h^\prime k^\prime l^\prime}}{\pqty{\vb{G}_{hkl} \cdot \vb{G}_{hkl}}^{1/2}\pqty{\vb{G}_{h^\prime k^\prime l^\prime} \cdot \vb{G}_{h^\prime k^\prime l^\prime}}^{1/2}} 
+\end{align*}
+
+
+\subsection{Projection sur un vecteur du réseau réciproque} 
+
+Projeté sur $\vb{G}_{HKL}$,
+\begin{align*}
+	\pqty{\vb{G}_{hkl}}_{\parallel\vb{G}_{HKL}} = \frac{\vb{G}_{HKL} \cdot \vb{G}_{hkl}}{\vb{G}_{HKL} \cdot \vb{G}_{HKL} }\vb{G}_{HKL} 
+\end{align*}
+
+Projeté sur le plan,
+\begin{align*}
+	\pqty{\vb{G}_{hkl}}_{\perp\vb{G}_{HKL}} = \vb{G}_{hkl} - \frac{\vb{G}_{HKL} \cdot \vb{G}_{hkl}}{\vb{G}_{HKL} \cdot \vb{G}_{HKL} }\vb{G}_{HKL} 
+\end{align*}
+
+\paragraph{Produit de phase} % (fold)
+\label{par:produit_de_phase}
+
+$\vb{G} \cdot \vb{r}$
+
+\begin{align*}
+	\vb{G} &= h_i \vb{b}_i & \vb{r} = \eta_j \vb{a}_j
+\end{align*}
+
+\begin{align*}
+	\vb{G} \cdot \vb{r} 
+	&= h_i \eta_j \vb{b}_i \cdot \vb{a}_j \\
+	&= 2 \pi h_i \eta_j
+\end{align*}
+
+\section{Espace} % (fold)
+\label{sec:espace}
+
+On peut définir la position d'un réseau dans l'espace en stipulant la direction d'un vecteur du réseau réciproque selon $\vu{z}$ et un vecteur du réseau cristalin selon $\vu{x}$ :
+\begin{align*}
+	\vb{G}^{(z)} = G^{(z)}\vu{z} \qq{et} \vb{R}^{(x)} = R^{(x)} \vu{x}
+\end{align*} où
+\begin{align*}
+	\vb{R}_{pqr} = p \vb{a_1} + q \vb{a_2} + r \vb{a_3}
+\end{align*}
+
+Ces deux vecteur doivent être orthogonaux et donc
+\begin{align*}
+	\vb{G}^{(z)} \cdot \vb{R}^{(x)} &= 2\pi\pqty{ h^{(z)}p^{(x)} + k^{(z)}q^{(x)} + l^{(z)}r^{(x)}} = G^{(z)}R^{(x)} \vu{z} \cdot \vu{x} = 0
+\end{align*}
+
+On peut obtenir les composantes selon $\vu{z}$ et $\vu{x}$ d'un vecteur du réseau réciproque dans cette espace en le projetant sur $\vb{G}^{(z)}$, $\vb{R}^{(x)}$. 
+\begin{align*}
+	\vb{G}_{hkl} \cdot \vu{z} &= \frac{\vb{G}_{hkl} \cdot \vb{G}^{(z)}}{\abs{\vb{G}^{(z)}}} &
+	\vb{G}_{hkl} \cdot \vu{x} &= \frac{\vb{G}_{hkl} \cdot \vb{R}^{(x)}}{\abs{\vb{R}^{(x)}}}
+\end{align*}
+
+On obtient la direction de $\vu{y}$ à partir de $\vb{G}^{(z)}$, $\vb{R}^{(x)}$ de la manière suivante,
+\begin{align*}
+	\vu{y} = \vu{z} \times \vu{x} = \frac{\vb{G}^{(z)}\times \vb{R}^{(x)}}{\abs{\vb{G}^{(z)}}\abs{\vb{R}^{(x)}}}
+\end{align*}
+
+On peut donc écrire la rpojection selon $\vu{y}$ grâce à un produit triple. On doit alors être en mesure d'effectuer un produit vectorielle entre deux vecteurs du réseau réciproque.
+\begin{align*}
+	\vb{G}_{hkl} \cdot \vu{y} = \frac{\vb{G}_{hkl} \cdot \pqty{\vb{G}^{(z)}\times \vb{R}^{(x)}}}{\abs{\vb{G}^{(z)}}\abs{\vb{R}^{(x)}}} 
+	= \frac{\vb{R}^{(x)}  \cdot \pqty{\vb{G}_{hkl} \times \vb{G}^{(z)}}}{\abs{\vb{G}^{(z)}}\abs{\vb{R}^{(x)}}}
+\end{align*}
+
+Pour ce faire il est plus pratique d'écrire ce produit grâce à une notation indicielle
+\begin{align*}
+	\vb{G} &= h_i \vb{b}_i & \vb{G} \times \vb{G}^\prime &= h_i h_l^\prime \vb{b}_i \times \vb{b}_l
+\end{align*}
+
+ On arrive à une conclusion similaire pour deux vecteurs du réseau réciproque.
+\begin{align*}
+	\vb{G} \times \vb{G}^\prime = \frac{4\pi^2}{V} \epsilon_{ilm}  h_i h_l^\prime  \vb{a}_m
+\end{align*}
+
+Les coeifficient devant $\vb{a}_m$ peuvent donc être considérés comme des composante $pqr$.
+
+Les composante d'un vecteur $\vb{R}_{pqr}$ se trouve de manière similaire. D'abord pour les composante selon $\vu{z}$ et $\vu{x}$.
+\begin{align*}
+	\vb{R}_{pqr} \cdot \vu{z} &= \frac{\vb{R}_{pqr} \cdot \vb{G}^{(z)}}{\abs{\vb{G}^{(z)}}} &
+	\vb{R}_{pqr} \cdot \vu{x} &= \frac{\vb{R}_{pqr} \cdot \vb{R}^{(x)}}{\abs{\vb{G}^{(x)}}}
+\end{align*}
+
+La projection selon $\vu{y}$ fait également intervenir un produit vectorielle, mais entre des vecteurs du réseau direct.
+\begin{align*}
+	\vb{R}_{pqr} \cdot \vu{y} = \frac{\vb{R}_{pqr} \cdot \pqty{\vb{G}^{(z)}\times \vb{R}^{(x)}}}{\abs{\vb{G}^{(z)}}\abs{\vb{R}^{(x)}}} = \frac{\vb{G}^{(z)} \cdot \pqty{ \vb{R}^{(x)} \times \vb{R}_{pqr} }}{\abs{\vb{G}^{(z)}}\abs{\vb{R}^{(x)}}}
+\end{align*}
+
+\begin{align*}
+	\vb{R} &= p_i \vb{a}_i & \vb{R} \times \vb{R}^\prime &= p_i p_l^\prime \vb{a}_i \times \vb{a}_l
+\end{align*}
+
+\begin{align*}
+	\vb{R} \times \vb{R}^\prime &= \frac{V}{2\pi} \epsilon_{ilk} p_i p_l^\prime \vb{b}_k
+\end{align*}
+
+% De la même manière que précédemment on trouve,
+% \begin{align*}
+% 	\vb{R} \times \vb{R}^\prime = \frac{4\pi^2}{V} \epsilon_{ilm}  h_i h_l^\prime  \vb{b}_m
+% \end{align*}

@@ -53,10 +53,7 @@ for sample in sampleList:
     AX1.plot(angle,signal)
     AX2.plot(X,A)
     AX2.plot(X,AGFct(X,G,*popt),'--k')
-    # AX3.plot(X,ampA_error/A)
     AX3.plot(X,np.angle(complexA))
-    # AX3.plot(X,argA_error)
-
 
     print(popt,perr)
 
