@@ -6,11 +6,12 @@ import matplotlib.pyplot as plt
 
 from AsciiDataFile.Readers import GenericDataReader as Reader
 from XRDTools.Diffractometer import Diffractometer
+from XRDTools.Geometry import two_theta_2_wave_vector_length
 from XRDTools.Spectrum import centroid, calculateA, fitAGFct, AGFct
 
-dataPath = 'Data/'
+data_path = 'Data/'
 
-sampleList = [
+sample_tuples = [
     ('thickness_100.dat',(35.25,36)),
     ('thickness_111.dat',(30.72,31.8)),
     ('thickness_PCCO.dat',(28,30.5))
@@ -26,22 +27,22 @@ AX3 = fig.add_subplot(2,2,4)
 AX1.set_yscale('log')
 # AX2.set_yscale('log')
 
-for sample in sampleList:
-    fileName = sample[0]
-    thetaLim = sample[1]
-    reader = Reader(' ',['angle','signal'])
-    CS = reader.read(path.join(dataPath,fileName))
+for sample_tuple in sample_tuples:
+    file_name = sample_tuple[0]
+    two_theta_lim = sample_tuple[1]
+    reader = Reader(' ',['two theta','signal'])
+    CS = reader.read(path.join(data_path,file_name))
 
-    angle = CS.getFieldByName('angle')
-    signal = CS.getFieldByName('signal')
-    subInd = (angle > thetaLim[0]) * (angle < thetaLim[1])
+    two_theta = CS.get_column_by_name('two theta')
+    signal = CS.get_column_by_name('signal')
+    subInd = (two_theta > two_theta_lim[0]) * (two_theta < two_theta_lim[1])
     # print(subInd)
     
-    angle = angle[subInd]
+    two_theta = two_theta[subInd]
     signal = signal[subInd]
     signal_error = 1*np.ones(signal.shape)
 
-    K = dm.TwoTheta2GLength(angle)
+    K = two_theta_2_wave_vector_length(dm.wave_length,two_theta)
     G = centroid(K,signal)
 
     X, complexA, ampA_error, argA_error = calculateA(K-G,signal,signal_error,stepX = 2,maxX = 120)
@@ -50,7 +51,7 @@ for sample in sampleList:
     p0 = [100,1e-3,A[0],0]
     popt, perr = fitAGFct(X,A,ampA_error,G,p0 = p0)
 
-    AX1.plot(angle,signal)
+    AX1.plot(two_theta,signal)
     AX2.plot(X,A)
     AX2.plot(X,AGFct(X,G,*popt),'--k')
     AX3.plot(X,np.angle(complexA))

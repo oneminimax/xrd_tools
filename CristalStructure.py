@@ -16,7 +16,7 @@ class GeneralStructure(object):
     hkl   : components of a reciprocal space vector in the reciprocal lattice base
     """
 
-    wyckoffDict = {
+    wyckoff = {
         'a' : lambda x, y, z : [(x,y,z)]
     }
     def __init__(self,a_lengths,a_angles):
@@ -51,8 +51,8 @@ class GeneralStructure(object):
 
     def add_atom_wickoff(self,letter,formFactor,variables = [],label = ''):
 
-        if letter in self.wyckoffDict:
-            coordList = self.wyckoffDict[letter]
+        if letter in self.wyckoff:
+            coordList = self.wyckoff[letter]
             if callable(coordList):
                 coordList = coordList(*variables)
 
@@ -74,14 +74,14 @@ class GeneralStructure(object):
 
         atoms = self.get_atoms()
 
-        formFactorArray = np.zeros((len(atoms),))
-        positionArray = np.zeros((3,len(atoms)))
+        form_factors = np.zeros((len(atoms),))
+        positions = np.zeros((3,len(atoms)))
 
         for i, atom in enumerate(atoms):
-            formFactorArray[i] = atom.getFormFactor(G)
-            positionArray[:,i] = atom.position
+            form_factors[i] = atom.get_form_factor(G)
+            positions[:,i] = atom.position
 
-        factor = np.sum(formFactorArray * np.exp(1j*2*np.pi*np.dot(hkl,positionArray)))
+        factor = np.sum(form_factors * np.exp(1j*2*np.pi*np.dot(hkl,positions)))
 
         return factor
 
@@ -385,7 +385,7 @@ class Diamond(Cubic):
                     self._add_atom(position + v1 + v2,formFactor,label)
 
 class No139(Tetragonal): # I 4 / m m m
-    wyckoffDict = {
+    wyckoff = {
         'a' : [(0,0,0)],
         'b' : [(0,0,1/2)],
         'c' : [(0,1/2,0),(0,1/2,0)],
@@ -404,19 +404,19 @@ class No139(Tetragonal): # I 4 / m m m
     }
 
 class No167(Rhombohedral): # R -3 c
-    wyckoffDict = {
+    wyckoff = {
         'a' : [(0,0,0)],
         }
 
 class No167star(Hexagonal): # R -3 c
-    wyckoffDict = {
+    wyckoff = {
         'a' : [(0,0,0)],
         }
 
 
 
 class No164(Hexagonal): # P -3 m 1
-    wyckoffDict = {
+    wyckoff = {
         'a' : [(0,0,0)],
         'b' : [(0,0,0.5)],
         'c' : lambda z : [(0,0,z),(0,0,-z)],
@@ -430,7 +430,7 @@ class No164(Hexagonal): # P -3 m 1
     }
 
 class No225(Cubic): # F m -3 m
-    wyckoffDict = {
+    wyckoff = {
         'a' : [(0,0,0)],
         'b' : [(1/2,1/2,1/2)],
         'c' : [(1/4,1/4,1/4),(1/4,1/4,3/4)],
@@ -454,9 +454,9 @@ class Atom(object):
 
         return '{0:s} : ({1:.3f},{2:.3f},{3:.3f})'.format(self.label,*self.position)
 
-    def getFormFactor(self,q):
+    def get_form_factor(self,q):
 
-        if formFactor == 'ITC':
+        if self.formFactor == 'ITC':
             return self.formFactorFct(q)
         else:
             return self.formFactor

@@ -71,9 +71,6 @@ class Diffractometer(object):
             raise SampleError('X Sample axis is not defined')
         else:
             return self.azimuth_pqr
-            
-
-
 
     def hkl_2_two_theta(self,hkl):
 
@@ -83,19 +80,28 @@ class Diffractometer(object):
         
     def hkl_2_theta_source_theta_detector(self,hkl):
 
-        TT = self.hkl_2_two_theta(hkl)
+        two_theta = self.hkl_2_two_theta(hkl)
         CS = self.get_cristal_structure()
         surface_normal_hkl = self.get_surface_normal_hkl()
         alpha = CS.g_g_angle(hkl,surface_normal_hkl)
 
-        thetaSource = TT/2 - alpha
-        thetaDetector = TT/2 + alpha
+        theta_source = two_theta/2 - alpha
+        theta_detector = two_theta/2 + alpha
 
-        return thetaSource, thetaDetector
+        return theta_source, theta_detector
+
+    def hkl_2_two_theta_omega_offset(self,hkl):
+
+        two_theta = self.hkl_2_two_theta(hkl)
+        CS = self.get_cristal_structure()
+        surface_normal_hkl = self.get_surface_normal_hkl()
+        alpha = CS.g_g_angle(hkl,surface_normal_hkl)
+
+        return two_theta, alpha
 
     def hkl_2_theta_source_theta_detector_phi(self,hkl):
 
-        thetaSource, thetaDetector = self.hkl_2_theta_source_theta_detector(hkl)
+        theta_source, theta_detector = self.hkl_2_theta_source_theta_detector(hkl)
 
         CS = self.get_cristal_structure()
         surface_normal_hkl = self.get_surface_normal_hkl()
@@ -107,7 +113,7 @@ class Diffractometer(object):
         else:
             phi = CS.GRAngle_onplaneHKL(hkl,azimuth_pqr,surface_normal_hkl)
 
-        return thetaSource, thetaDetector, phi
+        return theta_source, theta_detector, phi
 
     def get_absolute_coord_hkl(self,hkl):
 

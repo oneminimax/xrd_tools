@@ -48,6 +48,26 @@ def theta_source_theta_detector_2_wave_vector_x_z(wave_length,theta_source,theta
 
     alpha, beta = theta_source_theta_detector_2_alpha_beta(theta_source,theta_detector)
 
+    return alpha_beta_2_wave_vector_x_z(wave_length,theta_source,theta_detector)
+
+def alpha_beta_2_wave_vector_x_z(wave_length,alpha,beta):
+
+    """ Convert pairs of theta source and theta detector to x and z components a wave vector
+
+    Inputs
+    wave_length : x-ray source wave length (float)
+    alpha : angle between the bisectrix between source-sample and detector-sample and z axes
+    beta : half the angle between source-sample and detector-sample (half of two theta)
+
+    Outputs
+    wvx : x component of the wave vector
+    wvz : z component of the wave vector
+
+    notes : 
+    theta_source + theta_detector = two_theta
+    x and z are the axis in the same plane defined by the source, the detector and the sample center
+    """
+
     wave_vector_length = two_theta_2_wave_vector_length(wave_length,2*beta)
 
     wvx = wave_vector_length*np.sin(np.deg2rad(alpha))

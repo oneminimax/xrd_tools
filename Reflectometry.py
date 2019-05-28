@@ -4,322 +4,195 @@ from scipy.special import erfc
 from numpy import matmul
 from numpy.linalg import inv
 
-deltaFactor = (2.818e-13)*(6.02214076e+23)*1e-14/(2*np.pi) #atomicRatio, density g/cm^3, (lambda nm)^2
-nSigmaRoughness = 4
-roughnessDivision = 20
+delta_factor = (2.818e-13)*(6.02214076e+23)*1e-14/(2*np.pi) #atomic_ratio, density g/cm^3, (lambda nm)^2
+n_sigma_roughness = 4
+roughness_division = 20
 
 class Sample(object):
 
-    def __init__(self,substrate = None,layerList = list()):
+    def __init__(self,substrate = None,layers = list()):
         
         if substrate:
-            self.setSubstrate(substrate)
-        self.layerList = layerList
+            self.set_substrate(substrate)
+        self.layers = layers
         self.vacuum = Vacuum()
 
-    def setSubstrate(self,substrate):
+    def set_substrate(self,substrate):
         self.substrate = substrate
 
-    def addLayer(self,layer):
-        self.layerList.append(layer)
+    def add_layer(self,layer):
+        self.layers.append(layer)
 
-    def getLastLayer(self):
-        if len(self.layerList) > 0:
-            return self.layerList[-1]
-        else:
-            return self.substrate
-
-    def getPreviousLayer(self,layer):
-
-        index = self.layerList.index(layer)
-        if index == 0:
-            return self.substrate
-        else:
-            return self.layerList[index-1]
-
-    def getTotalThickness(self):
+    def get_total_thickness(self):
 
         thickness = 0
-        for layer in self.layerList:
+        for layer in self.layers:
             thickness += layer.thickness
 
         return thickness
 
-    def getXInterface(self):
+    def get_interfaces_x(self):
 
-        self.X0 = 0
-        XInterface = self.substrate.getXInterface(self)
-        for layer in self.layerList:
-            XInterface = np.append(XInterface,layer.getXInterface(self))
-        XInterface = np.append(XInterface,self.vacuum.getXInterface(self))
+        interfaces_x = np.zeros((len(self.layers)+1,))
+        for i, layer in enumerate(reversed(self.layers)):
+            interfaces_x[i+1] = interfaces_x[i] + layer.thickness
 
-        return XInterface
+        return interfaces_x
 
-    def getXMiddle(self):
+    def get_layers_thickness(self):
 
-        XInterface = self.getXInterface()
-        XMiddle = (XInterface[:-1] + XInterface[1:])/2
+        layer_thickness = np.zeros((len(self.layers),))
+        for i, layer in enumerate(reversed(self.layers)):
+            layer_thickness[i] = layer.thickness
 
-        return XMiddle
+        return layer_thickness
 
-    def getDensityProfil(self,X):
+    def get_layers_x(self):
 
-        densityProfil = np.zeros(XLeftRight.shape)
+        interfaces_x = self.get_interfaces_x()
+        layers_x = (interfaces_x[:-1] + interfaces_x[1:])/2
+
+        return layers_x
+
+    def get_layers_refraction_index(self,lamb):
+
+        layer_refraction_index = np.zeros((len(self.layers)+2,))
+        layer_refraction_index[0] = self.vacuum.get_refraction_index(lamb)
+        for i, layer in enumerate(reversed(self.layers)):
+            layer_refraction_index[i+1] = layer.get_refraction_index(lamb)
+        layer_refraction_index[-1] = self.substrate.get_refraction_index(lamb)
+
+        return layer_refraction_index
+
+    def get_interfaces_roughness(self):
         
-        X0 = 0
-        densityProfil += self.substrate.getDensityProfil(self,X0,X)
+        interface_roughness = np.zeros((len(self.layers)+1,))
+        for i, layer in enumerate(reversed(self.layers)):
+            interface_roughness[i] = layer.roughness
+        interface_roughness[-1] = self.substrate.roughness
+
+        return interface_roughness
+
+    def get_layers_kz(self,lamb,thetas):
+
+        layer_refraction_index = self.get_layers_refraction_index(lamb)
+        layers_kz = (2*np.pi/lamb) * np.sqrt(layer_refraction_index[:,None]**2 - np.cos(thetas[None,:])**2 + 0j)
+
+        return layers_kz
+
+    def get_interfaces_matrix(self,layers_x,layers_kz):
+
+        R = self.get_interfaces_roughness()
         
-        for layer in self.layerList:
-            densityProfil += layer.getDensityProfil(self,X0,X)
-            X0 += layer.thickness
-
-        return  X, densityProfil
-
-    def getnProfil(self,lamb,X):
-
-        deltaProfil = np.zeros(X.shape)
+        kzp = layers_kz[1:,:] + layers_kz[:-1,:] 
+        kzm = layers_kz[1:,:] - layers_kz[:-1,:]
         
-        X0 = 0
-        deltaProfil += self.substrate.getDeltaProfil(self,X0,X,lamb)
+        interface_matrix = np.zeros([2,2,layers_x.size,layers_kz.shape[1]],dtype = complex)
+        interface_matrix[0,0,:,:] = kzp*np.exp(-1j*kzm*layers_x[:,None])*np.exp(-1/2*(kzm*R[:,None])**2)
+        interface_matrix[0,1,:,:] = kzm*np.exp(-1j*kzp*layers_x[:,None])*np.exp(-1/2*(kzp*R[:,None])**2)
+        interface_matrix[1,0,:,:] = kzm*np.exp(1j*kzp*layers_x[:,None])*np.exp(-1/2*(kzp*R[:,None])**2)
+        interface_matrix[1,1,:,:] = kzp*np.exp(1j*kzm*layers_x[:,None])*np.exp(-1/2*(kzm*R[:,None])**2)
+
+        return interface_matrix
+
+    def get_transfert_matrix(self,layers_kz,interface_matrix):
+
+        transfert_matrix = np.zeros((2,2,layers_kz.shape[1]),dtype = complex)
+        for i_theta in range(interface_matrix.shape[3]):
+            tmp_transfert_matrix = np.eye(2)
+            for iX in range(interface_matrix.shape[2]):
+                tmp_transfert_matrix = matmul(interface_matrix[:,:,iX,i_theta],tmp_transfert_matrix)#/layers_kz[iX,i_theta]
+            transfert_matrix[:,:,i_theta] = tmp_transfert_matrix
+
+        return transfert_matrix
+
+    def get_reflect_coef(self,lamb,thetas):
+
+        X = self.get_interfaces_x()
+        layers_kz = self.get_layers_kz(lamb,thetas)
         
-        for layer in self.layerList:
-            deltaProfil += layer.getDeltaProfil(self,X0,X,lamb)
-            X0 += layer.thickness
-
-        nProfil = 1 - deltaProfil
-
-        return nProfil
-
-    def getdn(self,lamb):
-
-        XInterface = self.getXInterface()
-        nInterface = self.getnProfil(lamb,XInterface)
-
-        dn = np.diff(nInterface)/np.diff(XInterface)
-
-        return dn
-
-    def getMaxXDepthIndex(self,nArray,thetaArray):
-
-        dn = nArray[:,None] - np.cos(thetaArray[None,:])
-        penetrationBool = (dn >= 0)
-        penetrationIndex = np.zeros(dn.shape[1],dtype = int)
-
-        for iTheta in range(dn.shape[1]):
-            index = np.argwhere(np.flip(penetrationBool[:,iTheta],axis = 0) == False)
-            if len(index)>0:
-                penetrationIndex[iTheta] = index[0,0]
-            else:
-                penetrationIndex[iTheta] = -1
-
-        return penetrationIndex
-
-    def kzIntegral(self,penetrationIndex,kzArray):
-
-        XInterface = self.getXInterface()
-        DX = np.diff(XInterface)
+        interface_matrix = self.get_interfaces_matrix(X,layers_kz)
+        transfert_matrix = self.get_transfert_matrix(layers_kz, interface_matrix)
         
-        kzIntegral = np.zeros(penetrationIndex.shape)
+        reflect_coef = transfert_matrix[1,0,:]/transfert_matrix[1,1,:]
 
-        for iTheta in range(penetrationIndex.size):
-            if penetrationIndex[iTheta] == -1:
-                kzIntegral[iTheta] = np.sum(kzArray[:,iTheta]**2 * DX)
-            else:
-                kzIntegral[iTheta] = np.sum(kzArray[-(penetrationIndex[iTheta]-1):,iTheta]**2 * DX[-(penetrationIndex[iTheta]-1):])
+        return reflect_coef
 
-        return kzIntegral
+    def get_approx_reflect_coef(self,lamb,thetas):
+        X = self.get_interfaces_x()
+        DX = np.diff(X)
+        layers_kz = self.get_layers_kz(lamb,thetas)
+        # penetrationIndex = self.getPenetrationIndex(lamb,thetas)
 
-    def integral1(self,penetrationIndex,kzArray,kzPrimeArray):
-
-        XInterface = self.getXInterface()
-        XMiddle = self.getXMiddle()
-        DX = np.diff(XInterface)
-        
-        integral1 = np.zeros(penetrationIndex.shape,dtype = complex)
-
-        for iTheta in range(penetrationIndex.size):
-            if penetrationIndex[iTheta] == -1:
-                integral1[iTheta] = 1j*np.sum(XMiddle[:,None]*kzPrimeArray[:,iTheta] * DX)
-            else:
-                integral1[iTheta] = 1j*np.sum(XMiddle[-(penetrationIndex[iTheta]-1):,None]*kzPrimeArray[-(penetrationIndex[iTheta]-1):,iTheta] * DX[-(penetrationIndex[iTheta]-1):])
-                # np.sum(kzArray[-(penetrationIndex[iTheta]-1):,iTheta]**2 * DX[-(penetrationIndex[iTheta]-1):])
-
-        return integral1
-
-    def integral2(self,penetrationIndex,kzArray,kzPrimeArray):
-
-        XInterface = self.getXInterface()
-        XMiddle = self.getXMiddle()
-        DX = np.diff(XInterface)
-        
-        integral2 = np.zeros(penetrationIndex.shape,dtype = complex)
-
-        for iTheta in range(penetrationIndex.size):
-            if penetrationIndex[iTheta] == -1:
-                integral2[iTheta] = np.sum(np.exp(2j*kzArray[:,iTheta]*XMiddle[:,None])*kzPrimeArray[:,iTheta] * DX/(2*kzArray[:,iTheta]))
-            else:
-                integral2[iTheta] = np.sum(np.exp(2j*kzArray[-(penetrationIndex[iTheta]-1):,iTheta]*XMiddle[-(penetrationIndex[iTheta]-1):,None])*kzPrimeArray[-(penetrationIndex[iTheta]-1):,iTheta] * DX[-(penetrationIndex[iTheta]-1):]/(2*kzArray[-(penetrationIndex[iTheta]-1):,iTheta]))
-                # np.sum(kzArray[-(penetrationIndex[iTheta]-1):,iTheta]**2 * DX[-(penetrationIndex[iTheta]-1):])
-
-        return integral2
-
-    def getkzArray(self,lamb,nArray,thetaArray):
-
-        return (2*np.pi/lamb) * np.sqrt(np.abs(nArray[:,None]**2 - np.cos(thetaArray[None,:]))**2)
-
-    def getkzPrimeArray(self,lamb,nArray,thetaArray):
-
-        kzArray = self.getkzArray(lamb,nArray,thetaArray)
-        dnArray = self.getdn(lamb)
-
-        return (2*np.pi/lamb)**2 * nArray[:,None]/kzArray * dnArray[:,None]
-
-    def getrArray(self,lamb,thetaArray):
-
-        XInterface = self.getXInterface()
-        XMiddle = self.getXMiddle()
-        nArray = self.getnProfil(lamb,XMiddle)
-        penetrationIndex = self.getMaxXDepthIndex(nArray,thetaArray)
-
-        kzArray = self.getkzArray(lamb,nArray,thetaArray)
-        kzPrimeArray = self.getkzPrimeArray(lamb,nArray,thetaArray)
-        # kzIntegral = self.kzIntegral(penetrationIndex,kzArray)
-        integral1 = self.integral1(penetrationIndex,kzArray,kzPrimeArray)
-        integral2 = self.integral2(penetrationIndex,kzArray,kzPrimeArray)
-
-        rArray = np.zeros(thetaArray.shape,dtype = complex)
-
-        for iTheta in range(thetaArray.size):
+        reflect_coef = np.zeros(thetas.shape)
+        layer_kz_real = np.real(layers_kz)
+        for i_theta in range(thetas.size):
+            # print(penetrationIndex[i_theta],layer_kz_real[1:penetrationIndex[i_theta],i_theta]**2,DX[:penetrationIndex[i_theta]-1])
+            ka = -layer_kz_real[0,i_theta]
+            kb = -layer_kz_real[-1,i_theta]
+            # if penetrationIndex[i_theta]<layer_kz_real.shape[0]-1:
+            #     kb = 0
+            # else:
+            #     kb = -layer_kz_real[layer_kz_real.shape[0]-1,i_theta]
             
-            if penetrationIndex[iTheta] == 0:
-                rArray[iTheta] = 1
-            else:
-                # na = self.vacuum.getn(lamb)
-                # kza = (2*np.pi/lamb) * np.sqrt(np.abs(na**2 - np.cos(thetaArray[iTheta])**2))
-                # if penetrationIndex[iTheta] == -1:
-                #     nb = self.substrate.getn(lamb)
-                #     kzb = (2*np.pi/lamb) * np.sqrt(np.abs(nb**2 - np.cos(thetaArray[iTheta])**2))
-                #     d = XInterface[-1] - XInterface[0]
-                # else:
-                #     kzb = 0
-                #     d = XInterface[-1] - XInterface[-(penetrationIndex[iTheta]-1)]
+            
+            theta = thetas[i_theta]
+            # kzlin = layer_kz_real[1:penetrationIndex[i_theta],i_theta]
+            # dxlin = DX[:penetrationIndex[i_theta]-1]
+            kzlin = -layer_kz_real[1:-1,i_theta]
+            dxlin = DX
+            d = np.sum(dxlin)
+            # print(penetrationIndex[i_theta],layer_kz_real[:,i_theta],kb)
+            inte = np.sum(kzlin**2*dxlin)
+            # print(penetrationIndex[i_theta],ka,kb,d,inte,kzlin,dxlin)
+            reflect_coef[i_theta] = (kb-ka+d*kb*ka-inte)/(kb+ka-d*kb*ka-inte)
 
-                # rArray[iTheta] = (kzb - kza + d*kza*kzb - kzIntegral[iTheta])/ (kzb + kza - d*kza*kzb - kzIntegral[iTheta])
-                rArray[iTheta] = integral2[iTheta]/(1+integral1[iTheta])
+        return reflect_coef
 
-        return rArray
+class Material(object):
+    def __init__(self,atomic_mass,atomic_number,unit_cell_volume):
 
-
+        self.atomic_mass = atomic_mass
+        self.atomic_number = atomic_number
+        self.unit_cell_volume = unit_cell_volume
 
 class Layer(object):
-    def __init__(self,density,thickness,roughness = 0,atomicRatio = 0.5):
+    def __init__(self,density,thickness,roughness = 0,atomic_mass = 2,atomic_number = 1):
         self.thickness = thickness # nm
         self.density = density # g/cm^3
         self.roughness = roughness # nm
-        self.atomicRatio = atomicRatio # nb proton/atomic mass (u)
+    
+        self.atomic_mass = atomic_mass
+        self.atomic_number = atomic_number
 
-    def setThickness(self,thickness):
+        self.atomic_ratio = self.atomic_number/self.atomic_mass # nb proton/atomic mass (u)
+
+    def set_thickness(self,thickness):
 
         self.thickness = thickness
 
-    def setDensity(self,density):
+    def set_density(self,density):
 
         self.density = density
 
-    def setRoughness(self,roughness):
+    def get_atomic_density(self):
+
+        return self.density * 6.02214086e+24/10e+24/self.atomic_mass
+
+    def set_roughness(self,roughness):
 
         self.roughness = roughness
 
-    def getn(self,lamb):
+    def get_refraction_index(self,lamb):
 
-        return 1 - deltaFactor*self.density*self.atomicRatio*lamb**2
+        self.atomic_ratio = self.atomic_number/self.atomic_mass
 
-    def getXInterface(self,sample):
-
-        thickness = self.thickness
-        roughness1 = sample.getPreviousLayer(self).roughness
-        roughness2 = self.roughness
-        if self.thickness < nSigmaRoughness*(roughness1 + roughness2):
-            DX = np.linspace(0,thickness,2*roughnessDivision)
-        else:
-            if roughness1 == 0:
-                DX1 = np.array([0,])
-            else:
-                DX1 = np.linspace(0,nSigmaRoughness*roughness1,roughnessDivision)
-            if roughness2 == 0:
-                DX2 = np.array([thickness,])
-            else:
-                DX2 = thickness + np.linspace(-nSigmaRoughness*roughness2,0,roughnessDivision)
-            
-            DX = np.append(DX1,DX2)
-            
-        X = sample.X0 + DX[1:]
-        sample.X0 += self.thickness
-
-        return X
-
-    def getDensityProfil(self,sample,X0,X):
-
-        previousRoughness = sample.getPreviousLayer(self).roughness
-        actualRoughness = self.roughness
-
-        densityProfil = np.ones(X.shape) * self.density
-
-        if previousRoughness == 0:
-            densityProfil[X < X0] *= 0
-        else:
-            densityProfil *= erfc(-(X-X0)/previousRoughness)/2
-
-        if actualRoughness == 0:
-            densityProfil[X > X0 + self.thickness] *= 0
-        else:
-            densityProfil *= erfc((X-(X0+self.thickness))/actualRoughness)/2
-        
-        return densityProfil
-
-    def getDeltaProfil(self,sample,X0,X,lamb):
-
-        densityProfil = self.getDensityProfil(sample,X0,X)
-
-        deltaProfil = deltaFactor*densityProfil*self.atomicRatio*lamb**2
-        
-        return deltaProfil
+        return 1 - delta_factor*self.density*self.atomic_ratio*lamb**2
 
 class Substrate(Layer):
-    def __init__(self,density,roughness = 0,atomicRatio = 0.5):
-        Layer.__init__(self,density,0,roughness,atomicRatio)
-
-    def getXInterface(self,sample):
-
-        if self.roughness == 0:
-            X = np.array([0])
-        else:
-            X = sample.X0 + np.linspace(-nSigmaRoughness*self.roughness,0,roughnessDivision)
-        return X
-
-    def getDensityProfil(self,sample,X0,X):
-
-        actualRoughness = self.roughness
-
-        densityProfil = np.ones(X.shape) * self.density
-
-        if actualRoughness == 0:
-            densityProfil[X > (X0 + self.thickness)] *= 0
-        else:
-            densityProfil *= erfc((X-X0)/actualRoughness)/2
-        
-        return densityProfil
+    def __init__(self,density,roughness = 0,atomic_mass = 2,atomic_number = 1):
+        Layer.__init__(self,density,0,roughness,atomic_mass,atomic_number)
 
 class Vacuum(Layer):
     def __init__(self):
-        Layer.__init__(self,0,0,0)
-
-    def getXInterface(self,sample):
-        lastRoughness = sample.getLastLayer().roughness
-        if lastRoughness == 0:
-            X = np.array([])
-        else:
-            DX = np.linspace(0,nSigmaRoughness*lastRoughness,roughnessDivision)
-            X = sample.X0 + DX[1:]
-
-        return X
+        Layer.__init__(self,0,0,0,1)
