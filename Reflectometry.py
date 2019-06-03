@@ -4,9 +4,9 @@ from scipy.special import erfc
 from numpy import matmul
 from numpy.linalg import inv
 
-delta_factor = (2.818e-13)*(6.02214076e+23)*1e-14/(2*np.pi) #atomic_ratio, density g/cm^3, (lambda nm)^2
-n_sigma_roughness = 4
-roughness_division = 20
+delta_factor = (2.818e-13)*(6.02214076e+23)*1e-14 #atomic_ratio, density g/cm^3, (lambda nm)^2
+mass_unit = 1.660539e-27 #kg
+re = 2.8179403e-15 #m
 
 class Sample(object):
 
@@ -38,6 +38,16 @@ class Sample(object):
             interfaces_x[i+1] = interfaces_x[i] + layer.thickness
 
         return interfaces_x
+
+    def get_layers_name(self):
+
+        layers_name = list()
+        
+        for layer in reversed(self.layers):
+            layers_name.append(layer.name)
+        layers_name.append(self.substrate.name)
+
+        return layers_name
 
     def get_layers_thickness(self):
 
@@ -82,16 +92,16 @@ class Sample(object):
 
     def get_interfaces_matrix(self,layers_x,layers_kz):
 
-        R = self.get_interfaces_roughness()
+        interfaces_roughness = self.get_interfaces_roughness()
         
         kzp = layers_kz[1:,:] + layers_kz[:-1,:] 
         kzm = layers_kz[1:,:] - layers_kz[:-1,:]
         
         interface_matrix = np.zeros([2,2,layers_x.size,layers_kz.shape[1]],dtype = complex)
-        interface_matrix[0,0,:,:] = kzp*np.exp(-1j*kzm*layers_x[:,None])*np.exp(-1/2*(kzm*R[:,None])**2)
-        interface_matrix[0,1,:,:] = kzm*np.exp(-1j*kzp*layers_x[:,None])*np.exp(-1/2*(kzp*R[:,None])**2)
-        interface_matrix[1,0,:,:] = kzm*np.exp(1j*kzp*layers_x[:,None])*np.exp(-1/2*(kzp*R[:,None])**2)
-        interface_matrix[1,1,:,:] = kzp*np.exp(1j*kzm*layers_x[:,None])*np.exp(-1/2*(kzm*R[:,None])**2)
+        interface_matrix[0,0,:,:] = kzp * np.exp(-1j*kzm*layers_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
+        interface_matrix[0,1,:,:] = kzm * np.exp(-1j*kzp*layers_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interface_matrix[1,0,:,:] = kzm * np.exp( 1j*kzp*layers_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interface_matrix[1,1,:,:] = kzp * np.exp( 1j*kzm*layers_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
 
         return interface_matrix
 
@@ -118,36 +128,41 @@ class Sample(object):
 
         return reflect_coef
 
-    def get_approx_reflect_coef(self,lamb,thetas):
-        X = self.get_interfaces_x()
-        DX = np.diff(X)
-        layers_kz = self.get_layers_kz(lamb,thetas)
-        # penetrationIndex = self.getPenetrationIndex(lamb,thetas)
+    def get_density_profil(self,n_point = 100):
 
-        reflect_coef = np.zeros(thetas.shape)
-        layer_kz_real = np.real(layers_kz)
-        for i_theta in range(thetas.size):
-            # print(penetrationIndex[i_theta],layer_kz_real[1:penetrationIndex[i_theta],i_theta]**2,DX[:penetrationIndex[i_theta]-1])
-            ka = -layer_kz_real[0,i_theta]
-            kb = -layer_kz_real[-1,i_theta]
-            # if penetrationIndex[i_theta]<layer_kz_real.shape[0]-1:
-            #     kb = 0
-            # else:
-            #     kb = -layer_kz_real[layer_kz_real.shape[0]-1,i_theta]
-            
-            
-            theta = thetas[i_theta]
-            # kzlin = layer_kz_real[1:penetrationIndex[i_theta],i_theta]
-            # dxlin = DX[:penetrationIndex[i_theta]-1]
-            kzlin = -layer_kz_real[1:-1,i_theta]
-            dxlin = DX
-            d = np.sum(dxlin)
-            # print(penetrationIndex[i_theta],layer_kz_real[:,i_theta],kb)
-            inte = np.sum(kzlin**2*dxlin)
-            # print(penetrationIndex[i_theta],ka,kb,d,inte,kzlin,dxlin)
-            reflect_coef[i_theta] = (kb-ka+d*kb*ka-inte)/(kb+ka-d*kb*ka-inte)
+        n_roughness = 4
 
-        return reflect_coef
+        # top to bottom
+        layers_thickness = self.get_layers_thickness() 
+        interfaces_x = self.get_interfaces_x() # from top
+        interfaces_roughness = self.get_interfaces_roughness()
+        total_thickness = self.get_total_thickness()
+
+        X = np.linspace(-n_roughness*interfaces_roughness[-1],total_thickness + n_roughness*interfaces_roughness[0],n_point)
+
+        density_profil = self.substrate.density * erfc((X)/interfaces_roughness[-1])/2
+        for i, layer in enumerate(reversed(self.layers)):
+            density_profil += layer.density * erfc(-(X-(total_thickness-interfaces_x[i+1]))/interfaces_roughness[i+1]) * erfc((X-(total_thickness-interfaces_x[i]))/interfaces_roughness[i])/4
+
+        return X, density_profil
+
+    def get_scatering_length_profil(self,n_point = 100):
+
+        n_roughness = 4
+
+        # top to bottom
+        layers_thickness = self.get_layers_thickness() 
+        interfaces_x = self.get_interfaces_x() # from top
+        interfaces_roughness = self.get_interfaces_roughness()
+        total_thickness = self.get_total_thickness()
+
+        X = np.linspace(-n_roughness*interfaces_roughness[-1],total_thickness + n_roughness*interfaces_roughness[0],n_point)
+
+        scatering_length_profil = self.substrate.get_scatering_length() * erfc((X)/interfaces_roughness[-1])/2
+        for i, layer in enumerate(reversed(self.layers)):
+            scatering_length_profil += layer.get_scatering_length() * erfc(-(X-(total_thickness-interfaces_x[i+1]))/interfaces_roughness[i+1]) * erfc((X-(total_thickness-interfaces_x[i]))/interfaces_roughness[i])/4
+
+        return X, scatering_length_profil
 
 class Material(object):
     def __init__(self,atomic_mass,atomic_number,unit_cell_volume):
@@ -157,7 +172,8 @@ class Material(object):
         self.unit_cell_volume = unit_cell_volume
 
 class Layer(object):
-    def __init__(self,density,thickness,roughness = 0,atomic_mass = 2,atomic_number = 1):
+    def __init__(self,name,density,thickness,roughness = 0,atomic_mass = 2,atomic_number = 1):
+        self.name = name
         self.thickness = thickness # nm
         self.density = density # g/cm^3
         self.roughness = roughness # nm
@@ -185,14 +201,18 @@ class Layer(object):
 
     def get_refraction_index(self,lamb):
 
-        self.atomic_ratio = self.atomic_number/self.atomic_mass
+        return 1 - delta_factor*self.density*self.atomic_ratio*lamb**2/(2*np.pi)
 
-        return 1 - delta_factor*self.density*self.atomic_ratio*lamb**2
+    def get_scatering_length(self):
+
+        unit_cell_volume = self.atomic_mass*mass_unit/(self.density * 1e3)
+
+        return self.atomic_number/unit_cell_volume/1e30
 
 class Substrate(Layer):
-    def __init__(self,density,roughness = 0,atomic_mass = 2,atomic_number = 1):
-        Layer.__init__(self,density,0,roughness,atomic_mass,atomic_number)
+    def __init__(self,name,density,roughness = 0,atomic_mass = 2,atomic_number = 1):
+        Layer.__init__(self,name,density,0,roughness,atomic_mass,atomic_number)
 
 class Vacuum(Layer):
     def __init__(self):
-        Layer.__init__(self,0,0,0,1)
+        Layer.__init__(self,'Vacuum',0,0,0,1)
