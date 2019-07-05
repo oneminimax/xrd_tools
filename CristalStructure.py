@@ -2,7 +2,6 @@ import numpy as np
 from XRDTools.FormFactor import ITCFct
 
 
-
 class GeneralStructure(object):
 
     """ General notation :

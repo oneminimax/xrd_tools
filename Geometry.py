@@ -48,7 +48,7 @@ def theta_source_theta_detector_2_wave_vector_x_z(wave_length,theta_source,theta
 
     alpha, beta = theta_source_theta_detector_2_alpha_beta(theta_source,theta_detector)
 
-    return alpha_beta_2_wave_vector_x_z(wave_length,theta_source,theta_detector)
+    return alpha_beta_2_wave_vector_x_z(wave_length,alpha, beta)
 
 def alpha_beta_2_wave_vector_x_z(wave_length,alpha,beta):
 

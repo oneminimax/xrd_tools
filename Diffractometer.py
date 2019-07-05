@@ -42,7 +42,7 @@ class Diffractometer(object):
             self.surface_normal_hkl = surface_normal_hkl
         else:
             CS = self.get_cristal_structure()
-            if CS.GRdot(surface_normal_hkl,self.get_azimuth_pqr()) == 0:
+            if CS.g_r_dot(surface_normal_hkl,self.get_azimuth_pqr()) == 0:
                 self.surface_normal_hkl = surface_normal_hkl
             else:
                 raise ValueError('surface_normal_hkl must be orthogonal to azimuth_pqr')
@@ -60,7 +60,7 @@ class Diffractometer(object):
             self.azimuth_pqr = azimuth_pqr
         else:
             CS = self.get_cristal_structure()
-            if CS.GRdot(self.get_surface_normal_hkl(),azimuth_pqr) == 0:
+            if CS.g_r_dot(self.get_surface_normal_hkl(),azimuth_pqr) == 0:
                 self.azimuth_pqr = azimuth_pqr
             else:
                 raise ValueError('azimuth_pqr must be orthogonal to surface_normal_hkl')
@@ -107,11 +107,11 @@ class Diffractometer(object):
         surface_normal_hkl = self.get_surface_normal_hkl()
         azimuth_pqr = self.get_azimuth_pqr()
 
-        if CS.GGAngle(hkl,surface_normal_hkl) % 180 < 1e-2:
+        if CS.g_g_angle(hkl,surface_normal_hkl) % 180 < 1e-2:
             phi = 0
             Warning('G Vector is along z axis')
         else:
-            phi = CS.GRAngle_onplaneHKL(hkl,azimuth_pqr,surface_normal_hkl)
+            phi = CS.g_r_angle_on_plane_hkl(hkl,azimuth_pqr,surface_normal_hkl)
 
         return theta_source, theta_detector, phi
 
@@ -123,9 +123,9 @@ class Diffractometer(object):
         surface_normal_hkl = self.get_surface_normal_hkl()
         azimuth_pqr = self.get_azimuth_pqr()
 
-        Z = CS.GGdot(hkl,surface_normal_hkl) / CS.GLength(surface_normal_hkl)
-        X = CS.GRdot(hkl,azimuth_pqr) / CS.RLength(azimuth_pqr)
-        Y = CS.RRdot(CS.GGcross(hkl,surface_normal_hkl),azimuth_pqr) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
+        Z = CS.g_g_dot(hkl,surface_normal_hkl) / CS.GLength(surface_normal_hkl)
+        X = CS.g_r_dot(hkl,azimuth_pqr) / CS.RLength(azimuth_pqr)
+        Y = CS.r_r_dot(CS.GGcross(hkl,surface_normal_hkl),azimuth_pqr) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
 
         return np.array([X,Y,Z])
 
@@ -137,9 +137,9 @@ class Diffractometer(object):
         surface_normal_hkl = self.get_surface_normal_hkl()
         azimuth_pqr = self.get_azimuth_pqr()
 
-        Z = CS.GRdot(surface_normal_hkl,pqr)/CS.GLength(surface_normal_hkl)
-        X = CS.RRdot(azimuth_pqr,pqr)/CS.RLength(azimuth_pqr)
-        Y = CS.GGdot(surface_normal_hkl,CS.RRcross(azimuth_pqr,pqr)) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
+        Z = CS.g_r_dot(surface_normal_hkl,pqr)/CS.GLength(surface_normal_hkl)
+        X = CS.r_r_dot(azimuth_pqr,pqr)/CS.RLength(azimuth_pqr)
+        Y = CS.g_g_dot(surface_normal_hkl,CS.RRcross(azimuth_pqr,pqr)) / (CS.GLength(surface_normal_hkl) * CS.RLength(azimuth_pqr))
 
         return np.array([X,Y,Z])
 

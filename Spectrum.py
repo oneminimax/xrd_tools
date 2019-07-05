@@ -3,21 +3,21 @@ from XRDTools.Math import fourierTransform as FT
 # import scipy.odr as odr
 from scipy.optimize import leastsq
 
-def centroid(K,amplitude):
+def centroid(K,amplitude,expo = 1):
 
-    return np.dot(K,amplitude)/np.sum(amplitude)
+    return np.dot(K,amplitude**expo)/np.sum(amplitude**expo)
 
 def width(K,amplitude):
 
     return np.sqrt(np.dot(K**2,amplitude)/np.sum(amplitude))
 
-def signalArea(K,amplitude):
+def signal_area(K,amplitude):
 
     deltaK = np.gradient(K)
 
     return np.sum(amplitude*deltaK) 
 
-def LambdaFct(X,L):
+def lambda_fct(X,L):
 
     Y = L-X
     Y[Y<0] = 1e-9
@@ -27,7 +27,7 @@ def LambdaFct(X,L):
 def AGFct(X,G,L,sigma_eps_homo,scale,noise):
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        A = np.exp(np.log(scale*LambdaFct(X,L)/L) - ((X*G*sigma_eps_homo)**2)/2 ) + noise
+        A = np.exp(np.log(scale*lambda_fct(X,L)/L) - ((X*G*sigma_eps_homo)**2)/2 ) + noise
 
     # A[A<noise] = noise
 
@@ -38,9 +38,9 @@ def AGLambdaFct_abs(X,G,L,sigma_eps_homo,scale,noise,ave_eps_interface,sigma_eps
     # sigma_eps_interface = 0
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        sigma_eps_X2_Z = 2 * la**2 * sigma_eps_interface**2 * np.exp(-L/la) * np.sinh(LambdaFct(X,L)/la)/(LambdaFct(X,L)/la)
+        sigma_eps_X2_Z = 2 * la**2 * sigma_eps_interface**2 * np.exp(-L/la) * np.sinh(lambda_fct(X,L)/la)/(lambda_fct(X,L)/la)
         A_abs = np.exp(
-                np.log(scale*LambdaFct(X,L)/L)
+                np.log(scale*lambda_fct(X,L)/L)
                 - (G**2 * (sigma_eps_X2_Z + sigma_eps_homo**2 * X**2))/2 
             ) + noise
 
@@ -53,7 +53,7 @@ def AGLambdaFct_angle(X,G,L,ave_eps_homo,ave_eps_interface,la):
     # sigma_eps_interface = 0
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        ave_eps_Z = ave_eps_interface * np.exp(-L/(2*la)) * np.sinh(X/(2*la))/(X/(2*la)) * np.sinh(LambdaFct(X,L)/(2*la))/(LambdaFct(X,L)/(2*la))
+        ave_eps_Z = ave_eps_interface * np.exp(-L/(2*la)) * np.sinh(X/(2*la))/(X/(2*la)) * np.sinh(lambda_fct(X,L)/(2*la))/(lambda_fct(X,L)/(2*la))
         A_angle = G * X * (ave_eps_homo + ave_eps_Z)
 
     # A[A<noise] = noise
