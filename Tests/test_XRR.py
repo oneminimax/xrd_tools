@@ -18,7 +18,12 @@ BoreAtomicNumber = 5
 BoreDelta = 1/(2*np.pi)*relec*BoreAtomicNumber/BoreAtomicMass*BoreDensity*lamb**2
 nBore = 1 - BoreDelta
 
-print(nBore)
+BoreDensity = 2.37 * ureg.gram/ureg.cm**3
+BoreAtomicMass = 10.811 * ureg.atomic_mass_unit
+BoreAtomicNumber = 5
+BoreDelta = 1/(2*np.pi)*relec*BoreAtomicNumber/BoreAtomicMass*BoreDensity*lamb**2
+nBore = 1 - BoreDelta
+
 SiDensity = 2.3291 * ureg.gram/ureg.cm**3
 SiAtomicMass = 28.0855 * ureg.atomic_mass_unit
 SiAtomicNumber = 14
@@ -26,8 +31,10 @@ SiDelta = 1/(2*np.pi)*relec*SiAtomicNumber/SiAtomicMass*SiDensity*lamb**2
 SiDelta2 = 1/(2*np.pi)*(2.818e-13)*(14)/(28.0855)*(6.02214076e23)*2.3291*0.15406**2*1e-14
 nSi = 1 - SiDelta
 
-print(BoreDelta,SiDelta)
+print(BoreDelta.to_base_units(),SiDelta.to_base_units())
 print(1 - SiDelta,1-SiDelta2)
+
+quit()
 
 def SMatrixType0(n,theta0,k0,z):
 

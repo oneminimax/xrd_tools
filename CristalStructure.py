@@ -1,7 +1,6 @@
 import numpy as np
 from XRDTools.FormFactor import ITCFct
 
-
 class GeneralStructure(object):
 
     """ General notation :
@@ -48,7 +47,7 @@ class GeneralStructure(object):
 
         return self.atoms
 
-    def add_atom_wickoff(self,letter,formFactor,variables = [],label = ''):
+    def add_atom_wickoff(self,letter,form_factor,variables = [],label = ''):
 
         if letter in self.wyckoff:
             coordList = self.wyckoff[letter]
@@ -56,15 +55,15 @@ class GeneralStructure(object):
                 coordList = coordList(*variables)
 
             for coord in coordList:
-                self._add_atom(coord,formFactor,label)
+                self._add_atom(coord,form_factor,label)
 
-    def add_atom(self,position,formFactor,label = ''):
+    def add_atom(self,coordinates,form_factor,label = ''):
 
-        self._add_atom(position,formFactor,label)
+        self._add_atom(coordinates,form_factor,label)
 
-    def _add_atom(self,position,formFactor,label = ''):
+    def _add_atom(self,coordinates,form_factor,label = ''):
 
-        self.atoms.append(Atom(position,label = label,formFactor = formFactor))
+        self.atoms.append(Atom(coordinates,label = label,form_factor = form_factor))
 
     def structure_factor(self,hkl):
 
@@ -78,7 +77,7 @@ class GeneralStructure(object):
 
         for i, atom in enumerate(atoms):
             form_factors[i] = atom.get_form_factor(G)
-            positions[:,i] = atom.position
+            positions[:,i] = atom.coordinates
 
         factor = np.sum(form_factors * np.exp(1j*2*np.pi*np.dot(hkl,positions)))
 
@@ -344,7 +343,7 @@ class Hexagonal(GeneralStructure):
 class Monoclinic(GeneralStructure):
     def __init__(self,a1_length,a2_length,a3_length,angle2):
 
-        super().__init__((a1_length,b2_length,a3_length),(90,angle2,90))
+        super().__init__((a1_length,a2_length,a3_length),(90,angle2,90))
 
 class Tetragonal(GeneralStructure):
     def __init__(self,a12_length,a3_length):
@@ -363,31 +362,31 @@ class Cubic(GeneralStructure):
 
 class CubicFaceCentered(Cubic):
     
-    def add_atom(self,position,formFactor,label = ''):
+    def add_atom(self,coordinates,form_factor,label = ''):
 
         for v1 in [np.array((0,0,0)),np.array((0.5,0.5,0)),np.array((0,0.5,0.5)),np.array((0.5,0,0.5))]:
-            self._add_atom(position + v1,formFactor,label)
+            self._add_atom(coordinates + v1,form_factor,label)
 
 class CubicBodyCentered(Cubic):
     
-    def add_atom(self,position,formFactor,label = ''):
+    def add_atom(self,coordinates,form_factor,label = ''):
 
         for v1 in [np.array((0,0,0)),np.array((0.5,0.5,0.5))]:
-            self._add_atom(position + v1,formFactor,label)
+            self._add_atom(coordinates + v1,form_factor,label)
 
 class Diamond(Cubic):
 
-    def add_atom(self,position,formFactor,label = ''):
+    def add_atom(self,coordinates,form_factor,label = ''):
 
         for v1 in [np.array((0,0,0)),np.array((0.5,0.5,0)),np.array((0,0.5,0.5)),np.array((0.5,0,0.5))]:
                 for v2 in [np.array((0,0,0)),np.array((0.25,0.25,0.25))]:
-                    self._add_atom(position + v1 + v2,formFactor,label)
+                    self._add_atom(coordinates + v1 + v2,form_factor,label)
 
 class No139(Tetragonal): # I 4 / m m m
     wyckoff = {
         'a' : [(0,0,0)],
         'b' : [(0,0,1/2)],
-        'c' : [(0,1/2,0),(0,1/2,0)],
+        'c' : [(0,1/2,0),(1/2,0,0)],
         'd' : [(0,1/2,1/4),(1/2,0,1/4)],
         'e' : lambda z : [(0,0,z),(0,0,-z)],
         'f' : [(1/4,1/4,1/4),(3/4,3/4,1/4),(3/4,1/4,1/4),(1/4,3/4,1/4)],
@@ -428,7 +427,31 @@ class No164(Hexagonal): # P -3 m 1
         'j' : lambda x, y, z : [(x,y,z),(-y,x-y,z),(-x+y,-x,z),(y,x,-z),(x-y,-y,-z),(-x,-x+y,-z),(-x,-y,-z),(y,-x+y,-z),(x-y,x,-z),(-y,-x,z),(-x+y,y,z),(x,x-y,z)]
     }
 
+class No221(Cubic): # P m -3 m
+    wyckoff = {
+        'a' : [(0,0,0)],
+        'b' : [(1/2,1/2,1/2)],
+        'c' : [(0,1/2,1/2),(1/2,0,1/2),(1/2,1/2,0)],
+        'd' : [(1/2,0,0),(0,1/2,0),(0,0,1/2)],
+        'e' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0),(0,0,x),(0,0,-x)],
+        'f' : lambda x : [(x,1/2,1/2),(-x,1/2,1/2),(1/2,x,1/2),(1/2,-x,1/2),(1/2,1/2,x),(1/2,1/2,-x)],
+        'g' : lambda x : [(x,x,x),(-x,-x,x),(-x,x,-x),(x,-x,-x),(x,x,-x),(-x,-x,-x),(x,-x,x),(-x,x,x)],
+        # not fihished
+        # 'g' : lambda x : [(x,1/4,1/4),(-x,3/4,1/4),(1/4,x,1/4),(1/4,-x,3/4),(1/4,1/4,x),(3/4,1/4,-x),(1/4,x,3/4),(3/4,-x,3/4),(x,1/4,3/4),(-x,1/4,1/4),(1/4,1/4,-x),(1/4,3/4,x)]
+    }
+
 class No225(Cubic): # F m -3 m
+    wyckoff = {
+        'a' : [(0,0,0)],
+        'b' : [(1/2,1/2,1/2)],
+        'c' : [(1/4,1/4,1/4),(1/4,1/4,3/4)],
+        'd' : [(0,1/4,1/4),(0,3/4,1/4),(1/4,0,1/4),(1/4,0,3/4),(1/4,1/4,0),(3/4,1/4,0)],
+        'e' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0),(0,0,x),(0,0,-x)],
+        'f' : lambda x : [(x,x,x),(-x,-x,x),(-x,x,-x),(x,-x,-x),(x,x,-x),(-x,-x,-x),(x,-x,x),(-x,x,x)],
+        'g' : lambda x : [(x,1/4,1/4),(-x,3/4,1/4),(1/4,x,1/4),(1/4,-x,3/4),(1/4,1/4,x),(3/4,1/4,-x),(1/4,x,3/4),(3/4,-x,3/4),(x,1/4,3/4),(-x,1/4,1/4),(1/4,1/4,-x),(1/4,3/4,x)]
+    }
+
+class No227(Cubic): # F d -3 m
     wyckoff = {
         'a' : [(0,0,0)],
         'b' : [(1/2,1/2,1/2)],
@@ -441,24 +464,24 @@ class No225(Cubic): # F m -3 m
 
 class Atom(object):
 
-    def __init__(self,position,label = '',formFactor = 'ITC'):
+    def __init__(self,coordinates,label = '',form_factor = 'ITC'):
 
-        self.position = np.mod(np.array(position),1)
-        self.formFactor = formFactor
-        if formFactor == 'ITC':
+        self.coordinates = np.mod(np.array(coordinates),1)
+        self.form_factor = form_factor
+        if form_factor == 'ITC':
             self.formFactorFct = ITCFct(label)
         self.label = label
 
     def __str__(self):
 
-        return '{0:s} : ({1:.3f},{2:.3f},{3:.3f})'.format(self.label,*self.position)
+        return '{0:s} : ({1:.3f},{2:.3f},{3:.3f})'.format(self.label,*self.coordinates)
 
     def get_form_factor(self,q):
 
-        if self.formFactor == 'ITC':
+        if self.form_factor == 'ITC':
             return self.formFactorFct(q)
         else:
-            return self.formFactor
+            return self.form_factor
 
 def GA_GB_GC_to_cristalStructure(GA,GB,GC):
 

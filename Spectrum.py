@@ -127,7 +127,7 @@ def fitAGLambdaFct_angle(X,A_angle,ampA_Error,argA_Error,G,thickness,XLim,p0 = N
 
 
 
-def calculateA(K,amplitude,amplitude_error,maxX = 130,stepX = 2):
+def calculate_A(K,amplitude,amplitude_error,maxX = 130,stepX = 2):
 
     X = np.arange(0,maxX,stepX)
     complexA, ampA_Error, argA_Error = FT(K,amplitude,X,windowFct = np.hanning, YError = amplitude_error)
@@ -139,7 +139,7 @@ def calculateA(K,amplitude,amplitude_error,maxX = 130,stepX = 2):
 
 def extractThickness(K,amplitude,amplitude_error,maxX = 130,stepX = 2,p0 = None,allOutput = False):
 
-    X, complexA, ampA_Error, argA_Error = calculateA(K,amplitude,amplitude_error,maxX = maxX,stepX = stepX)
+    X, complexA, ampA_Error, argA_Error = calculate_A(K,amplitude,amplitude_error,maxX = maxX,stepX = stepX)
     A = np.abs(complexA)
     G = centroid(K,amplitude)
 
@@ -160,9 +160,9 @@ def extractThickness(K,amplitude,amplitude_error,maxX = 130,stepX = 2,p0 = None,
     else:
         return L
 
-def estimateNoiseLevel(K,amplitude,noisePolyDeg = 0):
+def estimate_noise_level(K,amplitude,noisePolyDeg = 0):
 
-    Y = np.log(amplitude)
+    Y = np.log(amplitude+1)
 
     histo, bin_edges = np.histogram(Y,100)
     

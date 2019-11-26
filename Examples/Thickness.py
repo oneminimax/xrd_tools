@@ -12,9 +12,9 @@ from XRDTools.Spectrum import centroid, calculateA, fitAGFct, AGFct
 data_path = 'Data/'
 
 sample_tuples = [
-    ('thickness_100.dat',(35.25,36)),
-    ('thickness_111.dat',(30.72,31.8)),
-    ('thickness_PCCO.dat',(28,30.5))
+    ('T2T_22_24_STO.dat',(22,24)),
+    ('T2T_22_23p5_LSAT.dat',(22,23.5)),
+    # ('thickness_PCCO.dat',(28,30.5))
     ]
 
 dm = Diffractometer()
@@ -33,8 +33,8 @@ for sample_tuple in sample_tuples:
     reader = Reader(' ',['two theta','signal'])
     CS = reader.read(path.join(data_path,file_name))
 
-    two_theta = CS.get_column_by_name('two theta')
-    signal = CS.get_column_by_name('signal')
+    two_theta = CS.get_column_by_name('two theta').magnitude
+    signal = CS.get_column_by_name('signal').magnitude
     subInd = (two_theta > two_theta_lim[0]) * (two_theta < two_theta_lim[1])
     # print(subInd)
     
@@ -48,15 +48,15 @@ for sample_tuple in sample_tuples:
     X, complexA, ampA_error, argA_error = calculateA(K-G,signal,signal_error,stepX = 2,maxX = 120)
     A = np.abs(complexA)
 
-    p0 = [100,1e-3,A[0],0]
-    popt, perr = fitAGFct(X,A,ampA_error,G,p0 = p0)
+    # p0 = [100,1e-3,A[0],0]
+    # popt, perr = fitAGFct(X,A,ampA_error,G,p0 = p0)
 
     AX1.plot(two_theta,signal)
-    AX2.plot(X,A)
-    AX2.plot(X,AGFct(X,G,*popt),'--k')
-    AX3.plot(X,np.angle(complexA))
+    # AX2.plot(X,A)
+    # AX2.plot(X,AGFct(X,G,*popt),'--k')
+    # AX3.plot(X,np.angle(complexA))
 
-    print(popt,perr)
+    # print(popt,perr)
 
 plt.show()
     
