@@ -98,14 +98,14 @@ def testCristalStructureNiobiumNitride():
     # print((np.abs(/cs.structureFactor((1,1,1))))**2)
 
 
-def testwickOff():
+def test_wickoff():
 
-    cs = CS.No164(1,2)
+    cs = CS.No139(1,2)
 
-    cs.addAtomWickoff('a',1,label = 'a1')
-    cs.addAtomWickoff('c',1,variables = [0.45],label = 'a2')
+    cs.add_atom_wickoff('a',1,label = 'a1')
+    cs.add_atom_wickoff('e',2-1j,label = 'a2',z = 0.1)
 
-    cs.showAtomList()
+    cs.show_atoms()
 
 
 if __name__ == '__main__':
@@ -114,4 +114,4 @@ if __name__ == '__main__':
     # testCristalStructureSilcium()
     # testCristalStructureNiobiumNitride()
     # calc()
-    testwickOff()
+    test_wickoff()

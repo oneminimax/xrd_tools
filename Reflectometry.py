@@ -31,14 +31,6 @@ class Sample(object):
 
         return thickness
 
-    def get_interfaces_x(self):
-
-        interfaces_x = np.zeros((len(self.layers)+1,))
-        for i, layer in enumerate(reversed(self.layers)):
-            interfaces_x[i+1] = interfaces_x[i] + layer.thickness
-
-        return interfaces_x
-
     def get_layers_name(self):
 
         layers_name = list()
@@ -64,15 +56,26 @@ class Sample(object):
 
         return layers_x
 
-    def get_layers_refraction_index(self,lamb):
+    ''' Interfaces gets '''
 
-        layer_refraction_index = np.zeros((len(self.layers)+2,))
-        layer_refraction_index[0] = self.vacuum.get_refraction_index(lamb)
+    def get_interfaces_x(self):
+
+        interfaces_x = np.zeros((len(self.layers)+1,))
         for i, layer in enumerate(reversed(self.layers)):
-            layer_refraction_index[i+1] = layer.get_refraction_index(lamb)
-        layer_refraction_index[-1] = self.substrate.get_refraction_index(lamb)
+            interfaces_x[i+1] = interfaces_x[i] + layer.thickness
 
-        return layer_refraction_index
+        return interfaces_x
+
+    def get_interfaces_refraction_index(self,lamb):
+
+        interfaces_refraction_index = np.zeros((len(self.layers)+1,2))
+        interfaces_refraction_index[0,0] = self.vacuum.get_refraction_index(lamb,'bottom')
+        for i, layer in enumerate(reversed(self.layers)):
+            interfaces_refraction_index[i,1] = layer.get_refraction_index(lamb,'top')
+            interfaces_refraction_index[i+1,0] = layer.get_refraction_index(lamb,'bottom')
+        interfaces_refraction_index[-1,1] = self.substrate.get_refraction_index(lamb,'top')
+
+        return interfaces_refraction_index
 
     def get_interfaces_roughness(self):
         
@@ -83,50 +86,163 @@ class Sample(object):
 
         return interface_roughness
 
-    def get_layers_kz(self,lamb,thetas):
+    def get_interfaces_kz(self,lamb,thetas):
 
-        layer_refraction_index = self.get_layers_refraction_index(lamb)
-        layers_kz = (2*np.pi/lamb) * np.sqrt(layer_refraction_index[:,None]**2 - np.cos(thetas[None,:])**2 + 0j)
+        # dim 0, interface
+        # dim 1 top bottom
+        # dim 2 different theta value
 
-        return layers_kz
+        interfaces_refraction_index = self.get_interfaces_refraction_index(lamb)
+        return (2*np.pi/lamb) * np.sqrt(interfaces_refraction_index[:,:,None]**2 - np.cos(thetas[None,None,:])**2 + 0j)
+    
 
-    def get_interfaces_matrix(self,layers_x,layers_kz):
+    def get_interfaces_matrix_p(self,interfaces_x,interfaces_kz):
+
+        '''
+        Transfer matrix from one side of an interface to the other (same position)
+        '''
 
         interfaces_roughness = self.get_interfaces_roughness()
         
-        kzp = layers_kz[1:,:] + layers_kz[:-1,:] 
-        kzm = layers_kz[1:,:] - layers_kz[:-1,:]
+        # kzp = interfaces_kz[1:,:] + interfaces_kz[:-1,:] 
+        # kzm = interfaces_kz[1:,:] - interfaces_kz[:-1,:]
+
+        kzp = np.sum(interfaces_kz,axis = 1)
+        kzm = np.squeeze(np.diff(interfaces_kz,axis = 1))
+
+        pfac = kzp/2
+        mfac = kzm/2
+
+        # dim 0, 1 2d matrix
+        # dim 2 interface position
+        # dim 3 value of k for different theta value
         
-        interface_matrix = np.zeros([2,2,layers_x.size,layers_kz.shape[1]],dtype = complex)
-        interface_matrix[0,0,:,:] = kzp * np.exp(-1j*kzm*layers_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
-        interface_matrix[0,1,:,:] = kzm * np.exp(-1j*kzp*layers_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
-        interface_matrix[1,0,:,:] = kzm * np.exp( 1j*kzp*layers_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
-        interface_matrix[1,1,:,:] = kzp * np.exp( 1j*kzm*layers_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
+        interfaces_matrix = np.zeros([2,2,interfaces_x.size,interfaces_kz.shape[2]],dtype = complex)
+        interfaces_matrix[0,0,:,:] = pfac * np.exp(-1j*kzm*interfaces_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
+        interfaces_matrix[0,1,:,:] = mfac * np.exp(-1j*kzp*interfaces_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interfaces_matrix[1,0,:,:] = mfac * np.exp( 1j*kzp*interfaces_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interfaces_matrix[1,1,:,:] = pfac * np.exp( 1j*kzm*interfaces_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
 
-        return interface_matrix
+        return interfaces_matrix
 
-    def get_transfert_matrix(self,layers_kz,interface_matrix):
+    def get_interfaces_matrix_s(self,interfaces_x,interfaces_kz,interfaces_n):
 
-        transfert_matrix = np.zeros((2,2,layers_kz.shape[1]),dtype = complex)
-        for i_theta in range(interface_matrix.shape[3]):
-            tmp_transfert_matrix = np.eye(2)
-            for iX in range(interface_matrix.shape[2]):
-                tmp_transfert_matrix = matmul(interface_matrix[:,:,iX,i_theta],tmp_transfert_matrix)#/layers_kz[iX,i_theta]
+        '''
+        Transfer matrix from one side of an interface to the other (same position)
+        '''
+
+        interfaces_roughness = self.get_interfaces_roughness()
+        
+        # kzp = interfaces_kz[1:,:] + interfaces_kz[:-1,:] 
+        # kzm = interfaces_kz[1:,:] - interfaces_kz[:-1,:]
+
+        kzp = np.sum(interfaces_kz,axis = 1)
+        kzm = np.squeeze(np.diff(interfaces_kz,axis = 1))
+
+        pfac = (interfaces_n[:,0,None]**2 * interfaces_kz[:,1,:] + interfaces_n[:,1,None]**2 * interfaces_kz[:,0,:])/(2*interfaces_n[:,0,None]*interfaces_n[:,1,None])
+        mfac = (interfaces_n[:,0,None]**2 * interfaces_kz[:,1,:] - interfaces_n[:,1,None]**2 * interfaces_kz[:,0,:])/(2*interfaces_n[:,0,None]*interfaces_n[:,1,None])
+
+        # dim 0, 1 2d matrix
+        # dim 2 interface position
+        # dim 3 value of k for different theta value
+        
+        interfaces_matrix = np.zeros([2,2,interfaces_x.size,interfaces_kz.shape[2]],dtype = complex)
+        interfaces_matrix[0,0,:,:] = pfac * np.exp(-1j*kzm*interfaces_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
+        interfaces_matrix[0,1,:,:] = mfac * np.exp(-1j*kzp*interfaces_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interfaces_matrix[1,0,:,:] = mfac * np.exp( 1j*kzp*interfaces_x[:,None]) * np.exp(-1/2*(kzp*interfaces_roughness[:,None])**2)
+        interfaces_matrix[1,1,:,:] = pfac * np.exp( 1j*kzm*interfaces_x[:,None]) * np.exp(-1/2*(kzm*interfaces_roughness[:,None])**2)
+
+        return interfaces_matrix
+
+    ''' Layers get '''
+
+    def get_layers_matrix(self,lamb,thetas,interfaces_x,interfaces_kz):
+
+        n = 10
+
+        layers_matrix = np.zeros([2,2,len(self.layers),len(thetas)],dtype = complex)
+        # layers_matrix[0,0,:,:] = 1
+        # layers_matrix[0,1,:,:] = 0
+        # layers_matrix[1,0,:,:] = 0
+        # layers_matrix[1,1,:,:] = 1
+
+        for i, layer in enumerate(reversed(self.layers)):
+            integral1 = 0
+            integral2 = 0
+            position_array = layer.get_position_array(n) + interfaces_x[i]
+
+            ave_position = (position_array[1:,None] + position_array[:-1,None])/2
+
+            dx = np.diff(position_array)
+            refraction_index_array = layer.get_refraction_index_array(lamb,n)
+
+            kz_array = (2*np.pi/lamb) * np.sqrt(refraction_index_array[:,None]**2 - np.cos(thetas[None,:])**2 + 0j)
+            # kzm = np.diff(kz_array,axis = 0)
+            kzm = kz_array[1:,:] - kz_array[:-1,:]
+            kzp = kz_array[1:,:] + kz_array[:-1,:]
+
+            kz_all_prod = np.prod(kzp,axis = 0)
+            kz_sub_prod = np.zeros((kzp.shape),dtype = complex)
+            for j in range(kzp.shape[0]):
+                # where = np.ones((kzp.shape),dtype = bool)
+                # where[j,:] = False
+                # kz_sub_prod[j,:] = np.prod(kzp,axis = 0,where = where)
+                kz_sub_prod[j,:] = kz_all_prod/kzp[j]
+
+            interal00 = np.sum(kzm*position_array[1:,None],axis = 0)
+
+            integral01 = np.sum(kzm*kz_sub_prod * np.exp(-1j*kzp*position_array[1:,None]),axis = 0)
+            integral10 = np.sum(kzm*kz_sub_prod * np.exp( 1j*kzp*position_array[1:,None]),axis = 0)
+
+            layers_matrix[0,0,i,:] = (1 - 1j * interal00)*kz_all_prod
+            layers_matrix[0,1,i,:] = integral01
+            layers_matrix[1,0,i,:] = integral10
+            layers_matrix[1,1,i,:] = (1 + 1j * interal00)*kz_all_prod
+
+        return layers_matrix
+
+    def get_transfert_matrix(self,interfaces_matrix,layers_matrix):
+
+        '''
+        The whole transfert from vacuum to substrate
+        '''
+
+        transfert_matrix = np.zeros((2,2,interfaces_matrix.shape[3]),dtype = complex)
+        for i_theta in range(interfaces_matrix.shape[3]):
+            tmp_transfert_matrix = interfaces_matrix[:,:,0,i_theta]
+            # tmp_transfert_matrix = np.eye(2)
+            for iX in range(len(self.layers)):
+                tmp_transfert_matrix = matmul(layers_matrix[:,:,iX,i_theta],tmp_transfert_matrix)
+                tmp_transfert_matrix = matmul(interfaces_matrix[:,:,iX+1,i_theta],tmp_transfert_matrix)#/layers_kz[iX,i_theta]
             transfert_matrix[:,:,i_theta] = tmp_transfert_matrix
 
         return transfert_matrix
 
-    def get_reflect_coef(self,lamb,thetas):
+    def get_reflect_coef(self,lamb,thetas,polarisation = 'p'):
 
-        X = self.get_interfaces_x()
-        layers_kz = self.get_layers_kz(lamb,thetas)
-        
-        interface_matrix = self.get_interfaces_matrix(X,layers_kz)
-        transfert_matrix = self.get_transfert_matrix(layers_kz, interface_matrix)
-        
-        reflect_coef = transfert_matrix[1,0,:]/transfert_matrix[1,1,:]
+        interfaces_x = self.get_interfaces_x()
+        interfaces_kz = self.get_interfaces_kz(lamb,thetas)
+        interfaces_n = self.get_interfaces_refraction_index(lamb)
 
-        return reflect_coef
+        layers_matrix = self.get_layers_matrix(lamb,thetas,interfaces_x,interfaces_kz)
+        if polarisation == 'p':
+            interfaces_matrix_p = self.get_interfaces_matrix_p(interfaces_x,interfaces_kz)
+            transfert_matrix_p = self.get_transfert_matrix(interfaces_matrix_p, layers_matrix)
+            reflect_coef_p = transfert_matrix_p[1,0,:]/transfert_matrix_p[1,1,:]
+            return reflect_coef_p
+        elif polarisation == 's':
+            interfaces_matrix_s = self.get_interfaces_matrix_s(interfaces_x,interfaces_kz,interfaces_n)
+            transfert_matrix_s = self.get_transfert_matrix(interfaces_matrix_s, layers_matrix)
+            reflect_coef_s = transfert_matrix_s[1,0,:]/transfert_matrix_s[1,1,:]
+            return reflect_coef_s
+        elif polarisation == 'both':
+            interfaces_matrix_p = self.get_interfaces_matrix_p(interfaces_x,interfaces_kz)
+            interfaces_matrix_s = self.get_interfaces_matrix_s(interfaces_x,interfaces_kz,interfaces_n)
+            transfert_matrix_p = self.get_transfert_matrix(interfaces_matrix_p, layers_matrix)
+            transfert_matrix_s = self.get_transfert_matrix(interfaces_matrix_s, layers_matrix)
+            reflect_coef_p = transfert_matrix_p[1,0,:]/transfert_matrix_p[1,1,:]
+            reflect_coef_s = transfert_matrix_s[1,0,:]/transfert_matrix_s[1,1,:]
+            return reflect_coef_p + reflect_coef_s
 
     def get_density_profil(self,n_point = 100):
 
@@ -158,11 +274,19 @@ class Sample(object):
 
         X = np.linspace(-n_roughness*interfaces_roughness[-1],total_thickness + n_roughness*interfaces_roughness[0],n_point)
 
-        scatering_length_profil = self.substrate.get_scatering_length() * erfc((X)/interfaces_roughness[-1])/2
+        scatering_length_profil = self.substrate.get_scatering_length('top') * erfc((X)/interfaces_roughness[-1])/2
         for i, layer in enumerate(reversed(self.layers)):
-            scatering_length_profil += layer.get_scatering_length() * erfc(-(X-(total_thickness-interfaces_x[i+1]))/interfaces_roughness[i+1]) * erfc((X-(total_thickness-interfaces_x[i]))/interfaces_roughness[i])/4
+            layer_scatering_lengths = layer.get_scatering_length('bottom_top')
+            first_interface_X = total_thickness-interfaces_x[i+1]
+            second_interface_X = total_thickness-interfaces_x[i]
+            slope = (layer_scatering_lengths[1] - layer_scatering_lengths[0])/(first_interface_X-second_interface_X)
+            
+            scatering_length_array = (X - first_interface_X)*slope + layer_scatering_lengths[1]
+            scatering_length_profil += scatering_length_array * erfc(-(X-(first_interface_X))/interfaces_roughness[i+1]) * erfc((X-(second_interface_X))/interfaces_roughness[i])/4
 
         return X, scatering_length_profil
+
+
 
 class Material(object):
     def __init__(self,atomic_mass,atomic_number,unit_cell_volume):
@@ -191,6 +315,13 @@ class Layer(object):
 
         self.density = density
 
+    def get_density(self,where):
+
+        if where in ['top','bottom']:
+            return self.density
+        elif where in ['top_bottom','bottom_top']:
+            return np.ones((2,))*self.density
+
     def get_atomic_density(self):
 
         return self.density * 6.02214086e+24/10e+24/self.atomic_mass
@@ -199,20 +330,88 @@ class Layer(object):
 
         self.roughness = roughness
 
-    def get_refraction_index(self,lamb):
+    def get_refraction_index(self,lamb,where):
 
-        return 1 - delta_factor*self.density*self.atomic_ratio*lamb**2/(2*np.pi)
+        return 1 - delta_factor*self.get_density(where)*self.atomic_ratio*lamb**2/(2*np.pi)
 
-    def get_scatering_length(self):
+    def get_scatering_length(self,where):
 
-        unit_cell_volume = self.atomic_mass*mass_unit/(self.density * 1e3)
+        unit_cell_volume = self.atomic_mass*mass_unit/(self.get_density(where) * 1e3)
 
         return self.atomic_number/unit_cell_volume/1e30
+
+    def get_position_array(self,n = 2):
+
+        return np.linspace(0,self.thickness,n)
+
+    def get_density_array(self,n = 2):
+
+        return np.ones((n,))*self.density
+
+    def get_refraction_index_array(self,lamb,n = 2):
+
+        return 1 - delta_factor*self.get_density_array(n)*self.atomic_ratio*lamb**2/(2*np.pi)
+
+
+class LayerSlopeDensity(Layer):
+    def __init__(self,name,density_top,density_bottom,thickness,roughness = 0,atomic_mass = 2,atomic_number = 1):
+        self.name = name
+        self.thickness = thickness # nm
+        self.density_top = density_top # g/cm^3
+        self.density_bottom = density_bottom # g/cm^3
+        self.roughness = roughness # nm
+    
+        self.atomic_mass = atomic_mass
+        self.atomic_number = atomic_number
+
+        self.atomic_ratio = self.atomic_number/self.atomic_mass # nb proton/atomic mass (u)
+
+    def set_density(self,density_top,density_bottom):
+
+        self.density_top = density_top
+        self.density_bottom = density_bottom
+
+    def get_density(self,where):
+
+        if where is 'top':
+            return self.density_top
+        elif where is 'bottom':
+            return self.density_bottom
+        elif where in 'top_bottom':
+            return np.array([self.density_top,self.density_bottom])
+        elif where is 'bottom_top':
+            return np.array([self.density_bottom,self.density_top])
+
+    def get_position_array(self,n = 10):
+
+        return np.linspace(0,self.thickness,n)
+
+    def get_density_array(self,n = 10):
+
+        top_bottom_array = np.power(np.linspace(0,1,n),1)
+        density_array = self.density_top + top_bottom_array*(self.density_bottom - self.density_top)
+
+        return density_array
+
 
 class Substrate(Layer):
     def __init__(self,name,density,roughness = 0,atomic_mass = 2,atomic_number = 1):
         Layer.__init__(self,name,density,0,roughness,atomic_mass,atomic_number)
 
+    def get_density(self,where):
+
+        if where in ['top']:
+            return self.density
+        else:
+            print('Substrate bottom is not accessible')
+
 class Vacuum(Layer):
     def __init__(self):
         Layer.__init__(self,'Vacuum',0,0,0,1)
+
+    def get_density(self,where):
+
+        if where in ['bottom']:
+            return self.density
+        else:
+            print('Vaccum top is not accessible')

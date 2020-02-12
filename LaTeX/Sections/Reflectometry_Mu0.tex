@@ -130,7 +130,7 @@ Between planes
 
 If we define $\theta_j$ as the angle between the interface and $\vb{k}_j$, we get the following relations (Snell's law).
 \begin{align*}
-	k_{j-1}\cos\theta_{j-1} &= k_{j}\cos\theta_{j} & \frac{\cos\theta_j}{\cos\theta_{j-1}} &= \frac{k_{j-1}}{k_j} = \frac{n_{j-1}}{n_j} = \pqty{\frac{\epsilon_{j-1}\mu_{j-1}}{\epsilon_j\mu_j}}^{1/2} \sim \pqty{\frac{\epsilon_{j-1}}{\epsilon_j}}^{1/2}
+	k_{j-1}\cos\theta_{j-1} &= k_{j}\cos\theta_{j} & \frac{\cos\theta_j}{\cos\theta_{j-1}} &= \frac{k_{j-1}}{k_j} = \frac{n_{j-1}}{n_j} = \pqty{\frac{\epsilon_{j-1}\mu_{j-1}}{\epsilon_j\mu_j}}^{1/2}
 \end{align*}
 
 If the first incident beam is $k_0$ at an angle $\theta_0$, this means,
@@ -139,13 +139,6 @@ If the first incident beam is $k_0$ at an angle $\theta_0$, this means,
 \end{align*}
 
 We will choose the direction of propagation in order to have $k_y = 0$.
-
-\begin{align*}
-	k_{z,j} &= k_j \sin\theta_j \\
-	&= k_0 n_j \pqty{1 - \cos^2\theta_j}^{1/2}  \\
-	&= k_0 \pqty{n_j^2 - n_j^2\cos^2\theta_j}^{1/2}  \\
-	&= k_0 \pqty{n_j^2 - n_0^2\cos^2\theta_0}^{1/2} 
-\end{align*}
 
 
 % \begin{align*}
@@ -178,14 +171,14 @@ The relevant equations are
 	\epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
 	\epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}} 
 	\\
-	k_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
-	k_{j}\pqty{E^{\text{(I,p)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{ik_{z,j}z_j}}
+	\frac{k_{j-1}}{\mu_{j-1}}\pqty{E^{\text{(I,p)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
+	\frac{k_{j}}{\mu_{j}}\pqty{E^{\text{(I,p)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{ik_{z,j}z_j}}
 \end{align*}
 
 Since,
 \begin{align*}
-	\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_{j} \cos\theta_{j}} = \frac{k_{j-1}}{k_{j}} && \to & &
-	\frac{ \cos\theta_{j-1} k_{j}}{ \cos\theta_{j} k_{j-1}} = \frac{\epsilon_{j}}{\epsilon_{j-1}}
+	\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_{j} \cos\theta_{j}} = \frac{k_{j-1}\mu_{j}}{k_{j}\mu_{j-1}} && \to & &
+	\frac{ \cos\theta_{j-1} k_{j}}{ \cos\theta_{j} k_{j-1}} = \frac{\epsilon_{j}\mu_{j}}{\epsilon_{j-1}\mu_{j-1}}
 \end{align*}
 the third equation is equivalent to the second one.
 
@@ -210,8 +203,8 @@ The relevant equations are then,
 	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
 	E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j} e^{-ik_{z,j}z_j}
 	\\
-	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	\frac{k_{j-1}\sin\theta_{j-1}}{\mu_{j-1}}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
+	\frac{k_{j}\sin\theta_{j}}{\mu_{j}}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
 	\\
 	k_{j-1}\cos\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
 	k_{j}\cos\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
@@ -231,27 +224,12 @@ First and third equations are equivalent because,
 	\sin\theta_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
 	\sin\theta_{j}\pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}} 
 	\\
-	% \epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	% \epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}} 
+	\epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
+	\epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}} 
 	% \\
-	k_{j-1}\pqty{E^{\text{(I)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
-	k_{j}\pqty{E^{\text{(I)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j} e^{ik_{z,j}z_j}}
+	% \frac{k_{j-1}}{\mu_{j-1}}\pqty{E^{\text{(I)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
+	% \frac{k_{j}}{\mu_{j}}\pqty{E^{\text{(I)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j} e^{ik_{z,j}z_j}}
 \end{align*}
-
-% \begin{align*}
-% 	\vb{S}^{\text{(p)}}_j\pqty{z} \cdot \vb{E}^{\text{(p)}}_j
-% 	&\equiv
-% 	\pmqty{
-% 		\sin\theta_{j} e^{ik_{z,j}z} & 
-% 		-\sin\theta_{j} e^{-ik_{z,j}z} \\
-% 		\epsilon_{j} \cos\theta_{j} e^{ik_{z,j}z} & 
-% 		\epsilon_{j} \cos\theta_{j} e^{-ik_{z,j}z} 
-% 	}
-% 	\pmqty{
-% 		E^{\text{(I,p)}}_{0,j} \\ 
-% 		E^{\text{(R,p)}}_{0,j}
-% 	}
-% \end{align*}
 
 \begin{align*}
 	\vb{S}^{\text{(p)}}_j\pqty{z} \cdot \vb{E}^{\text{(p)}}_j
@@ -259,8 +237,8 @@ First and third equations are equivalent because,
 	\pmqty{
 		\sin\theta_{j} e^{ik_{z,j}z} & 
 		-\sin\theta_{j} e^{-ik_{z,j}z} \\
-		k_{j} e^{ik_{z,j}z} & 
-		k_{j} e^{-ik_{z,j}z} 
+		\epsilon_{j} \cos\theta_{j} e^{ik_{z,j}z} & 
+		\epsilon_{j} \cos\theta_{j} e^{-ik_{z,j}z} 
 	}
 	\pmqty{
 		E^{\text{(I,p)}}_{0,j} \\ 
@@ -269,29 +247,30 @@ First and third equations are equivalent because,
 \end{align*}
 
 \begin{align*}
-	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
-	E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j} e^{-ik_{z,j}z_j}
+	% E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
+	% E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j} e^{-ik_{z,j}z_j}
+	% \\
+	\epsilon_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
+	\epsilon_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
 	\\
-	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	k_{j-1}\cos\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
+	k_{j}\cos\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}} 
 \end{align*}
 
 \begin{align*}
 	\vb{S}^{\text{(s)}}_j\pqty{z} \cdot \vb{E}^{\text{(s)}}_j
 	&\equiv
 	\pmqty{
-		e^{ik_{z,j}z} & 
-		e^{-ik_{z,j}z} \\
-		k_j \sin\theta_{j} e^{ik_{z,j}z} & 
-		- k_j \sin\theta_{j} e^{-ik_{z,j}z} 
+		\epsilon_{j} \sin\theta_{j} e^{ik_{z,j}z} & 
+		-\epsilon_{j} \sin\theta_{j} e^{-ik_{z,j}z} \\
+		k_j \cos\theta_{j} e^{ik_{z,j}z} & 
+		k_j \cos\theta_{j} e^{-ik_{z,j}z} 
 	}
 	\pmqty{
 		E^{\text{(I,s)}}_{0,j} \\ 
 		E^{\text{(R,s)}}_{0,j}
 	}
 \end{align*}
-
-
 
 For either polarisation the relation between $\vb{E}_j$ and $\vb{E}_{j-1}$ is given by the following equation,
 \begin{align*}
@@ -307,290 +286,165 @@ We then compute $\vb{E}_j$ from $\vb{E}_{j-1}$ with
 \end{align*}
 
 \begin{align*}
-	\vb{T}^{\text{(p)}}_j &= \frac{1}{2k_j\sin\theta_j}\pmqty{
-		k_{j} e^{-ik_{z,j}z_j} & 
-		\sin\theta_{j} e^{-ik_{z,j}z_j} \\
-		-k_{j} e^{ik_{z,j}z_j} & 
-		\sin\theta_{j} e^{ik_{z,j}z_j}
-	}
-	\pmqty{
-		\sin\theta_{j-1} e^{ik_{z,j-1}z_j} & 
-		-\sin\theta_{j-1} e^{-ik_{z,j-1}z_j} \\
-		k_{j-1} e^{ik_{z,j-1}z_j} & 
-		k_{j-1} e^{-ik_{z,j-1}z_j} 
+	\vb{T}^{\text{(p)}}_j &= \frac{1}{2\epsilon_j\sin\theta_j\cos\theta_j}\pmqty{
+		\epsilon_{j} \cos\theta_{j} \exp\pqty{-ik_{z,j}z_j} & 
+		\sin\theta_{j} \exp\pqty{-ik_{z,j}z_j} \\
+		-\epsilon_{j} \cos\theta_{j} \exp\pqty{ik_{z,j}z_j} & 
+		\sin\theta_{j} \exp\pqty{ik_{z,j}z_j} 
+	} \pmqty{
+		\sin\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
+		-\sin\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} \\
+		\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
+		\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} 
 	} \\
-	% &= \frac{1}{2k_j\sin\theta_j}\pmqty{
-	% 	k_{j} e^{-ik_{z,j}z_j}\sin\theta_{j-1} e^{ik_{z,j-1}z_j} + 
-	% 	\sin\theta_{j} e^{-ik_{z,j}z_j}k_{j-1} e^{ik_{z,j-1}z_j} &
-	% 	-k_{j} e^{-ik_{z,j}z_j}\sin\theta_{j-1} e^{-ik_{z,j-1}z_j} + 
-	% 	\sin\theta_{j} e^{-ik_{z,j}z_j}k_{j-1} e^{-ik_{z,j-1}z_j} \\
-	% 	-k_{j} e^{ik_{z,j}z_j}\sin\theta_{j-1} e^{ik_{z,j-1}z_j} + 
-	% 	\sin\theta_{j} e^{ik_{z,j}z_j}k_{j-1} e^{ik_{z,j-1}z_j} &
-	% 	k_{j} e^{ik_{z,j}z_j}\sin\theta_{j-1} e^{-ik_{z,j-1}z_j} + 
-	% 	\sin\theta_{j} e^{ik_{z,j}z_j}k_{j-1} e^{-ik_{z,j-1}z_j}
-	% }\\
-	% &= \frac{1}{2k_j\sin\theta_j}\pmqty{
-	% 	k_{j} \sin\theta_{j-1} e^{-ik_{z,j}^{-}z_j} + 
-	% 	k_{j-1} \sin\theta_{j} e^{-ik_{z,j}^{-}z_j} &
-	% 	-k_{j} \sin\theta_{j-1} e^{-ik_{z,j}^{+}z_j} + 
-	% 	k_{j-1} \sin\theta_{j} e^{-ik_{z,j}^{+}z_j} \\
-	% 	-k_{j} \sin\theta_{j-1} e^{ik_{z,j}^{+}z_j} + 
-	% 	k_{j-1} \sin\theta_{j} e^{ik_{z,j}^{+}z_j} &
-	% 	k_{j}\sin\theta_{j-1} e^{ik_{z,j}^{-}z_j}  + 
-	% 	k_{j-1} \sin\theta_{j} e^{ik_{z,j}^{-}z_j}
-	% } \\
-	% &= \frac{1}{2k_j\sin\theta_j}\pmqty{
-	% 	\pqty{k_{j} \sin\theta_{j-1}  + 
-	% 	 		k_{j-1} \sin\theta_{j} }e^{-ik_{z,j}^{-}z_j} &
-	% 	\pqty{-k_{j} \sin\theta_{j-1}  + 
-	% 	 		k_{j-1} \sin\theta_{j} } e^{-ik_{z,j}^{+}z_j}\\
-	% 	\pqty{-k_{j} \sin\theta_{j-1}  + 
-	% 	 		k_{j-1} \sin\theta_{j} }e^{ik_{z,j}^{+}z_j} &
-	% 	\pqty{k_{j}\sin\theta_{j-1}   + 
-	% 			k_{j-1} \sin\theta_{j} }e^{ik_{z,j}^{-}z_j}
-	% } \\
-	% &= \frac{1}{2k_{z,j}}\pmqty{
-	% 	\pqty{\frac{k_{j}}{k_{j-1}} k_{z,j-1}  + 
-	% 	 		\frac{k_{j-1}}{k_{j}} k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
-	% 	\pqty{-\frac{k_{j}}{k_{j-1}} k_{z,j-1}  + 
-	% 	 		\frac{k_{j-1}}{k_{j}} k_{z,j} } e^{-ik_{z,j}^{+}z_j}\\
-	% 	\pqty{-\frac{k_{j}}{k_{j-1}} k_{z,j-1}  + 
-	% 	 		\frac{k_{j-1}}{k_{j}} k_{z,j} }e^{ik_{z,j}^{+}z_j} &
-	% 	\pqty{\frac{k_{j}}{k_{j-1}} k_{z,j-1}   + 
-	% 			\frac{k_{j-1}}{k_{j}} k_{z,j} }e^{ik_{z,j}^{-}z_j}
-	% } \\
-	&= \frac{1}{2k_{z,j}}\pmqty{
-		\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
-		\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} } e^{-ik_{z,j}^{+}z_j}\\
-		\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{+}z_j} &
-		\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}   + 
-				\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{-}z_j}
-	} \\
-	% &= \frac{1}{2n_{j-1}n_{j}k_{z,j}}\pmqty{
-	% 	\pqty{ n_{j}^2 k_{z,j-1}  + 
-	% 	 		n_{j-1}^2 k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
-	% 	\pqty{- n_{j}^2 k_{z,j-1}  + 
-	% 	 		n_{j-1}^2 k_{z,j} } e^{-ik_{z,j}^{+}z_j}\\
-	% 	\pqty{- n_{j}^2 k_{z,j-1}  + 
-	% 	 		n_{j-1}^2 k_{z,j} }e^{ik_{z,j}^{+}z_j} &
-	% 	\pqty{ n_{j}^2 k_{z,j-1}   + 
-	% 			n_{j-1}^2 k_{z,j} }e^{ik_{z,j}^{-}z_j}
-	% } \\
-	&= \frac{1}{2n_{j-1}n_{j}k_{z,j}}\pmqty{
-		\pqty{ n_{j-1}^2 k_{z,j} + 
-				n_{j}^2 k_{z,j-1} }e^{-ik_{z,j}^{-}z_j} &
-		\pqty{n_{j-1}^2 k_{z,j} - 
-		 		n_{j}^2 k_{z,j-1} } e^{-ik_{z,j}^{+}z_j}\\
-		\pqty{n_{j-1}^2 k_{z,j} - 
-		 		n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{+}z_j} &
-		\pqty{ n_{j-1}^2 k_{z,j} + 
-				n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{-}z_j}
-	}	
-\end{align*}
-
-\begin{align*}
-	\det{\vb{T}^{\text{(p)}}_j} &= \frac{
-			\pqty{ n_{j-1}^2 k_{z,j} + n_{j}^2 k_{z,j-1} }^2
-			- \pqty{n_{j-1}^2 k_{z,j} - n_{j}^2 k_{z,j-1} }^2
-			}{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			% &= \frac{
-			% n_{j-1}^4 k^2_{z,j} + n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% - n_{j-1}^4 k^2_{z,j} - n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			% &= \frac{
-			% 4n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			&= \frac{k_{z,j-1}}{k_{z,j}}
-\end{align*}
-
-
-\begin{align*}
-	\vb{T}^{\text{(s)}}_j &= \frac{1}{-2 k_j \sin\theta_{j} }
-	\pmqty{
-		- k_j \sin\theta_{j} e^{-ik_{z,j}z_j} & 
-		- e^{-ik_{z,j}z_j} \\
-		- k_j \sin\theta_{j} e^{ik_{z,j}z_j} & 
-		e^{ik_{z,j}z_j}
-	}
-	\pmqty{
-		e^{ik_{z,j-1}z_j} & 
-		e^{-ik_{z,j-1}z_j} \\
-		k_{j-1} \sin\theta_{j-1} e^{ik_{z,j-1}z_j} & 
-		- k_{j-1} \sin\theta_{j-1} e^{-ik_{z,j-1}z_j} 
-	} \\ 
-	% &= \frac{1}{-2 k_j \sin\theta_{j} }
-	% \pmqty{
-	% 	- k_j \sin\theta_{j} e^{-ik_{z,j}^{-}z_j} 
-	% 	- k_{j-1} \sin\theta_{j-1} e^{-ik_{z,j}^{-}z_j} &
-	% 	- k_j \sin\theta_{j} e^{-ik_{z,j}^{+}z_j}k_{j-1} 
-	% 	+ k_{j-1} \sin\theta_{j-1} e^{-ik_{z,j}^{+}z_j}  \\
-	% 	- k_j \sin\theta_{j} e^{ik_{z,j}^{+}z_j}
-	% 	+ k_{j-1} \sin\theta_{j-1} e^{ik_{z,j}^{+}z_j} & 
-	% 	- k_j \sin\theta_{j} e^{ik_{z,j}^{-}z_j}k_{j-1} 
-	% 	- k_{j-1} \sin\theta_{j-1} e^{ik_{z,j}^{-}z_j}
+	% &= \frac{1}{2\epsilon_j\sin\theta_j\cos\theta_j}\pmqty{
+	% 	\epsilon_{j} \cos\theta_{j} \exp\pqty{-ik_{z,j}z_j}
+	% 	\sin\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} 
+	% 	+ \sin\theta_{j} \exp\pqty{-ik_{z,j}z_j}
+	% 	\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j}
+	% 	& 
+	% 	-\epsilon_{j} \cos\theta_{j} \exp\pqty{-ik_{z,j}z_j}
+	% 	\sin\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j}
+	% 	+ \sin\theta_{j} \exp\pqty{-ik_{z,j}z_j} 
+	% 	\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} 
+	% 	\\
+	% 	-\epsilon_{j} \cos\theta_{j} \exp\pqty{ik_{z,j}z_j}
+	% 	\sin\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j}
+	% 	+ \sin\theta_{j} \exp\pqty{ik_{z,j}z_j}
+	% 	\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j}
+	% 	&
+	% 	\epsilon_{j} \cos\theta_{j} \exp\pqty{ik_{z,j}z_j}
+	% 	\sin\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j}
+	% 	+ \sin\theta_{j} \exp\pqty{ik_{z,j}z_j} 
+	% 	\epsilon_{j-1} \cos\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j}
 	% }
-	%  \\
-	% &= \frac{1}{-2 k_{z,j} }
-	% \pmqty{
-	% 	- k_{z,j} e^{-ik_{z,j}^{-}z_j} 
-	% 	- k_{z,j-1} e^{-ik_{z,j}^{-}z_j} &
-	% 	- k_{z,j} e^{-ik_{z,j}^{+}z_j}k_{j-1} 
-	% 	+ k_{z,j-1} e^{-ik_{z,j}^{+}z_j}  \\
-	% 	- k_{z,j} e^{ik_{z,j}^{+}z_j}
-	% 	+ k_{z,j-1} e^{ik_{z,j}^{+}z_j} & 
-	% 	- k_{z,j} e^{ik_{z,j}^{-}z_j}k_{j-1} 
-	% 	- k_{z,j-1} e^{ik_{z,j}^{-}z_j}
-	% }
-	%  \\
-	% &= \frac{1}{-2 k_{z,j} }
-	% \pmqty{
-	% 	- k_{z,j}^{+} e^{-ik_{z,j}^{-}z_j} &
-	% 	- k_{z,j}^{-} e^{-ik_{z,j}^{+}z_j} \\
-	% 	- k_{z,j}^{-} e^{ik_{z,j}^{+}z_j} &
-	% 	- k_{z,j}^{+} e^{ik_{z,j}^{-}z_j}
+	% \\
+	% &= \frac{1}{2\epsilon_j\sin\theta_j\cos\theta_j}\pmqty{
+	% 	\pqty{
+	% 		\epsilon_{j} \cos\theta_{j} \sin\theta_{j-1} 
+	% 		+\epsilon_{j-1} \sin\theta_{j} \cos\theta_{j-1} 
+	% 		}\exp\pqty{-ik_{z,j}^{-}z_j}
+	% 	& 
+	% 	\pqty{
+	% 		-\epsilon_{j} \cos\theta_{j} \sin\theta_{j-1} 
+	% 		+\epsilon_{j-1} \sin\theta_{j} \cos\theta_{j-1}  
+	% 		}\exp\pqty{-ik_{z,j}^{+}z_j}
+	% 	\\
+	% 	\pqty{
+	% 		-\epsilon_{j} \cos\theta_{j} \sin\theta_{j-1} 
+	% 		+\epsilon_{j-1} \sin\theta_{j} \cos\theta_{j-1} 
+	% 		}\exp\pqty{ik_{z,j}^{+}z_j}
+	% 	&
+	% 	\pqty{
+	% 		\epsilon_{j} \cos\theta_{j} \sin\theta_{j-1} 
+	% 	 	+ \epsilon_{j-1} \sin\theta_{j} \cos\theta_{j-1}
+	% 	 	} \exp\pqty{ik_{z,j}^{-}z_j} 
 	% } \\
-	&= \frac{1}{2 k_{z,j} }
-	\pmqty{
-		k_{z,j}^{+} e^{-ik_{z,j}^{-}z_j} &
-		k_{z,j}^{-} e^{-ik_{z,j}^{+}z_j} \\
-		k_{z,j}^{-} e^{ik_{z,j}^{+}z_j} &
-		k_{z,j}^{+} e^{ik_{z,j}^{-}z_j}
+	&=  \frac{1}{2}\pmqty{
+		\pqty{
+			\frac{\sin\theta_{j-1}}{\sin\theta_j} 
+			+\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_j\cos\theta_j} 
+			}\exp\pqty{-ik_{z,j}^{-}z_j}
+		& 
+		\pqty{
+			-\frac{\sin\theta_{j-1}}{\sin\theta_j} 
+			+\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_j\cos\theta_j}  
+			}\exp\pqty{-ik_{z,j}^{+}z_j}
+		\\
+		\pqty{
+			-\frac{ \sin\theta_{j-1}}{\sin\theta_j} 
+			+\frac{\epsilon_{j-1} \cos\theta_{j-1} }{\epsilon_j\cos\theta_j}
+			}\exp\pqty{ik_{z,j}^{+}z_j}
+		&
+		\pqty{
+			\frac{\sin\theta_{j-1}}{\sin\theta_j} 
+		 	+ \frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_j\cos\theta_j}
+		 	} \exp\pqty{ik_{z,j}^{-}z_j} 
 	}
 \end{align*}
-
 with
 \begin{align*}
-	k_{z,j}^{\pm} &= k_{z,j} \pm k_{z,j-1}
-\end{align*}
-
-Note that,
-\begin{align*}
-	\det{\vb{T}^{\text{(s)}}_j} &= \frac{\pqty{k_{z,j} + k_{z,j-1}}^2 - \pqty{k_{z,j} - k_{z,j-1}}^2}{4 k_{z,j}^2} \\
-	% &= \frac{k_{z,j}^2 + k_{z,j-1}^2 + 2k_{z,j} k_{z,j-1} - k_{z,j}^2 - k_{z,j-1}^2 + 2k_{z,j} k_{z,j-1}}{4 k_{z,j}^2} \\
-	% &= \frac{4k_{z,j} k_{z,j-1}}{4 k_{z,j}^2} \\
-	&= \frac{ k_{z,j-1}}{ k_{z,j}}
+	k_{z,j}^{-} &= k_{z,j} - k_{z,j-1} & k_{z,j}^{+} &= k_{z,j} + k_{z,j-1}
 \end{align*}
 
 \begin{align*}
-	\vb{T}^{\text{(p,s)}}_j &= 
+	\vb{T}^{\text{(s)}}_j &= 
+	\frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
+	\pmqty{ 
+		k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}z_j} & 
+		\epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}z_j} \\
+		-k_j \cos\theta_{j} \exp\pqty{ik_{z,j}z_j} & 
+		 \epsilon_{j} \sin\theta_{j} \exp\pqty{ik_{z,j}z_j}
+	} 
 	\pmqty{
-		p^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{-}z_j} &
-		m^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{+}z_j} \\
-		m^{\text{(p,s)}}_{j} e^{ik_{z,j}^{+}z_j} &
-		p^{\text{(p,s)}}_{j} e^{ik_{z,j}^{-}z_j}
-	}
-\end{align*} with,
-\begin{align*}
-	p^{\text{(p)}}_{j} &= \frac{k_{z,j} + k_{z,j-1}}{2 k_{z,j}} 
-	& m^{\text{(p)}}_{j} &= \frac{k_{z,j} - k_{z,j-1}}{2 k_{z,j}} \\
-	p^{\text{(s)}}_{j} &= \frac{n_{j-1}^2k_{z,j} + n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}} 
-	& m^{\text{(s)}}_{j} &= \frac{n_{j-1}^2k_{z,j} - n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}}
+		\epsilon_{j-1} \sin\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
+		-\epsilon_{j-1} \sin\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} \\
+		k_{j-1} \cos\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
+		k_{j-1} \cos\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} 
+	} \\
+	% &= 
+	% \frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
+	% \pmqty{ 
+	% 	k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}^{-1}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
+	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}^{-1}z_j} k_{j-1} \cos\theta_{j-1}
+	% 	&
+	% 	-k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}^{+}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
+	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}^{+}z_j} k_{j-1} \cos\theta_{j-1}
+	% 	\\
+	% 	-k_j \cos\theta_{j} \exp\pqty{ik_{z,j}^{+}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
+	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{+ik_{z,j}^{+}z_j} k_{j-1} \cos\theta_{j-1} 
+	% 	&
+	% 	k_j \cos\theta_{j} \exp\pqty{ik_{z,j}^{-1}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
+	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{ik_{z,j}^{-1}z_j} k_{j-1} \cos\theta_{j-1} 
+	% } 
+	% \\
+	% &= 
+	% \frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
+	% \pmqty{ 
+	% 	\pqty{
+	% 		k_j\epsilon_{j-1} \cos\theta_{j} \sin\theta_{j-1}   
+	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
+	% 	}\exp\pqty{-ik_{z,j}^{-1}z_j}
+	% 	&
+	% 	\pqty{
+	% 		-k_j \epsilon_{j-1} \cos\theta_{j} \sin\theta_{j-1} 
+	% 		+k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
+	% 	}\exp\pqty{-ik_{z,j}^{+}z_j}
+	% 	\\
+	% 	\pqty{
+	% 		-k_j \epsilon_{j-1}  \cos\theta_{j}  \sin\theta_{j-1} 
+	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1} 
+	% 	}\exp\pqty{ik_{z,j}^{+}z_j}
+	% 	&
+	% 	\pqty{
+	% 		k_j \epsilon_{j-1}  \cos\theta_{j}\sin\theta_{j-1} 
+	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
+	% 	}\exp\pqty{ik_{z,j}^{-1}z_j}
+	% }  \\
+	&= 
+	\frac{1}{2}
+	\pmqty{ 
+		\pqty{
+			\frac{\epsilon_{j-1} \sin\theta_{j-1}}{\epsilon_{j} \sin\theta_{j}}    
+			+ \frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
+		}\exp\pqty{-ik_{z,j}^{-}z_j}
+		&
+		\pqty{
+			-\frac{\epsilon_{j-1} \sin\theta_{j-1}}{\epsilon_{j} \sin\theta_{j}}  
+			+\frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
+		}\exp\pqty{-ik_{z,j}^{+}z_j}
+		\\
+		\pqty{
+			-\frac{\epsilon_{j-1} \sin\theta_{j-1}}{\epsilon_{j} \sin\theta_{j}}  
+			+\frac{k_{j-1} \cos\theta_{j-1} }{k_j \cos\theta_{j} }  
+		}\exp\pqty{ik_{z,j}^{+}z_j}
+		&
+		\pqty{
+			\frac{\epsilon_{j-1} \sin\theta_{j-1} }{\epsilon_{j} \sin\theta_{j}} 
+			+ \frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
+		}\exp\pqty{ik_{z,j}^{-}z_j}
+	}  
 \end{align*}
-
-% \begin{align*}
-% 	\vb{T}^{\text{(s)}}_j &= 
-% 	\frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
-% 	\pmqty{ 
-% 		k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}z_j} & 
-% 		\epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}z_j} \\
-% 		-k_j \cos\theta_{j} \exp\pqty{ik_{z,j}z_j} & 
-% 		 \epsilon_{j} \sin\theta_{j} \exp\pqty{ik_{z,j}z_j}
-% 	} 
-% 	\pmqty{
-% 		\epsilon_{j-1} \sin\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
-% 		-\epsilon_{j-1} \sin\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} \\
-% 		k_{j-1} \cos\theta_{j-1} \exp\pqty{ik_{z,j-1}z_j} & 
-% 		k_{j-1} \cos\theta_{j-1} \exp\pqty{-ik_{z,j-1}z_j} 
-% 	} \\
-% 	% &= 
-% 	% \frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
-% 	% \pmqty{ 
-% 	% 	k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}^{-1}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
-% 	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}^{-1}z_j} k_{j-1} \cos\theta_{j-1}
-% 	% 	&
-% 	% 	-k_j \cos\theta_{j} \exp\pqty{-ik_{z,j}^{+}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
-% 	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{-ik_{z,j}^{+}z_j} k_{j-1} \cos\theta_{j-1}
-% 	% 	\\
-% 	% 	-k_j \cos\theta_{j} \exp\pqty{ik_{z,j}^{+}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
-% 	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{+ik_{z,j}^{+}z_j} k_{j-1} \cos\theta_{j-1} 
-% 	% 	&
-% 	% 	k_j \cos\theta_{j} \exp\pqty{ik_{z,j}^{-1}z_j} \epsilon_{j-1} \sin\theta_{j-1} 
-% 	% 	+ \epsilon_{j} \sin\theta_{j} \exp\pqty{ik_{z,j}^{-1}z_j} k_{j-1} \cos\theta_{j-1} 
-% 	% } 
-% 	% \\
-% 	% &= 
-% 	% \frac{1}{2\epsilon_{j} k_j \cos\theta_{j}  \sin\theta_{j}}
-% 	% \pmqty{ 
-% 	% 	\pqty{
-% 	% 		k_j\epsilon_{j-1} \cos\theta_{j} \sin\theta_{j-1}   
-% 	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
-% 	% 	}\exp\pqty{-ik_{z,j}^{-1}z_j}
-% 	% 	&
-% 	% 	\pqty{
-% 	% 		-k_j \epsilon_{j-1} \cos\theta_{j} \sin\theta_{j-1} 
-% 	% 		+k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
-% 	% 	}\exp\pqty{-ik_{z,j}^{+}z_j}
-% 	% 	\\
-% 	% 	\pqty{
-% 	% 		-k_j \epsilon_{j-1}  \cos\theta_{j}  \sin\theta_{j-1} 
-% 	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1} 
-% 	% 	}\exp\pqty{ik_{z,j}^{+}z_j}
-% 	% 	&
-% 	% 	\pqty{
-% 	% 		k_j \epsilon_{j-1}  \cos\theta_{j}\sin\theta_{j-1} 
-% 	% 		+ k_{j-1} \epsilon_{j} \sin\theta_{j} \cos\theta_{j-1}
-% 	% 	}\exp\pqty{ik_{z,j}^{-1}z_j}
-% 	% }  \\
-% 	&= 
-% 	\frac{1}{2}
-% 	\pmqty{ 
-% 		\pqty{
-% 			\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}    
-% 			+ \frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
-% 		}\exp\pqty{-ik_{z,j}^{-}z_j}
-% 		&
-% 		\pqty{
-% 			-\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}  
-% 			+\frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
-% 		}\exp\pqty{-ik_{z,j}^{+}z_j}
-% 		\\
-% 		\pqty{
-% 			-\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}  
-% 			+\frac{k_{j-1} \cos\theta_{j-1} }{k_j \cos\theta_{j} }  
-% 		}\exp\pqty{ik_{z,j}^{+}z_j}
-% 		&
-% 		\pqty{
-% 			\frac{k^2_{j-1} \sin\theta_{j-1} }{k^2_{j} \sin\theta_{j}} 
-% 			+ \frac{k_{j-1} \cos\theta_{j-1}}{k_j \cos\theta_{j} } 
-% 		}\exp\pqty{ik_{z,j}^{-}z_j}
-% 	} \\
-% 	&= 
-% 	\frac{1}{2}
-% 	\pmqty{ 
-% 		\pqty{
-% 			\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}    
-% 			+ 1 
-% 		}\exp\pqty{-ik_{z,j}^{-}z_j}
-% 		&
-% 		\pqty{
-% 			-\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}  
-% 			+1 
-% 		}\exp\pqty{-ik_{z,j}^{+}z_j}
-% 		\\
-% 		\pqty{
-% 			-\frac{k^2_{j-1} \sin\theta_{j-1}}{k^2_{j} \sin\theta_{j}}  
-% 			+1  
-% 		}\exp\pqty{ik_{z,j}^{+}z_j}
-% 		&
-% 		\pqty{
-% 			\frac{k^2_{j-1} \sin\theta_{j-1} }{k^2_{j} \sin\theta_{j}} 
-% 			+1
-% 		}\exp\pqty{ik_{z,j}^{-}z_j}
-% 	}  
-% \end{align*}
 
 \newpage
 

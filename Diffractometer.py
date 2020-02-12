@@ -115,6 +115,29 @@ class Diffractometer(object):
 
         return theta_source, theta_detector, phi
 
+    def structure_factor(self,hkl):
+
+        return self.get_cristal_structure().structure_factor(hkl)
+
+    def compton_factor(self,hkl):
+
+        two_theta = self.hkl_2_two_theta(hkl)
+        return (1 + np.cos(np.deg2rad(two_theta))**2)/2
+
+    def lorentz_factor(self,hkl):
+
+        two_theta = self.hkl_2_two_theta(hkl)
+        return 1/np.sin(np.deg2rad(two_theta))
+
+    def intensity(self,hkl):
+
+        two_theta = self.hkl_2_two_theta(hkl)
+        structure_factor = self.structure_factor(hkl)
+        thompson_factor = (1 + np.cos(np.deg2rad(two_theta))**2)/2
+        reciprocal_density_factor = 1/np.sin(np.deg2rad(two_theta))
+
+        return np.abs(structure_factor)**2 * thompson_factor * reciprocal_density_factor
+
     def get_absolute_coord_hkl(self,hkl):
 
         hkl = np.array(hkl)

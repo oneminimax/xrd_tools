@@ -1,39 +1,39 @@
 import numpy as np
 
-def fourierTransform(XData,YData,KData,windowFct = None,YError = None, NoError = False):
+def fourier_transform(x_data,y_data,k_transform,window_fct = None,y_error = None, no_error_output = False):
 
-    M = _nonLinearPhaseMatrix(XData,KData)
+    phase_matrix = _non_linear_phase_matrix(x_data,k_transform)
 
-    if isinstance(YError,np.ndarray):
+    if isinstance(y_error,np.ndarray):
         pass
     else:
-        YError = np.zeros(XData.shape)
+        y_error = np.zeros(x_data.shape)
 
-    if callable(windowFct):
-        window = windowFct(YData.size)
-        YData = YData*window
-        YError = YError*window
+    if callable(window_fct):
+        window = window_fct(y_data.size)
+        y_data = y_data*window
+        y_error = y_error*window
         
-    TF = 1/(2*np.pi) * np.dot(M,YData)
+    tf = 1/(2*np.pi) * np.dot(phase_matrix,y_data)
 
-    if NoError:
-        return TF
+    if no_error_output:
+        return tf
 
     else:
         # Error calculation
-        DReTF = 1/(2*np.pi) * np.sqrt(np.dot(np.real(M)**2,YError**2))
-        DImTF = 1/(2*np.pi) * np.sqrt(np.dot(np.imag(M)**2,YError**2))
+        re_y_tf_error = 1/(2*np.pi) * np.sqrt(np.dot(np.real(phase_matrix)**2,y_error**2))
+        im_y_tf_error = 1/(2*np.pi) * np.sqrt(np.dot(np.imag(phase_matrix)**2,y_error**2))
 
-        DAbsTF = 1/np.abs(TF)    * np.sqrt((np.real(TF)**2 * DReTF**2 + np.imag(TF)**2 * DImTF**2))
-        DArgTF = 1/np.abs(TF)**2 * np.sqrt((np.real(TF)**2 * DImTF**2 + np.imag(TF)**2 * DReTF**2))
+        abs_tf_error = 1/np.abs(tf)    * np.sqrt((np.real(tf)**2 * re_y_tf_error**2 + np.imag(tf)**2 * im_y_tf_error**2))
+        arg_tc_error = 1/np.abs(tf)**2 * np.sqrt((np.real(tf)**2 * im_y_tf_error**2 + np.imag(tf)**2 * re_y_tf_error**2))
 
-        return TF, DAbsTF, DArgTF
+        return tf, abs_tf_error, arg_tc_error
 
-def _nonLinearPhaseMatrix(XData,KData):
+def _non_linear_phase_matrix(x_data,k_transform):
 
-    StepX = np.gradient(XData)
+    x_step = np.gradient(x_data)
 
-    A = np.outer(KData,XData)
-    M = np.exp(1j * A) * StepX[None,:]
+    phase = np.outer(k_transform,x_data)
+    phase_matrix = np.exp(1j * phase) * x_step[None,:]
 
-    return M
+    return phase_matrix

@@ -1,5 +1,6 @@
 import numpy as np
 from XRDTools.FormFactor import ITCFct
+from XRDTools.Wyckoff import Position
 
 class GeneralStructure(object):
 
@@ -14,8 +15,9 @@ class GeneralStructure(object):
     hkl   : components of a reciprocal space vector in the reciprocal lattice base
     """
 
-    wyckoff = {
-        'a' : lambda x, y, z : [(x,y,z)]
+    base_wyckoff_positions = '(0,0,0)'
+    wyckoff_positions = {
+        'a' : '(x,y,z)'
     }
     def __init__(self,a_lengths,a_angles):
 
@@ -38,7 +40,7 @@ class GeneralStructure(object):
 
         return 'General structure : \n a = {0:.4f}, b = {1:.4f}, c = {2:.4f}\n alpha = {3:.4f}, beta = {4:.4f}, gamma = {5:.4f}'.format(*self.a_lengths,*np.rad2deg(self.a_angles))
 
-    def show_atom_list(self):
+    def list_atoms(self):
 
         for atom in self.atoms:
             print(atom)
@@ -47,15 +49,12 @@ class GeneralStructure(object):
 
         return self.atoms
 
-    def add_atom_wickoff(self,letter,form_factor,variables = [],label = ''):
+    def add_atom_wickoff(self,letter,form_factor,label = '',**kwargs):
 
-        if letter in self.wyckoff:
-            coordList = self.wyckoff[letter]
-            if callable(coordList):
-                coordList = coordList(*variables)
-
-            for coord in coordList:
-                self._add_atom(coord,form_factor,label)
+        wyckoff_position = Position.generate_from_string(self.wyckoff_positions[letter],self.base_wyckoff_positions)
+        coordinates = wyckoff_position(**kwargs)
+        for coord in coordinates:
+            self._add_atom(coord,form_factor,label)
 
     def add_atom(self,coordinates,form_factor,label = ''):
 
@@ -82,6 +81,11 @@ class GeneralStructure(object):
         factor = np.sum(form_factors * np.exp(1j*2*np.pi*np.dot(hkl,positions)))
 
         return factor
+
+    def debye_waller_factor(self,hkl):
+
+        hkl = np.array(hkl)
+        G = self.g_length(hkl)
 
     def a_length(self,i):
 
@@ -383,84 +387,72 @@ class Diamond(Cubic):
                     self._add_atom(coordinates + v1 + v2,form_factor,label)
 
 class No139(Tetragonal): # I 4 / m m m
-    wyckoff = {
-        'a' : [(0,0,0)],
-        'b' : [(0,0,1/2)],
-        'c' : [(0,1/2,0),(1/2,0,0)],
-        'd' : [(0,1/2,1/4),(1/2,0,1/4)],
-        'e' : lambda z : [(0,0,z),(0,0,-z)],
-        'f' : [(1/4,1/4,1/4),(3/4,3/4,1/4),(3/4,1/4,1/4),(1/4,3/4,1/4)],
-        'g' : lambda z : [(0,1/2,z),(1/2,0,z),(0,1/2,-z),(1/2,0,-z)],
-        'h' : lambda x : [(x,x,0),(-x,-x,0),(-x,x,0),(x,-x,0)],
-        'i' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0)],
-        'j' : lambda x : [(x,1/2,0),(-x,1/2,0),(1/2,x,0),(1/2,-x,0)],
-        'k' : lambda x : [(x,x+1/2,1/4),(-x,-x+1/2,1/4),(-x+1/2,x,1/4),(x+1/2,-x,1/4),(-x,-x+1/2,3/4),(x,x+1/2,3/4),(x+1/2,-x,3/4),(-x+1/2,x,3/4)],
-        'l' : lambda x, y : [(x,y,0),(-x,-y,0),(-y,x,0),(y,-x,0),(-x,y,0),(x,-y,0),(y,x,0)(-y,-x,0)],
-        'm' : lambda x, z : [(x,x,z),(-x,-x,z),(-x,x,z),(x,-x,z),(-x,x,-z),(x,-x,-z),(x,x,-z),(-x,-x,-z)],
-        'n' : lambda y, z : [(0,y,z),(0,-y,z),(-y,0,z),(y,0,z),(0,y,-z),(0,-y,-z),(y,0,-z),(-y,0,-z)],
-        'o' : lambda x, y, z : [(x,y,z),(-x,-y,z),(-y,x,z),(y,-x,z),(-x,y,-z),(x,-y,-z),(y,x,-z),(-y,-x,-z),(-x,-y,-z),(x,y,-z),(y,-x,-z),(-y,x,-z),(x,-y,z),(-x,y,z),(-y,-x,z),(y,x,z)]
+    base_wyckoff_positions = '(0,0,0) (1/2,1/2,1/2)'
+    wyckoff_positions = {
+        'a' : '(0,0,0)',
+        'b' : '(0,0,1/2)',
+        'c' : '(0,1/2,0) (1/2,0,0)',
+        'd' : '(0,1/2,1/4) (1/2,0,1/4)',
+        'e' : '(0,0,z) (0,0,-z)',
+        'f' : '(1/4,1/4,1/4) (3/4,3/4,1/4) (3/4,1/4,1/4) (1/4,3/4,1/4)',
+        'g' : '(0,1/2,z) (1/2,0,z) (0,1/2,-z) (1/2,0,-z)',
+        'h' : '(x,x,0) (-x,-x,0) (-x,x,0) (x,-x,0)',
+        'i' : '(x,0,0) (-x,0,0) (0,x,0) (0,-x,0)',
+        'j' : '(x,1/2,0) (-x,1/2,0) (1/2,x,0) (1/2,-x,0)',
+        'k' : '(x,x+1/2,1/4) (-x,-x+1/2,1/4) (-x+1/2,x,1/4) (x+1/2,-x,1/4) (-x,-x+1/2,3/4) (x,x+1/2,3/4) (x+1/2,-x,3/4) (-x+1/2,x,3/4)',
+        'l' : '(x,y,0) (-x,-y,0) (-y,x,0) (y,-x,0) (-x,y,0) (x,-y,0) (y,x,0) (-y,-x,0)',
+        'm' : '(x,x,z) (-x,-x,z) (-x,x,z) (x,-x,z) (-x,x,-z) (x,-x,-z) (x,x,-z) (-x,-x,-z)',
+        'n' : '(0,y,z) (0,-y,z) (-y,0,z) (y,0,z) (0,y,-z) (0,-y,-z) (y,0,-z) (-y,0,-z)',
+        'o' : '(x,y,z) (-x,-y,z) (-y,x,z) (y,-x,z) (-x,y,-z) (x,-y,-z) (y,x,-z) (-y,-x,-z) (-x,-y,-z) (x,y,-z) (y,-x,-z) (-y,x,-z) (x,-y,z) (-x,y,z) (-y,-x,z) (y,x,z)'
     }
 
-class No167(Rhombohedral): # R -3 c
-    wyckoff = {
-        'a' : [(0,0,0)],
-        }
-
-class No167star(Hexagonal): # R -3 c
-    wyckoff = {
-        'a' : [(0,0,0)],
-        }
-
-
-
-class No164(Hexagonal): # P -3 m 1
-    wyckoff = {
-        'a' : [(0,0,0)],
-        'b' : [(0,0,0.5)],
-        'c' : lambda z : [(0,0,z),(0,0,-z)],
-        'd' : lambda z : [(1/3,2/3,z),(2/3,1/3,-z)],
-        'e' : [(1/2,0,0),(0,1/2,0),(1/2,1/2,0)],
-        'f' : [(1/2,0,1/2),(0,1/2,1/2),(1/2,1/2,1/2)],
-        'g' : lambda x : [(x,0,0),(0,x,0),(-x,-x,0),(-x,0,0),(0,-x,0)],
-        'h' : lambda x : [(x,0,1/2),(0,x,1/2),(-x,-x,1/2),(-x,0,1/2),(0,-x,1/2),(x,x,1/2)],
-        'i' : lambda x, z : [(x,-x,z),(x,2*x,z),(-2*x,-x,z),(-x,x,-z),(2*x,x,-z),(-x,-2*x,-z)],
-        'j' : lambda x, y, z : [(x,y,z),(-y,x-y,z),(-x+y,-x,z),(y,x,-z),(x-y,-y,-z),(-x,-x+y,-z),(-x,-y,-z),(y,-x+y,-z),(x-y,x,-z),(-y,-x,z),(-x+y,y,z),(x,x-y,z)]
+class No206(Cubic): # I a -3
+    base_wyckoff_positions = '(0,0,0) (1/2,1/2,1/2)'
+    wyckoff_positions = {
+        'a' : '(0,0,0) (1/2,0,1/2) (0,1/2,1/2) (1/2,1/2,0)',
+        'b' : '(1/4,1/4,1/4) (1/4,3/4,3/4) (3/4,3/4,1/4) (3/4,1/4,3/4)',
+        'c' : '(x,x,x) (-x+1/2,-x,x+1/2) (-x,x+1/2,-x+1/2) (x+1/2,-x+1/2,-x) (-x,-x,-x) (x+1/2,x,-x+1/2) (x,-x+1/2,x+1/2) (-x+1/2,x+1/2,x)',
+        'd' : '(x,0,1/4) (-x+1/2,0,3/4) (1/4,x,0) (3/4,-x+1/2,0) (0,1/4,x) (0,3/4,-x+1/2) (-x,0,3/4) (x+1/2,0,1/4) (3/4,-x,0) (1/4,x+1/2,0) (0,3/4,-x) (0,1/4,x+1/2)',
+        'e' : '(x,y,z) (-x+1/2,-y,z+1/2) (-x,y+1/2,-z+1/2) (x+1/2,-y+1/2,-z) (z,x,y) (z+1/2,-x+1/2,-y) (-z+1/2,-x,y+1/2) (-z,x+1/2,-y+1/2) (y,z,x) (-y,z+1/2,-x+1/2) (y+1/2,-z+1/2,-x) (-y+1/2,-z,x+1/2) (-x,-y,-z) (x+1/2,y,-z+1/2) (x,-y+1/2,z+1/2) (-x+1/2,y+1/2,z) (-z,-x,-y) (-z+1/2,x+1/2,y) (z+1/2,x,-y+1/2) (z,-x+1/2,y+1/2) (-y,-z,-x) (y,-z+1/2,x+1/2) (-y+1/2,z+1/2,x) (y+1/2,z,-x+1/2)',
     }
 
 class No221(Cubic): # P m -3 m
-    wyckoff = {
-        'a' : [(0,0,0)],
-        'b' : [(1/2,1/2,1/2)],
-        'c' : [(0,1/2,1/2),(1/2,0,1/2),(1/2,1/2,0)],
-        'd' : [(1/2,0,0),(0,1/2,0),(0,0,1/2)],
-        'e' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0),(0,0,x),(0,0,-x)],
-        'f' : lambda x : [(x,1/2,1/2),(-x,1/2,1/2),(1/2,x,1/2),(1/2,-x,1/2),(1/2,1/2,x),(1/2,1/2,-x)],
-        'g' : lambda x : [(x,x,x),(-x,-x,x),(-x,x,-x),(x,-x,-x),(x,x,-x),(-x,-x,-x),(x,-x,x),(-x,x,x)],
-        # not fihished
-        # 'g' : lambda x : [(x,1/4,1/4),(-x,3/4,1/4),(1/4,x,1/4),(1/4,-x,3/4),(1/4,1/4,x),(3/4,1/4,-x),(1/4,x,3/4),(3/4,-x,3/4),(x,1/4,3/4),(-x,1/4,1/4),(1/4,1/4,-x),(1/4,3/4,x)]
+    base_wyckoff_positions = '(0,0,0)'
+    wyckoff_positions = {
+        'a' : '(0,0,0)',
+        'b' : '(1/2,1/2,1/2)',
+        'c' : '(0,1/2,1/2) (1/2,0,1/2) (1/2,1/2,0)',
+        'd' : '(1/2,0,0) (0,1/2,0) (0,0,1/2)',
+        'e' : '(x,0,0) (-x,0,0) (0,x,0) (0,-x,0) (0,0,x) (0,0,-x)',
+        'f' : '(x,1/2,1/2) (-x,1/2,1/2) (1/2,x,1/2) (1/2,-x,1/2) (1/2,1/2,x) (1/2,1/2,-x)',
+        'g' : '(x,x,x) (-x,-x,x) (-x,x,-x) (x,-x,-x) (x,x,-x) (-x,-x,-x) (x,-x,x) (-x,x,x)',
+        'h' : '(x,1/2,0) (-x,1/2,0) (0,x,1/2) (0,-x,1/2) (1/2,0,x) (1/2,0,-x) (1/2,x,0) (1/2,-x,0) (x,0,1/2) (-x,0,1/2) (0,1/2,-x) (0,1/2,x)',
+        'i' : '(0,y,y) (0,-y,y) (0,y,-y) (0,-y,-y) (y,0,y) (y,0,-y) (-y,0,y) (-y,0,-y) (y,y,0) (-y,y,0) (y,-y,0) (-y,-y,0)',
+        'j' : '(1/2,y,y) (1/2,-y,y) (1/2,y,-y) (1/2,-y,-y) (y,1/2,y) (y,1/2,-y) (-y,1/2,y) (-y,1/2,-y) (y,y,1/2) (-y,y,1/2) (y,-y,1/2) (-y,-y,1/2)',
+        'k' : '(0,y,z) (0,-y,z) (0,y,-z) (0,-y,-z) (z,0,y) (z,0,-y) (-z,0,y) (-z,0,-y) (y,z,0) (-y,z,0) (y,-z,0) (-y,-z,0) (y,0,-z) (-y,0,-z) (y,0,z) (-y,0,z) (0,z,-y) (0,z,y) (0,-z,-y) (0,-z,y) (z,y,0) (z,-y,0) (-z,y,0) (-z,-y,0)',
+        'l' : '(1/2,y,z) (1/2,-y,z) (1/2,y,-z) (1/2,-y,-z) (z,1/2,y) (z,1/2,-y) (-z,1/2,y) (-z,1/2,-y) (y,z,1/2) (-y,z,1/2) (y,-z,1/2) (-y,-z,1/2) (y,1/2,-z) (-y,1/2,-z) (y,1/2,z) (-y,1/2,z) (1/2,z,-y) (1/2,z,y) (1/2,-z,-y) (1/2,-z,y) (z,y,1/2) (z,-y,1/2) (-z,y,1/2) (-z,-y,1/2)',
+        'm' : '(x,x,z) (-x,-x,z) (-x,x,-z) (x,-x,-z) (z,x,x) (z,-x,-x) (-z,-x,x) (-z,x,-x) (x,z,x) (-x,z,-x) (x,-z,-x) (-x,-z,x) (x,x,-z) (-x,-x,-z) (x,-x,z) (-x,x,z) (x,z,-x) (-x,z,x) (-x,-z,-x) (x,-z,x) (z,x,-x) (z,-x,x) (-z,x,x) (-z,-x,-x)',
+        'n' : '(x,y,z) (-x,-y,z) (-x,y,-z) (x,-y,-z) (z,x,y) (z,-x,-y) (-z,-x,y) (-z,x,-y) (y,z,x) (-y,z,-x) (y,-z,-x) (-y,-z,x) (y,x,-z) (-y,-x,-z) (y,-x,z) (-y,x,z) (x,z,-y) (-x,z,y) (-x,-z,-y) (x,-z,y) (z,y,-x) (z,-y,x) (-z,y,x) (-z,-y,-x) (-x,-y,-z) (x,y,-z) (x,-y,z) (-x,y,z) (-z,-x,-y) (-z,x,y) (z,x,-y) (z,-x,y) (-y,-z,-x) (y,-z,x) (-y,z,x) (y,z,-x) (-y,-x,z) (y,x,z) (-y,x,-z) (y,-x,-z) (-x,-z,y) (x,-z,-y) (x,z,y) (-x,z,-y) (-z,-y,x) (-z,y,-x) (z,-y,-x) (z,y,x)',
     }
 
 class No225(Cubic): # F m -3 m
-    wyckoff = {
-        'a' : [(0,0,0)],
-        'b' : [(1/2,1/2,1/2)],
-        'c' : [(1/4,1/4,1/4),(1/4,1/4,3/4)],
-        'd' : [(0,1/4,1/4),(0,3/4,1/4),(1/4,0,1/4),(1/4,0,3/4),(1/4,1/4,0),(3/4,1/4,0)],
-        'e' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0),(0,0,x),(0,0,-x)],
-        'f' : lambda x : [(x,x,x),(-x,-x,x),(-x,x,-x),(x,-x,-x),(x,x,-x),(-x,-x,-x),(x,-x,x),(-x,x,x)],
-        'g' : lambda x : [(x,1/4,1/4),(-x,3/4,1/4),(1/4,x,1/4),(1/4,-x,3/4),(1/4,1/4,x),(3/4,1/4,-x),(1/4,x,3/4),(3/4,-x,3/4),(x,1/4,3/4),(-x,1/4,1/4),(1/4,1/4,-x),(1/4,3/4,x)]
+    base_wyckoff_positions = '(0,0,0) (0,1/2,1/2) (1/2,0,1/2) (1/2,1/2,0)'
+    wyckoff_positions = {
+        'a' : '(0,0,0)',
+        'b' : '(1/2,1/2,1/2)',
+        'c' : '(1/4,1/4,1/4) (1/4,1/4,3/4)',
+        'd' : '(0,1/4,1/4) (0,3/4,1/4) (1/4,0,1/4) (1/4,0,3/4) (1/4,1/4,0) (3/4,1/4,0)',
+        'e' : '(0,1/4,1/4) (0,3/4,1/4) (1/4,0,1/4) (1/4,0,3/4) (1/4,1/4,0) (3/4,1/4,0)',
+        'f' : '(x,x,x) (-x,-x,x) (-x,x,-x) (x,-x,-x) (x,x,-x) (-x,-x,-x) (x,-x,x) (-x,x,x)',
+        'g' : '(x,1/4,1/4) (-x,3/4,1/4) (1/4,x,1/4) (1/4,-x,3/4) (1/4,1/4,x) (3/4,1/4,-x) (1/4,x,3/4) (3/4,-x,3/4) (x,1/4,3/4) (-x,1/4,1/4) (1/4,1/4,-x) (1/4,3/4,x) ',
+        'h' : '(0,y,y) (0,-y,y) (0,y,-y) (0,-y,-y) (y,0,y) (y,0,-y) (-y,0,y) (-y,0,-y) (y,y,0) (-y,y,0) (y,-y,0) (-y,-y,0)',
+        'i' : '(1/2,y,y) (1/2,-y,y) (1/2,y,-y) (1/2,-y,-y) (y,1/2,y) (y,1/2,-y) (-y,1/2,y) (-y,1/2,-y) (y,y,1/2) (-y,y,1/2) (y,-y,1/2) (-y,-y,1/2)',
+        'j' : '(0,y,z) (0,-y,z) (0,y,-z) (0,-y,-z) (z,0,y) (z,0,-y) (-z,0,y) (-z,0,-y) (y,z,0) (-y,z,0) (y,-z,0) (-y,-z,0) (y,0,-z) (-y,0,-z) (y,0,z) (-y,0,z) (0,z,-y) (0,z,y) (0,-z,-y) (0,-z,y) (z,y,0) (z,-y,0) (-z,y,0) (-z,-y,0)',
+        'k' : '(x,x,z) (-x,-x,z) (-x,x,-z) (x,-x,-z) (z,x,x) (z,-x,-x) (-z,-x,x) (-z,x,-x) (x,z,x) (-x,z,-x) (x,-z,-x) (-x,-z,x) (x,x,-z) (-x,-x,-z) (x,-x,z) (-x,x,z) (x,z,-x) (-x,z,x) (-x,-z,-x) (x,-z,x) (z,x,-x) (z,-x,x) (-z,x,x) (-z,-x,-x)',
+        'l' : '(x,y,z) (-x,-y,z) (-x,y,-z) (x,-y,-z) (z,x,y) (z,-x,-y) (-z,-x,y) (-z,x,-y) (y,z,x) (-y,z,-x) (y,-z,-x) (-y,-z,x) (y,x,-z) (-y,-x,-z) (y,-x,z) (-y,x,z) (x,z,-y) (-x,z,y) (-x,-z,-y) (x,-z,y) (z,y,-x) (z,-y,x) (-z,y,x) (-z,-y,-x) (-x,-y,-z) (x,y,-z) (x,-y,z) (-x,y,z) (-z,-x,-y) (-z,x,y) (z,x,-y) (z,-x,y) (-y,-z,-x) (y,-z,x) (-y,z,x) (y,z,-x) (-y,-x,z) (y,x,z) (-y,x,-z) (y,-x,-z) (-x,-z,y) (x,-z,-y) (x,z,y) (-x,z,-y) (-z,-y,x) (-z,y,-x) (z,-y,-x) (z,y,x)'
     }
 
-class No227(Cubic): # F d -3 m
-    wyckoff = {
-        'a' : [(0,0,0)],
-        'b' : [(1/2,1/2,1/2)],
-        'c' : [(1/4,1/4,1/4),(1/4,1/4,3/4)],
-        'd' : [(0,1/4,1/4),(0,3/4,1/4),(1/4,0,1/4),(1/4,0,3/4),(1/4,1/4,0),(3/4,1/4,0)],
-        'e' : lambda x : [(x,0,0),(-x,0,0),(0,x,0),(0,-x,0),(0,0,x),(0,0,-x)],
-        'f' : lambda x : [(x,x,x),(-x,-x,x),(-x,x,-x),(x,-x,-x),(x,x,-x),(-x,-x,-x),(x,-x,x),(-x,x,x)],
-        'g' : lambda x : [(x,1/4,1/4),(-x,3/4,1/4),(1/4,x,1/4),(1/4,-x,3/4),(1/4,1/4,x),(3/4,1/4,-x),(1/4,x,3/4),(3/4,-x,3/4),(x,1/4,3/4),(-x,1/4,1/4),(1/4,1/4,-x),(1/4,3/4,x)]
-    }
+
 
 class Atom(object):
 
@@ -474,7 +466,7 @@ class Atom(object):
 
     def __str__(self):
 
-        return '{0:s} : ({1:.3f},{2:.3f},{3:.3f})'.format(self.label,*self.coordinates)
+        return '{0:s} : ({1:.3f},{2:.3f},{3:.3f}) : f = {4:.4f}'.format(self.label,*self.coordinates,self.form_factor)
 
     def get_form_factor(self,q):
 
