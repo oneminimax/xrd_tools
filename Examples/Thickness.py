@@ -31,9 +31,14 @@ AX3 = fig.add_subplot(2,2,4)
 AX1.set_yscale('log')
 AX3.set_yscale('log')
 
+# ag_fct(x,wave_vector_g,thickness,sigma_eps,scale,noise)
 ag_model = Model(ag_fct)
-ag_params = ag_model.make_params()
-ag_params['wave_vector_g'].vary = False
+params = ag_model.make_params()
+params['wave_vector_g'].vary = False
+params['thickness'].value = 60
+params['sigma_eps'].value = 1e-5
+params['scale'].value = 1
+params['noise'].value = 1e-6
 
 for sample_tuple in sample_tuples:
     file_name = sample_tuple[0]
@@ -52,18 +57,12 @@ for sample_tuple in sample_tuples:
 
     wave_vector = two_theta_2_wave_vector_length(wave_length,two_theta)
     wave_vector_g = centroid(wave_vector,signal)
+    params['wave_vector_g'].value = wave_vector_g
 
     x, ag, abs_ag_error, arg_ag_error = calculate_ag(wave_vector-wave_vector_g,signal-noise,signal_error,x_max = 120,x_step = 2)
-
-    abs_ag = np.abs(ag) # ag_fct(x,wave_vector_g,thickness,sigma_eps,scale,noise)
-
-    ag_params['wave_vector_g'].value = wave_vector_g
-    ag_params['thickness'].value = 60
-    ag_params['sigma_eps'].value = 1e-5
-    ag_params['scale'].value = 1
-    ag_params['noise'].value = 1e-6
-
-    result = ag_model.fit(abs_ag,ag_params, x=x)
+    abs_ag = np.abs(ag)
+    
+    result = ag_model.fit(abs_ag,params, x=x,method = 'least_squares')
     dely = result.eval_uncertainty(sigma=3)
 
     print(result.fit_report())
