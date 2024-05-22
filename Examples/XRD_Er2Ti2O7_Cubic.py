@@ -1,13 +1,12 @@
+import numpy as np
+from XRDTools import wave_length
 from XRDTools.CristalStructure import Cubic, Rhombohedral
 from XRDTools.Diffractometer import Diffractometer
 from XRDTools.Geometry import two_theta_2_wave_vector_length
-from XRDTools import wave_length
-
-import numpy as np
 
 # print(np.sqrt(3*(2**2))*2*np.pi/two_theta_2_wave_vector_length(wave_length,30.32))
 
-ETO = Rhombohedral(0.715491,60)
+ETO = Rhombohedral(0.715491, 60)
 # ETO = Rhombohedral(0.724,60)
 
 # ETO.add_atom((0.625000, 0.125000, 0.125000),68,'Er')
@@ -33,21 +32,44 @@ ETO = Rhombohedral(0.715491,60)
 # ETO.add_atom((0.543467, 0.543467, 0.956533),8,'O')
 # ETO.add_atom((0.956533, 0.956533, 0.543467),8,'O')
 
-hkl_z = (1,1,1)
+hkl_z = (1, 1, 1)
 
-dm = Diffractometer(cristal_structure = ETO, surface_normal_hkl = hkl_z)
+dm = Diffractometer(cristal_structure=ETO, surface_normal_hkl=hkl_z)
 # pqr_x = (1,0,0)
 
 # # Show some peaks values
-HKL = (2,2,2)
-print('hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}'.format(*HKL,dm.hkl_2_two_theta(HKL),*dm.hkl_2_theta_source_theta_detector(HKL),0,np.abs(ETO.structure_factor(HKL))**2))
+HKL = (2, 2, 2)
+print(
+    "hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}".format(
+        *HKL,
+        dm.hkl_2_two_theta(HKL),
+        *dm.hkl_2_theta_source_theta_detector(HKL),
+        0,
+        np.abs(ETO.structure_factor(HKL)) ** 2
+    )
+)
 
-HKL = (6,2,2)
-print('hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}'.format(*HKL,dm.hkl_2_two_theta(HKL),*dm.hkl_2_theta_source_theta_detector(HKL),0,np.abs(ETO.structure_factor(HKL))**2))
+HKL = (6, 2, 2)
+print(
+    "hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}".format(
+        *HKL,
+        dm.hkl_2_two_theta(HKL),
+        *dm.hkl_2_theta_source_theta_detector(HKL),
+        0,
+        np.abs(ETO.structure_factor(HKL)) ** 2
+    )
+)
 
-HKL = (3,5,5)
-print('hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}'.format(*HKL,dm.hkl_2_two_theta(HKL),*dm.hkl_2_theta_source_theta_detector(HKL),0,np.abs(ETO.structure_factor(HKL))**2))
-
+HKL = (3, 5, 5)
+print(
+    "hkl : {0:d}{1:d}{2:d}, 2T : {3:.4f}, Source : {4:.4f}, Detector : {5:.4f}, Phi : {6:.4f}, Factor : {7:.3f}".format(
+        *HKL,
+        dm.hkl_2_two_theta(HKL),
+        *dm.hkl_2_theta_source_theta_detector(HKL),
+        0,
+        np.abs(ETO.structure_factor(HKL)) ** 2
+    )
+)
 
 
 # Build unit cell. Using atomic number as atomic factor
