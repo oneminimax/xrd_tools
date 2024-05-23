@@ -1,13 +1,13 @@
 %!TEX root = ../Theory.tex
 
-\section{Snoek's limit} % (fold)
-\label{sec:snoek_s_limit}
+% \section{Snoek's limit} % (fold)
+% \label{sec:snoek_s_limit}
 
-\begin{align*}
-	\pqty{\mu_0^\prime - 1} f_0 = \frac{2}{3}\gamma 4\pi M_s
-\end{align*} where $4\pi M_s$ is the saturation magnetization and $\gamma \approx \SI{3}{MHz/Oe}$.
+% \begin{align*}
+% 	\pqty{\mu_0^\prime - 1} f_0 = \frac{2}{3}\gamma 4\pi M_s
+% \end{align*} where $4\pi M_s$ is the saturation magnetization and $\gamma \approx \SI{3}{MHz/Oe}$.
 
-% section snoek_s_limit (end)
+% % section snoek_s_limit (end)
 
 \section{Reflectometry} % (fold)
 \label{sec:reflectometry}
@@ -28,11 +28,11 @@
 
 The propagation of light as a magneto-electric wave of wave vector $\vb{k}$ is given by,
 \begin{align*}
-	\vb{E}\pqty{\vb{r},t} &= \vb{E}_{0}e^{i\pqty{\vb{k}\cdot\vb{r} - \omega t}} & \vb{B}\pqty{\vb{r},t} &= \frac{\vu{k}\times\vb{E}\pqty{\vb{r},t}}{v}
+	\vb{E}\pqty{\vb{r},t} & = \vb{E}_{0}e^{i\pqty{\vb{k}\cdot\vb{r} - \omega t}} & \vb{B}\pqty{\vb{r},t} & = \frac{\vu{k}\times\vb{E}\pqty{\vb{r},t}}{v}
 \end{align*}
 
 \begin{align*}
-	\vb{E}\pqty{\vb{r},t} &= \vb{E}_{0}e^{i\pqty{\vb{k}\cdot\vb{r} - \omega t}} & \omega \vb{B}\pqty{\vb{r},t} &= \vb{k}\times\vb{E}\pqty{\vb{r},t}
+	\vb{E}\pqty{\vb{r},t} & = \vb{E}_{0}e^{i\pqty{\vb{k}\cdot\vb{r} - \omega t}} & \omega \vb{B}\pqty{\vb{r},t} & = \vb{k}\times\vb{E}\pqty{\vb{r},t}
 \end{align*}
 
 In each layer $j$, there is a wave incident \text{(I)} and a reflected \text{(R)} wave,
@@ -45,25 +45,25 @@ In each layer $j$, there is a wave incident \text{(I)} and a reflected \text{(R)
 % 		\vb{k}_j^{\text{(R)}}\times\vb{E}_{0j}^{\text{(R)}}e^{i\pqty{\vb{k}_j^{\text{(R)}}\cdot\vb{r} - \omega t}}
 % \end{align*}
 \begin{align*}
-	\vb{E}_j\pqty{\vb{r},t} &= 
-		\bqty{
-			\vb{E}_{0j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} + 
-			\vb{E}_{0j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
-		} e^{-i \omega t}\\
-	\omega\vb{B}_j\pqty{\vb{r},t} &= 
-		\bqty{
-			\vb{k}_j^{(\text{I})}\times\vb{E}_{0j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} + 
-			\vb{k}_j^{(\text{R})}\times\vb{E}_{0j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
-		} e^{-i \omega t}
+	\vb{E}_j\pqty{\vb{r},t}       & =
+	\bqty{
+	\vb{E}_{0j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} +
+	\vb{E}_{0j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
+	} e^{-i \omega t}                 \\
+	\omega\vb{B}_j\pqty{\vb{r},t} & =
+	\bqty{
+	\vb{k}_j^{(\text{I})}\times\vb{E}_{0j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} +
+	\vb{k}_j^{(\text{R})}\times\vb{E}_{0j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
+	} e^{-i \omega t}
 \end{align*}
 
 Wave vector and group speed are related,
 \begin{align*}
-	k_j^{\text{(I,R)}}v_j &= \omega & k_j^{\text{(I,R)}} = \abs*{\vb{k}_j^{\text{(I,R)}}}
+	k_j^{\text{(I,R)}}v_j & = \omega & k_j^{\text{(I,R)}} = \abs*{\vb{k}_j^{\text{(I,R)}}}
 \end{align*}
 
 \begin{align*}
-	n_j v_j &= c & \frac{n_j}{k_j^{\text{(I,R)}}} &= \frac{c}{\omega} = \frac{\lambda}{2\pi}
+	n_j v_j & = c & \frac{n_j}{k_j^{\text{(I,R)}}} & = \frac{c}{\omega} = \frac{\lambda}{2\pi}
 \end{align*}
 
 % \begin{align*}
@@ -72,42 +72,42 @@ Wave vector and group speed are related,
 % \end{align*}
 
 \begin{figure}
-\begin{center}
-    {\includegraphics{Figures/SpaceDiscretion.pdf}
-    }
-\caption{
-Caption
-}
-\label{fig:1}
-\end{center}
+	\begin{center}
+		{\includegraphics{Figures/SpaceDiscretion.pdf}
+		}
+		\caption{
+			Caption
+		}
+		\label{fig:1}
+	\end{center}
 \end{figure}
 
-The interface between layer $j-1$ and $j$ is define as $\boldsymbol{\mathsf{r}}_j$. 
+The interface between layer $j-1$ and $j$ is define as $\boldsymbol{\mathsf{r}}_j$.
 \begin{align*}
 	\boldsymbol{\mathsf{r}}_j = x\vu{x} + y\vu{y} + z_j\vu{z}
 \end{align*}
 The electric field component at the interface need to respect the following equation
 \begin{align*}
-	\pqty{\vb{E}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} &= \pqty{\vb{E}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} \\
-	\epsilon_{j-1}\pqty{\vb{E}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z &= \epsilon_{j}\pqty{\vb{E}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z
+	\pqty{\vb{E}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y}           & = \pqty{\vb{E}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y}         \\
+	\epsilon_{j-1}\pqty{\vb{E}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z & = \epsilon_{j}\pqty{\vb{E}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z
 \end{align*} while the magnetic field components,
 \begin{align*}
-	\frac{1}{\mu_{j-1}}\pqty{\vb{B}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} &= \frac{1}{\mu_j}\pqty{\vb{B}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} \\
-	\pqty{\vb{B}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z &= \pqty{\vb{B}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z 
+	\frac{1}{\mu_{j-1}}\pqty{\vb{B}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} & = \frac{1}{\mu_j}\pqty{\vb{B}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_{x,y} \\
+	\pqty{\vb{B}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z                        & = \pqty{\vb{B}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}}_z
 \end{align*}
 
 Note that, at the frequency of X rays, the relative magnetic permeabilty of matter is unity up to many orders of magnitude, (Snoek's limit)
 \begin{align*}
-	\mu_j \sim \mu_0 && \frac{\Delta \mu}{\mu_0} \ll \frac{\Delta \epsilon}{\epsilon_0}
-\end{align*} 
+	\mu_j \sim \mu_0 &  & \frac{\Delta \mu}{\mu_0} \ll \frac{\Delta \epsilon}{\epsilon_0}
+\end{align*}
 
 As an example, the continuity of the $x$ component of the electric field gives the following equation,
 \begin{align*}
-		E_{0z,{j-1}}^{(\text{I})}\exp\pqty{i\vb{k}_{j-1}^{(\text{I})}\cdot\vb{r}} + 
-		E_{0z,{j-1}}^{(\text{R})}\exp\pqty{i\vb{k}_{j-1}^{(\text{R})}\cdot\vb{r}}
-	&= 
-		E_{0z,j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} + 
-		E_{0z,j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
+	E_{0z,{j-1}}^{(\text{I})}\exp\pqty{i\vb{k}_{j-1}^{(\text{I})}\cdot\vb{r}} +
+	E_{0z,{j-1}}^{(\text{R})}\exp\pqty{i\vb{k}_{j-1}^{(\text{R})}\cdot\vb{r}}
+	 & =
+	E_{0z,j}^{(\text{I})}\exp\pqty{i\vb{k}_j^{(\text{I})}\cdot\vb{r}} +
+	E_{0z,j}^{(\text{R})}\exp\pqty{i\vb{k}_j^{(\text{R})}\cdot\vb{r}}
 \end{align*}
 
 % All these equation will have phase factors that must connect at the interface. 
@@ -117,34 +117,34 @@ As an example, the continuity of the $x$ component of the electric field gives t
 
 The $x$ and $y$ dependance must be the same for each term of this equation, meaning that, in each layer we must have
 \begin{align*}
-	k_{x,j} &= k^{\text{(I)}}_{x,j} = k^{\text{(R)}}_{x,j} & k_{y,j} &= k^{\text{(I)}}_{y,j} = k^{\text{(R)}}_{y,j}
+	k_{x,j} & = k^{\text{(I)}}_{x,j} = k^{\text{(R)}}_{x,j} & k_{y,j} & = k^{\text{(I)}}_{y,j} = k^{\text{(R)}}_{y,j}
 \end{align*} and therefore
 \begin{align*}
- 	k_{z,j} &= k^{\text{(I)}}_{z,j} = -k^{\text{(R)}}_{z,j}.
-\end{align*} 
+	k_{z,j} & = k^{\text{(I)}}_{z,j} = -k^{\text{(R)}}_{z,j}.
+\end{align*}
 
 Between planes
 \begin{align*}
-	k_{x,j-1} &= k_{x,j} & k_{y,j-1} &= k_{y,j}
+	k_{x,j-1} & = k_{x,j} & k_{y,j-1} & = k_{y,j}
 \end{align*}
 
 If we define $\theta_j$ as the angle between the interface and $\vb{k}_j$, we get the following relations (Snell's law).
 \begin{align*}
-	k_{j-1}\cos\theta_{j-1} &= k_{j}\cos\theta_{j} & \frac{\cos\theta_j}{\cos\theta_{j-1}} &= \frac{k_{j-1}}{k_j} = \frac{n_{j-1}}{n_j} = \pqty{\frac{\epsilon_{j-1}\mu_{j-1}}{\epsilon_j\mu_j}}^{1/2} \sim \pqty{\frac{\epsilon_{j-1}}{\epsilon_j}}^{1/2}
+	k_{j-1}\cos\theta_{j-1} & = k_{j}\cos\theta_{j} & \frac{\cos\theta_j}{\cos\theta_{j-1}} & = \frac{k_{j-1}}{k_j} = \frac{n_{j-1}}{n_j} = \pqty{\frac{\epsilon_{j-1}\mu_{j-1}}{\epsilon_j\mu_j}}^{1/2} \sim \pqty{\frac{\epsilon_{j-1}}{\epsilon_j}}^{1/2}
 \end{align*}
 
 If the first incident beam is $k_0$ at an angle $\theta_0$, this means,
 \begin{align*}
-	k_{0}\cos\theta_{0} &= k_{j}\cos\theta_{j} & \frac{k_0}{n_0} &= \frac{k_j}{n_j}
+	k_{0}\cos\theta_{0} & = k_{j}\cos\theta_{j} & \frac{k_0}{n_0} & = \frac{k_j}{n_j}
 \end{align*}
 
 We will choose the direction of propagation in order to have $k_y = 0$.
 
 \begin{align*}
-	k_{z,j} &= k_j \sin\theta_j \\
-	&= k_0 n_j \pqty{1 - \cos^2\theta_j}^{1/2}  \\
-	&= k_0 \pqty{n_j^2 - n_j^2\cos^2\theta_j}^{1/2}  \\
-	&= k_0 \pqty{n_j^2 - n_0^2\cos^2\theta_0}^{1/2} 
+	k_{z,j} & = k_j \sin\theta_j                             \\
+	        & = k_0 n_j \pqty{1 - \cos^2\theta_j}^{1/2}      \\
+	        & = k_0 \pqty{n_j^2 - n_j^2\cos^2\theta_j}^{1/2} \\
+	        & = k_0 \pqty{n_j^2 - n_0^2\cos^2\theta_0}^{1/2}
 \end{align*}
 
 
@@ -160,31 +160,31 @@ We will choose the direction of propagation in order to have $k_y = 0$.
 
 If the polarization of the electric field is in the propagration plane ($xz$), the components of the electric field for the incident and reflected waves are,
 \begin{align*}
-	E^{\text{(I,p)}}_{0x,j} &= E^{\text{(I,p)}}_{0,j}\sin\theta_j & E^{\text{(R,p)}}_{0x,j} &= -E^{\text{(R,p)}}_{0,j}\sin\theta_j \\
-	E^{\text{(I,p)}}_{0y,j} &= 0 & E^{\text{(R,p)}}_{0y,j} &= 0 \\
-	E^{\text{(I,p)}}_{0z,j} &= E^{\text{(I,p)}}_{0,j}\cos\theta_j & E^{\text{(R,p)}}_{0z,j} &= E^{\text{(R,p)}}_{0,j}\cos\theta_j
+	E^{\text{(I,p)}}_{0x,j} & = E^{\text{(I,p)}}_{0,j}\sin\theta_j & E^{\text{(R,p)}}_{0x,j} & = -E^{\text{(R,p)}}_{0,j}\sin\theta_j \\
+	E^{\text{(I,p)}}_{0y,j} & = 0                                  & E^{\text{(R,p)}}_{0y,j} & = 0                                   \\
+	E^{\text{(I,p)}}_{0z,j} & = E^{\text{(I,p)}}_{0,j}\cos\theta_j & E^{\text{(R,p)}}_{0z,j} & = E^{\text{(R,p)}}_{0,j}\cos\theta_j
 \end{align*} while the components of the magnetic field are,
 \begin{align*}
-	B^{\text{(I,p)}}_{0x,j} &= 0 & B^{\text{(R,p)}}_{0x,j} &= 0 \\
-	\omega B^{\text{(I,p)}}_{0y,j} &= k^{\text{(I,p)}}_jE^{\text{(I,p)}}_{0,j} & \omega B^{\text{(R,p)}}_{0y,j} &= k^{\text{(R,p)}}_jE^{\text{(R,p)}}_{0,j} \\
-	B^{\text{(I,p)}}_{0z,j} &= 0 & B^{\text{(R,p)}}_{0z,j} &= 0 \\
+	B^{\text{(I,p)}}_{0x,j}        & = 0                                        & B^{\text{(R,p)}}_{0x,j}        & = 0                                        \\
+	\omega B^{\text{(I,p)}}_{0y,j} & = k^{\text{(I,p)}}_jE^{\text{(I,p)}}_{0,j} & \omega B^{\text{(R,p)}}_{0y,j} & = k^{\text{(R,p)}}_jE^{\text{(R,p)}}_{0,j} \\
+	B^{\text{(I,p)}}_{0z,j}        & = 0                                        & B^{\text{(R,p)}}_{0z,j}        & = 0                                        \\
 \end{align*}
 
 The relevant equations are
 \begin{align*}
-	\sin\theta_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	\sin\theta_{j}\pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	\sin\theta_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}}                 & =
+	\sin\theta_{j}\pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}}
 	\\
-	\epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	\epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}} 
+	\epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	\epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}}
 	\\
-	k_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
+	k_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1} e^{ik_{z,j-1}z_j}}                         & =
 	k_{j}\pqty{E^{\text{(I,p)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{ik_{z,j}z_j}}
 \end{align*}
 
 Since,
 \begin{align*}
-	\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_{j} \cos\theta_{j}} = \frac{k_{j-1}}{k_{j}} && \to & &
+	\frac{\epsilon_{j-1} \cos\theta_{j-1}}{\epsilon_{j} \cos\theta_{j}} = \frac{k_{j-1}}{k_{j}} &  & \to &  &
 	\frac{ \cos\theta_{j-1} k_{j}}{ \cos\theta_{j} k_{j-1}} = \frac{\epsilon_{j}}{\epsilon_{j-1}}
 \end{align*}
 the third equation is equivalent to the second one.
@@ -194,27 +194,27 @@ the third equation is equivalent to the second one.
 
 If the polarization of the electric field is out of the propagration plane ($y$), the components of the electric field for the incident and reflected waves are,
 \begin{align*}
-	E^{\text{(I,s)}}_{0x,j} &= 0 & E^{\text{(R,s)}}_{0x,j} &= 0 \\
-	E^{\text{(I,s)}}_{0y,j} &= E^{\text{(I,s)}}_{0,j} & E^{\text{(R,s)}}_{0y,j} &= E^{\text{(R,s)}}_{0,j} \\
-	E^{\text{(I,s)}}_{0z,j} &= 0 & E^{\text{(R,s)}}_{0z,j} &= 0 \\
+	E^{\text{(I,s)}}_{0x,j} & = 0                      & E^{\text{(R,s)}}_{0x,j} & = 0                      \\
+	E^{\text{(I,s)}}_{0y,j} & = E^{\text{(I,s)}}_{0,j} & E^{\text{(R,s)}}_{0y,j} & = E^{\text{(R,s)}}_{0,j} \\
+	E^{\text{(I,s)}}_{0z,j} & = 0                      & E^{\text{(R,s)}}_{0z,j} & = 0                      \\
 \end{align*}
 while the components of the magnetic field are,
 \begin{align*}
-	\omega B^{\text{(I,s)}}_{0x,j} &= k_j E^{\text{(I,s)}}_{0,j}\sin\theta_j & \omega B^{\text{(R,s)}}_{0x,j} &= -k_j E^{\text{(R,s)}}_{0,j}\sin\theta_j \\
-	B^{\text{(I,s)}}_{0y,j} &= 0 & B^{\text{(R,s)}}_{0y,j} &= 0 \\
-	\omega B^{\text{(I,s)}}_{0z,j} &= k_j E^{\text{(I,s)}}_{0,j}\cos\theta_j & \omega B^{\text{(R,s)}}_{0z,j} &= k_j E^{\text{(R,s)}}_{0,j}\cos\theta_j \\
+	\omega B^{\text{(I,s)}}_{0x,j} & = k_j E^{\text{(I,s)}}_{0,j}\sin\theta_j & \omega B^{\text{(R,s)}}_{0x,j} & = -k_j E^{\text{(R,s)}}_{0,j}\sin\theta_j \\
+	B^{\text{(I,s)}}_{0y,j}        & = 0                                      & B^{\text{(R,s)}}_{0y,j}        & = 0                                       \\
+	\omega B^{\text{(I,s)}}_{0z,j} & = k_j E^{\text{(I,s)}}_{0,j}\cos\theta_j & \omega B^{\text{(R,s)}}_{0z,j} & = k_j E^{\text{(R,s)}}_{0,j}\cos\theta_j  \\
 \end{align*}
 
 The relevant equations are then,
 \begin{align*}
-	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
+	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}                               & =
 	E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j} e^{-ik_{z,j}z_j}
 	\\
-	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}}
 	\\
-	k_{j-1}\cos\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\cos\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	k_{j-1}\cos\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	k_{j}\cos\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}}
 \end{align*}
 
 First and third equations are equivalent because,
@@ -228,13 +228,13 @@ First and third equations are equivalent because,
 \label{sub:sets_of_equations}
 
 \begin{align*}
-	\sin\theta_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	\sin\theta_{j}\pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	\sin\theta_{j-1}\pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	\sin\theta_{j}\pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,p)}}_{0,j}e^{-ik_{z,j}z_j}}
 	\\
 	% \epsilon_{j-1} \cos\theta_{j-1} \pqty{E^{\text{(I,p)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,p)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
 	% \epsilon_{j} \cos\theta_{j} \pqty{E^{\text{(I,p)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,p)}}_{0,j} e^{-ik_{z,j}z_j}} 
 	% \\
-	k_{j-1}\pqty{E^{\text{(I)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1} e^{ik_{z,j-1}z_j}} &=
+	k_{j-1}\pqty{E^{\text{(I)}}_{0,j-1} e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1} e^{ik_{z,j-1}z_j}}             & =
 	k_{j}\pqty{E^{\text{(I)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j} e^{ik_{z,j}z_j}}
 \end{align*}
 
@@ -255,38 +255,38 @@ First and third equations are equivalent because,
 
 \begin{align*}
 	\vb{S}^{\text{(p)}}_j\pqty{z} \cdot \vb{E}^{\text{(p)}}_j
-	&\equiv
+	                             & \equiv
 	\pmqty{
-		\sin\theta_{j} e^{ik_{z,j}z} & 
-		-\sin\theta_{j} e^{-ik_{z,j}z} \\
-		k_{j} e^{ik_{z,j}z} & 
-		k_{j} e^{-ik_{z,j}z} 
+	\sin\theta_{j} e^{ik_{z,j}z} &
+	-\sin\theta_{j} e^{-ik_{z,j}z}        \\
+	k_{j} e^{ik_{z,j}z}          &
+	k_{j} e^{-ik_{z,j}z}
 	}
 	\pmqty{
-		E^{\text{(I,p)}}_{0,j} \\ 
+	E^{\text{(I,p)}}_{0,j}                \\
 		E^{\text{(R,p)}}_{0,j}
 	}
 \end{align*}
 
 \begin{align*}
-	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
+	E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}                               & =
 	E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R,s)}}_{0,j} e^{-ik_{z,j}z_j}
 	\\
-	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I,s)}}_{0,j-1}e^{ik_{z,j-1}z_j} - E^{\text{(R,s)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	k_{j}\sin\theta_{j}\pqty{E^{\text{(I,s)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R,s)}}_{0,j}e^{-ik_{z,j}z_j}}
 \end{align*}
 
 \begin{align*}
 	\vb{S}^{\text{(s)}}_j\pqty{z} \cdot \vb{E}^{\text{(s)}}_j
-	&\equiv
+	                                 & \equiv
 	\pmqty{
-		e^{ik_{z,j}z} & 
-		e^{-ik_{z,j}z} \\
-		k_j \sin\theta_{j} e^{ik_{z,j}z} & 
-		- k_j \sin\theta_{j} e^{-ik_{z,j}z} 
+	e^{ik_{z,j}z}                    &
+	e^{-ik_{z,j}z}                            \\
+	k_j \sin\theta_{j} e^{ik_{z,j}z} &
+	- k_j \sin\theta_{j} e^{-ik_{z,j}z}
 	}
 	\pmqty{
-		E^{\text{(I,s)}}_{0,j} \\ 
+	E^{\text{(I,s)}}_{0,j}                    \\
 		E^{\text{(R,s)}}_{0,j}
 	}
 \end{align*}
@@ -295,30 +295,30 @@ First and third equations are equivalent because,
 
 For either polarisation the relation between $\vb{E}_j$ and $\vb{E}_{j-1}$ is given by the following equation,
 \begin{align*}
-	\vb{S}_{j-1}\pqty{z_j} \cdot \vb{E}_{j-1} &= \vb{S}_j\pqty{z_j} \cdot \vb{E}_j
+	\vb{S}_{j-1}\pqty{z_j} \cdot \vb{E}_{j-1} & = \vb{S}_j\pqty{z_j} \cdot \vb{E}_j
 \end{align*}
 
 We then compute $\vb{E}_j$ from $\vb{E}_{j-1}$ with
 \begin{align*}
-	 \vb{E}_j &= \vb{T}_j \cdot \vb{E}_{j-1} 
+	\vb{E}_j & = \vb{T}_j \cdot \vb{E}_{j-1}
 \end{align*} with
 \begin{align*}
 	\vb{T}_j \equiv \vb{S}^{-1}_j\pqty{z_j} \cdot\vb{S}_{j-1}\pqty{z_j}
 \end{align*}
 
 \begin{align*}
-	\vb{T}^{\text{(p)}}_j &= \frac{1}{2k_j\sin\theta_j}\pmqty{
-		k_{j} e^{-ik_{z,j}z_j} & 
-		\sin\theta_{j} e^{-ik_{z,j}z_j} \\
-		-k_{j} e^{ik_{z,j}z_j} & 
-		\sin\theta_{j} e^{ik_{z,j}z_j}
+	\vb{T}^{\text{(p)}}_j                               & = \frac{1}{2k_j\sin\theta_j}\pmqty{
+	k_{j} e^{-ik_{z,j}z_j}                              &
+	\sin\theta_{j} e^{-ik_{z,j}z_j}                                                               \\
+	-k_{j} e^{ik_{z,j}z_j}                              &
+	\sin\theta_{j} e^{ik_{z,j}z_j}
 	}
 	\pmqty{
-		\sin\theta_{j-1} e^{ik_{z,j-1}z_j} & 
-		-\sin\theta_{j-1} e^{-ik_{z,j-1}z_j} \\
-		k_{j-1} e^{ik_{z,j-1}z_j} & 
-		k_{j-1} e^{-ik_{z,j-1}z_j} 
-	} \\
+	\sin\theta_{j-1} e^{ik_{z,j-1}z_j}                  &
+	-\sin\theta_{j-1} e^{-ik_{z,j-1}z_j}                                                          \\
+	k_{j-1} e^{ik_{z,j-1}z_j}                           &
+	k_{j-1} e^{-ik_{z,j-1}z_j}
+	}                                                                                             \\
 	% &= \frac{1}{2k_j\sin\theta_j}\pmqty{
 	% 	k_{j} e^{-ik_{z,j}z_j}\sin\theta_{j-1} e^{ik_{z,j-1}z_j} + 
 	% 	\sin\theta_{j} e^{-ik_{z,j}z_j}k_{j-1} e^{ik_{z,j-1}z_j} &
@@ -359,16 +359,16 @@ We then compute $\vb{E}_j$ from $\vb{E}_{j-1}$ with
 	% 	\pqty{\frac{k_{j}}{k_{j-1}} k_{z,j-1}   + 
 	% 			\frac{k_{j-1}}{k_{j}} k_{z,j} }e^{ik_{z,j}^{-}z_j}
 	% } \\
-	&= \frac{1}{2k_{z,j}}\pmqty{
-		\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
-		\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} } e^{-ik_{z,j}^{+}z_j}\\
-		\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  + 
-		 		\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{+}z_j} &
-		\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}   + 
-				\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{-}z_j}
-	} \\
+	                                                    & = \frac{1}{2k_{z,j}}\pmqty{
+	\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}  +
+	\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
+	\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  +
+	\frac{n_{j-1}}{n_{j}} k_{z,j} } e^{-ik_{z,j}^{+}z_j}                                          \\
+	\pqty{-\frac{n_{j}}{n_{j-1}} k_{z,j-1}  +
+	\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{+}z_j}  &
+	\pqty{\frac{n_{j}}{n_{j-1}} k_{z,j-1}   +
+		\frac{n_{j-1}}{n_{j}} k_{z,j} }e^{ik_{z,j}^{-}z_j}
+	}                                                                                             \\
 	% &= \frac{1}{2n_{j-1}n_{j}k_{z,j}}\pmqty{
 	% 	\pqty{ n_{j}^2 k_{z,j-1}  + 
 	% 	 		n_{j-1}^2 k_{z,j} }e^{-ik_{z,j}^{-}z_j} &
@@ -379,48 +379,48 @@ We then compute $\vb{E}_j$ from $\vb{E}_{j-1}$ with
 	% 	\pqty{ n_{j}^2 k_{z,j-1}   + 
 	% 			n_{j-1}^2 k_{z,j} }e^{ik_{z,j}^{-}z_j}
 	% } \\
-	&= \frac{1}{2n_{j-1}n_{j}k_{z,j}}\pmqty{
-		\pqty{ n_{j-1}^2 k_{z,j} + 
-				n_{j}^2 k_{z,j-1} }e^{-ik_{z,j}^{-}z_j} &
-		\pqty{n_{j-1}^2 k_{z,j} - 
-		 		n_{j}^2 k_{z,j-1} } e^{-ik_{z,j}^{+}z_j}\\
-		\pqty{n_{j-1}^2 k_{z,j} - 
-		 		n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{+}z_j} &
-		\pqty{ n_{j-1}^2 k_{z,j} + 
-				n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{-}z_j}
-	}	
+	                                                    & = \frac{1}{2n_{j-1}n_{j}k_{z,j}}\pmqty{
+	\pqty{ n_{j-1}^2 k_{z,j} +
+	n_{j}^2 k_{z,j-1} }e^{-ik_{z,j}^{-}z_j}             &
+	\pqty{n_{j-1}^2 k_{z,j} -
+	n_{j}^2 k_{z,j-1} } e^{-ik_{z,j}^{+}z_j}                                                      \\
+	\pqty{n_{j-1}^2 k_{z,j} -
+	n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{+}z_j}              &
+	\pqty{ n_{j-1}^2 k_{z,j} +
+		n_{j}^2 k_{z,j-1} }e^{ik_{z,j}^{-}z_j}
+	}
 \end{align*}
 
 \begin{align*}
-	\det{\vb{T}^{\text{(p)}}_j} &= \frac{
-			\pqty{ n_{j-1}^2 k_{z,j} + n_{j}^2 k_{z,j-1} }^2
-			- \pqty{n_{j-1}^2 k_{z,j} - n_{j}^2 k_{z,j-1} }^2
-			}{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			% &= \frac{
-			% n_{j-1}^4 k^2_{z,j} + n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% - n_{j-1}^4 k^2_{z,j} - n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			% &= \frac{
-			% 4n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
-			% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
-			&= \frac{k_{z,j-1}}{k_{z,j}}
+	\det{\vb{T}^{\text{(p)}}_j} & = \frac{
+	\pqty{ n_{j-1}^2 k_{z,j} + n_{j}^2 k_{z,j-1} }^2
+	- \pqty{n_{j-1}^2 k_{z,j} - n_{j}^2 k_{z,j-1} }^2
+	}{4n^2_{j-1}n^2_{j}k^2_{z,j}}                             \\
+	% &= \frac{
+	% n_{j-1}^4 k^2_{z,j} + n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
+	% - n_{j-1}^4 k^2_{z,j} - n_{j}^4 k^2_{z,j-1} + 2n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
+	% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
+	% &= \frac{
+	% 4n_{j-1}^2 k_{z,j} n_{j}^2 k_{z,j-1}
+	% }{4n^2_{j-1}n^2_{j}k^2_{z,j}} \\
+	                            & = \frac{k_{z,j-1}}{k_{z,j}}
 \end{align*}
 
 
 \begin{align*}
-	\vb{T}^{\text{(s)}}_j &= \frac{1}{-2 k_j \sin\theta_{j} }
+	\vb{T}^{\text{(s)}}_j                      & = \frac{1}{-2 k_j \sin\theta_{j} }
 	\pmqty{
-		- k_j \sin\theta_{j} e^{-ik_{z,j}z_j} & 
-		- e^{-ik_{z,j}z_j} \\
-		- k_j \sin\theta_{j} e^{ik_{z,j}z_j} & 
-		e^{ik_{z,j}z_j}
+	- k_j \sin\theta_{j} e^{-ik_{z,j}z_j}      &
+	- e^{-ik_{z,j}z_j}                                                              \\
+	- k_j \sin\theta_{j} e^{ik_{z,j}z_j}       &
+	e^{ik_{z,j}z_j}
 	}
 	\pmqty{
-		e^{ik_{z,j-1}z_j} & 
-		e^{-ik_{z,j-1}z_j} \\
-		k_{j-1} \sin\theta_{j-1} e^{ik_{z,j-1}z_j} & 
-		- k_{j-1} \sin\theta_{j-1} e^{-ik_{z,j-1}z_j} 
-	} \\ 
+	e^{ik_{z,j-1}z_j}                          &
+	e^{-ik_{z,j-1}z_j}                                                              \\
+	k_{j-1} \sin\theta_{j-1} e^{ik_{z,j-1}z_j} &
+	- k_{j-1} \sin\theta_{j-1} e^{-ik_{z,j-1}z_j}
+	}                                                                               \\
 	% &= \frac{1}{-2 k_j \sin\theta_{j} }
 	% \pmqty{
 	% 	- k_j \sin\theta_{j} e^{-ik_{z,j}^{-}z_j} 
@@ -452,42 +452,42 @@ We then compute $\vb{E}_j$ from $\vb{E}_{j-1}$ with
 	% 	- k_{z,j}^{-} e^{ik_{z,j}^{+}z_j} &
 	% 	- k_{z,j}^{+} e^{ik_{z,j}^{-}z_j}
 	% } \\
-	&= \frac{1}{2 k_{z,j} }
+	                                           & = \frac{1}{2 k_{z,j} }
 	\pmqty{
-		k_{z,j}^{+} e^{-ik_{z,j}^{-}z_j} &
-		k_{z,j}^{-} e^{-ik_{z,j}^{+}z_j} \\
-		k_{z,j}^{-} e^{ik_{z,j}^{+}z_j} &
-		k_{z,j}^{+} e^{ik_{z,j}^{-}z_j}
+	k_{z,j}^{+} e^{-ik_{z,j}^{-}z_j}           &
+	k_{z,j}^{-} e^{-ik_{z,j}^{+}z_j}                                                \\
+	k_{z,j}^{-} e^{ik_{z,j}^{+}z_j}            &
+	k_{z,j}^{+} e^{ik_{z,j}^{-}z_j}
 	}
 \end{align*}
 
 with
 \begin{align*}
-	k_{z,j}^{\pm} &= k_{z,j} \pm k_{z,j-1}
+	k_{z,j}^{\pm} & = k_{z,j} \pm k_{z,j-1}
 \end{align*}
 
 Note that,
 \begin{align*}
-	\det{\vb{T}^{\text{(s)}}_j} &= \frac{\pqty{k_{z,j} + k_{z,j-1}}^2 - \pqty{k_{z,j} - k_{z,j-1}}^2}{4 k_{z,j}^2} \\
+	\det{\vb{T}^{\text{(s)}}_j} & = \frac{\pqty{k_{z,j} + k_{z,j-1}}^2 - \pqty{k_{z,j} - k_{z,j-1}}^2}{4 k_{z,j}^2} \\
 	% &= \frac{k_{z,j}^2 + k_{z,j-1}^2 + 2k_{z,j} k_{z,j-1} - k_{z,j}^2 - k_{z,j-1}^2 + 2k_{z,j} k_{z,j-1}}{4 k_{z,j}^2} \\
 	% &= \frac{4k_{z,j} k_{z,j-1}}{4 k_{z,j}^2} \\
-	&= \frac{ k_{z,j-1}}{ k_{z,j}}
+	                            & = \frac{ k_{z,j-1}}{ k_{z,j}}
 \end{align*}
 
 \begin{align*}
-	\vb{T}^{\text{(p,s)}}_j &= 
+	\vb{T}^{\text{(p,s)}}_j                   & =
 	\pmqty{
-		p^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{-}z_j} &
-		m^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{+}z_j} \\
-		m^{\text{(p,s)}}_{j} e^{ik_{z,j}^{+}z_j} &
-		p^{\text{(p,s)}}_{j} e^{ik_{z,j}^{-}z_j}
+	p^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{-}z_j} &
+	m^{\text{(p,s)}}_{j} e^{-ik_{z,j}^{+}z_j}     \\
+	m^{\text{(p,s)}}_{j} e^{ik_{z,j}^{+}z_j}  &
+	p^{\text{(p,s)}}_{j} e^{ik_{z,j}^{-}z_j}
 	}
 \end{align*} with,
 \begin{align*}
-	p^{\text{(p)}}_{j} &= \frac{k_{z,j} + k_{z,j-1}}{2 k_{z,j}} 
-	& m^{\text{(p)}}_{j} &= \frac{k_{z,j} - k_{z,j-1}}{2 k_{z,j}} \\
-	p^{\text{(s)}}_{j} &= \frac{n_{j-1}^2k_{z,j} + n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}} 
-	& m^{\text{(s)}}_{j} &= \frac{n_{j-1}^2k_{z,j} - n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}}
+	p^{\text{(p)}}_{j} & = \frac{k_{z,j} + k_{z,j-1}}{2 k_{z,j}}
+	                   & m^{\text{(p)}}_{j}                                                  & = \frac{k_{z,j} - k_{z,j-1}}{2 k_{z,j}}                             \\
+	p^{\text{(s)}}_{j} & = \frac{n_{j-1}^2k_{z,j} + n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}}
+	                   & m^{\text{(s)}}_{j}                                                  & = \frac{n_{j-1}^2k_{z,j} - n_{j}^2k_{z,j-1}}{2 n_{j}n_{j-1}k_{z,j}}
 \end{align*}
 
 % \begin{align*}
@@ -602,14 +602,14 @@ We define the following vector and matrix
 	\vb{W}_j \equiv \vb{S}_j\pqty{z}\cdot\vb{E}_j
 \end{align*} where
 \begin{align*}
-	\vb{W}_j\pqty{\vb{r}} &= \pmqty{E_{0x,j}\pqty{\vb{r}} \\ \epsilon_j E_{0z,j}\pqty{\vb{r}}} = E_{0,j}\pqty{\vb{r}}\pmqty{\sin\theta_j \\ \epsilon_j \cos\theta_j}
-	&\vb{E}_j &= \pmqty{E_{0,j}^{\text{(I)}} \\ E_{0,j}^{\text{(R)}}} 
-	& 
-	\vb{S}_j\pqty{z} &= \pmqty{
-		\alpha_j e^{ik_{z,j}z} & 
-		-\alpha_j e^{-ik_{z,j}z} \\
-		\beta_j e^{ik_{z,j}z} & 
-		\beta_j e^{-ik_{z,j}z}}
+	\vb{W}_j\pqty{\vb{r}}  & = \pmqty{E_{0x,j}\pqty{\vb{r}}                                 \\ \epsilon_j E_{0z,j}\pqty{\vb{r}}} = E_{0,j}\pqty{\vb{r}}\pmqty{\sin\theta_j \\ \epsilon_j \cos\theta_j}
+	                       & \vb{E}_j                       & = \pmqty{E_{0,j}^{\text{(I)}} \\ E_{0,j}^{\text{(R)}}}
+	                       &
+	\vb{S}_j\pqty{z}       & = \pmqty{
+	\alpha_j e^{ik_{z,j}z} &
+	-\alpha_j e^{-ik_{z,j}z}                                                                \\
+	\beta_j e^{ik_{z,j}z}  &
+	\beta_j e^{-ik_{z,j}z}}
 \end{align*} where we defined
 % \begin{align*}
 % 	\epsilon_j\cos\theta_j = \frac{n_j^2}{\mu_j}\cos\theta_j = \frac{\lambda n_j k_j}{\mu_j}\cos\theta_j
@@ -628,54 +628,54 @@ We define the following vector and matrix
 % 	% \frac{k_{j}}{k_{j-1}}\frac{\mu_{j-1}}{\mu_{j}}\pqty{E^{\text{(I)}}_{0,j} e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j} e^{ik_{z,j}z_j}}
 % \end{align*}
 \begin{align*}
-	\alpha_j &\equiv \sin\theta_j = \pqty{1 - \frac{n_0^2\cos^2\theta_0}{n_{j}^2}}^{1/2} & \beta_j &\equiv \epsilon_j\cos\theta_j  = \frac{n_j}{\mu_j} \lambda k_0 \cos\theta_0
+	\alpha_j & \equiv \sin\theta_j = \pqty{1 - \frac{n_0^2\cos^2\theta_0}{n_{j}^2}}^{1/2} & \beta_j & \equiv \epsilon_j\cos\theta_j  = \frac{n_j}{\mu_j} \lambda k_0 \cos\theta_0
 \end{align*}so that,
 \begin{align*}
-	\vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t} &= \vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}
+	\vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t} & = \vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}
 \end{align*}
 
 \begin{align*}
-	\det{\vb{S}_j} &= 2\alpha_j\beta_j = 2\epsilon_j\sin\theta_j\cos\theta_j = 2n^2_j\sin\theta_j\cos\theta_j = 2n_j\sin\theta_j n_0\cos\theta_0
+	\det{\vb{S}_j} & = 2\alpha_j\beta_j = 2\epsilon_j\sin\theta_j\cos\theta_j = 2n^2_j\sin\theta_j\cos\theta_j = 2n_j\sin\theta_j n_0\cos\theta_0
 \end{align*}
 
 Polarisation out of plane, with $k_y = 0$,
 \begin{align*}
-	E^{\text{(I)}}_{0x,j} &= 0 & E^{\text{(R)}}_{0x,j} &= 0 \\
-	E^{\text{(I)}}_{0y,j} &= E^{\text{(I)}}_{0,j} & E^{\text{(R)}}_{0y,j} &= E^{\text{(R)}}_{0,j} \\
-	E^{\text{(I)}}_{0z,j} &= 0 & E^{\text{(R)}}_{0z,j} &= 0 \\
+	E^{\text{(I)}}_{0x,j} & = 0                    & E^{\text{(R)}}_{0x,j} & = 0                    \\
+	E^{\text{(I)}}_{0y,j} & = E^{\text{(I)}}_{0,j} & E^{\text{(R)}}_{0y,j} & = E^{\text{(R)}}_{0,j} \\
+	E^{\text{(I)}}_{0z,j} & = 0                    & E^{\text{(R)}}_{0z,j} & = 0                    \\
 \end{align*}
 
 \begin{align*}
-	\omega B^{\text{(I)}}_{0x,j} &= k_j E^{\text{(I)}}_{0,j}\sin\theta_j & \omega B^{\text{(R)}}_{0x,j} &= -k_j E^{\text{(R)}}_{0,j}\sin\theta_j \\
-	B^{\text{(I)}}_{0y,j} &= 0 & B^{\text{(R)}}_{0y,j} &= 0 \\
-	\omega B^{\text{(I)}}_{0z,j} &= k_j E^{\text{(I)}}_{0,j}\cos\theta_j & \omega B^{\text{(R)}}_{0z,j} &= k_j E^{\text{(R)}}_{0,j}\cos\theta_j \\
+	\omega B^{\text{(I)}}_{0x,j} & = k_j E^{\text{(I)}}_{0,j}\sin\theta_j & \omega B^{\text{(R)}}_{0x,j} & = -k_j E^{\text{(R)}}_{0,j}\sin\theta_j \\
+	B^{\text{(I)}}_{0y,j}        & = 0                                    & B^{\text{(R)}}_{0y,j}        & = 0                                     \\
+	\omega B^{\text{(I)}}_{0z,j} & = k_j E^{\text{(I)}}_{0,j}\cos\theta_j & \omega B^{\text{(R)}}_{0z,j} & = k_j E^{\text{(R)}}_{0,j}\cos\theta_j  \\
 \end{align*}
 
 The relevant equations are
 \begin{align*}
-	E^{\text{(I)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1}e^{-ik_{z,j-1}z_j} &=
+	E^{\text{(I)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1}e^{-ik_{z,j-1}z_j}                               & =
 	E^{\text{(I)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j} e^{-ik_{z,j}z_j}
 	\\
-	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
-	k_{j}\sin\theta_{j}\pqty{E^{\text{(I)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R)}}_{0,j}e^{-ik_{z,j}z_j}} 
+	k_{j-1}\sin\theta_{j-1}\pqty{E^{\text{(I)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} & =
+	k_{j}\sin\theta_{j}\pqty{E^{\text{(I)}}_{0,j}e^{ik_{z,j}z_j} - E^{\text{(R)}}_{0,j}e^{-ik_{z,j}z_j}}
 	% \\
 	% k_{j-1}\cos\theta_{j-1}\pqty{E^{\text{(I)}}_{0,j-1}e^{ik_{z,j-1}z_j} + E^{\text{(R)}}_{0,j-1}e^{-ik_{z,j-1}z_j}} &=
 	% k_{j-1}\cos\theta_{j}\pqty{E^{\text{(I)}}_{0,j}e^{ik_{z,j}z_j} + E^{\text{(R)}}_{0,j}e^{-ik_{z,j}z_j}} 
 \end{align*}
 
 \begin{align*}
-	\vb{W}_j\pqty{\vb{r}} &= \pmqty{E_{0y,j}\pqty{\vb{r}} \\ \omega B_{0x,j}\pqty{\vb{r}} } = E_{0,j}\pqty{\vb{r}}\pmqty{1 \\ k_j\sin\theta_j  } 
-	&\vb{E}_j &= \pmqty{E_{0,j}^{\text{(I)}} \\ E_{0,j}^{\text{(R)}}} 
-	& 
-	\vb{S}_j\pqty{z} &= \pmqty{
-		e^{ik_{z,j}z} & 
-		e^{-ik_{z,j}z}  \\
-		k_{z,j} e^{ik_{z,j}z} & 
-		-k_{z,j} e^{-ik_{z,j}z}
-		}
+	\vb{W}_j\pqty{\vb{r}} & = \pmqty{E_{0y,j}\pqty{\vb{r}}                                 \\ \omega B_{0x,j}\pqty{\vb{r}} } = E_{0,j}\pqty{\vb{r}}\pmqty{1 \\ k_j\sin\theta_j  }
+	                      & \vb{E}_j                       & = \pmqty{E_{0,j}^{\text{(I)}} \\ E_{0,j}^{\text{(R)}}}
+	                      &
+	\vb{S}_j\pqty{z}      & = \pmqty{
+	e^{ik_{z,j}z}         &
+	e^{-ik_{z,j}z}                                                                         \\
+	k_{z,j} e^{ik_{z,j}z} &
+	-k_{z,j} e^{-ik_{z,j}z}
+	}
 \end{align*} with
 \begin{align*}
-	k_{z,j} &\equiv k_{j}\sin\theta_{j} = k_j\alpha_j = \frac{2\pi n_j\alpha_j}{\lambda}
+	k_{z,j} & \equiv k_{j}\sin\theta_{j} = k_j\alpha_j = \frac{2\pi n_j\alpha_j}{\lambda}
 \end{align*}
 
 For X-Rays both polarisation can pe approximate by the later one.
@@ -684,23 +684,23 @@ Lets note that $\det{\vb{S}_j} = -2k_{z,j}$.
 
 In both polarisation what we have at the interface is,
 \begin{align*}
-	\vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t} &= \vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}
+	\vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j,t} & = \vb{W}_{j}\pqty{\boldsymbol{\mathsf{r}}_j,t}
 \end{align*}
 
 In case of $n_j < \cos\theta_j$, $k_{z,j}$ is imaginary. We define $\kappa_z = \mathcal{I}\qty{k_z}$ and,
 \begin{align*}
-	\vb{S}_j\pqty{z} &= \pmqty{
-		e^{ik_{z,j}z} & 
-		e^{-ik_{z,j}z}  \\
-		k_{z,j} e^{ik_{z,j}z} & 
-		-k_{z,j} e^{-ik_{z,j}z}
-		} &
-	\vb{S}_j\pqty{z} &= \pmqty{
-		e^{-\kappa_{z,j}z} & 
-		e^{\kappa_{z,j}z}  \\
-		i\kappa_{z,j} e^{-\kappa_{z,j}z} & 
+	\vb{S}_j\pqty{z}                 & = \pmqty{
+	e^{ik_{z,j}z}                    &
+	e^{-ik_{z,j}z}                               \\
+	k_{z,j} e^{ik_{z,j}z}            &
+	-k_{z,j} e^{-ik_{z,j}z}
+	}                                &
+	\vb{S}_j\pqty{z}                 & = \pmqty{
+	e^{-\kappa_{z,j}z}               &
+	e^{\kappa_{z,j}z}                            \\
+	i\kappa_{z,j} e^{-\kappa_{z,j}z} &
 		-i\kappa_{z,j} e^{\kappa_{z,j}z}
-		}
+	}
 \end{align*}
 
 \begin{align*}
@@ -719,8 +719,8 @@ We define the transfer matrix as,
 
 We can find this matrix with the help of the interface condition,
 \begin{align*}
-	\vb{W}_j\pqty{\boldsymbol{\mathsf{r}}_j} &= \vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j} \\
-	\vb{S}_j\pqty{\boldsymbol{\mathsf{r}}_j} \cdot \vb{E}_j &= \vb{S}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j} \cdot \vb{E}_{j-1}
+	\vb{W}_j\pqty{\boldsymbol{\mathsf{r}}_j}                & = \vb{W}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j}                    \\
+	\vb{S}_j\pqty{\boldsymbol{\mathsf{r}}_j} \cdot \vb{E}_j & = \vb{S}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j} \cdot \vb{E}_{j-1}
 \end{align*} so that,
 \begin{align*}
 	\vb{T}_j = \vb{S}^{-1}_j\pqty{\boldsymbol{\mathsf{r}}_j} \cdot\vb{S}_{j-1}\pqty{\boldsymbol{\mathsf{r}}_j}
@@ -728,18 +728,18 @@ We can find this matrix with the help of the interface condition,
 
 Let's note that $\det{\vb{T}_j} = \frac{k_{j-1}}{k_{j}}$.
 \begin{align*}
-	\vb{T}_j &=
+	\vb{T}_j                                                      & =
 	\frac{1}{2k_{z,j}}\pmqty{
-		k_{z,j} e^{-ik_{z,j}z_j} & 
-		e^{-ik_{z,j}z_j}  \\
-		k_{z,j} e^{ik_{z,j}z_j} & 
-		-e^{ik_{z,j}z_j}
-		} \pmqty{
-	e^{ik_{z,j-1}z_j} & 
-	e^{-ik_{z,j-1}z_j}  \\
-	k_{z,j-1} e^{ik_{z,j-1}z_j} & 
+	k_{z,j} e^{-ik_{z,j}z_j}                                      &
+	e^{-ik_{z,j}z_j}                                                                            \\
+	k_{z,j} e^{ik_{z,j}z_j}                                       &
+	-e^{ik_{z,j}z_j}
+	} \pmqty{
+	e^{ik_{z,j-1}z_j}                                             &
+	e^{-ik_{z,j-1}z_j}                                                                          \\
+	k_{z,j-1} e^{ik_{z,j-1}z_j}                                   &
 	-k_{z,j-1} e^{-ik_{z,j-1}z_j}
-	}  \\
+	}                                                                                           \\
 	% &= \frac{1}{2k_{z,j}}\pmqty{
 	% 	k_{z,j} e^{-ik_{z,j}z_j}e^{ik_{z,j-1}z_j} 
 	% 		+ e^{-ik_{z,j}z_j}k_{z,j-1} e^{ik_{z,j-1}z_j} &
@@ -756,23 +756,23 @@ Let's note that $\det{\vb{T}_j} = \frac{k_{j-1}}{k_{j}}$.
 	% 	\pqty{k_{z,j} - k_{z,j-1}}e^{ik_{z,j}z_j}e^{ik_{z,j-1}z_j} &
 	% 	\pqty{k_{z,j} + k_{z,j-1}}e^{ik_{z,j}z_j}e^{-ik_{z,j-1}z_j}
 	% 	} \\
-	&= \frac{1}{2k_{z,j}}\pmqty{
-		\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
-		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}  \\
-		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
-		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
-		} \\
+	                                                              & = \frac{1}{2k_{z,j}}\pmqty{
+	\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
+	\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}                               \\
+	\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+	\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+	}                                                                                           \\
 \end{align*}
 
 Evanescant solution
 \begin{align*}
-	\vb{T}_j &=
-		\frac{1}{2\kappa_{z,j}}\pmqty{
-		\pqty{\kappa_{z,j} + \kappa_{z,j-1}}e^{\pqty{\kappa_{z,j} - \kappa_{z,j-1}}z_j} &
-		\pqty{\kappa_{z,j} - \kappa_{z,j-1}}e^{\pqty{\kappa_{z,j} + \kappa_{z,j-1}}z_j}  \\
-		\pqty{\kappa_{z,j} - \kappa_{z,j-1}}e^{ -\pqty{\kappa_{z,j} + \kappa_{z,j-1}}z_j} &
-		\pqty{\kappa_{z,j} + \kappa_{z,j-1}}e^{ -\pqty{\kappa_{z,j} - \kappa_{z,j-1}}z_j}
-		} \\
+	\vb{T}_j                                                                          & =
+	\frac{1}{2\kappa_{z,j}}\pmqty{
+	\pqty{\kappa_{z,j} + \kappa_{z,j-1}}e^{\pqty{\kappa_{z,j} - \kappa_{z,j-1}}z_j}   &
+	\pqty{\kappa_{z,j} - \kappa_{z,j-1}}e^{\pqty{\kappa_{z,j} + \kappa_{z,j-1}}z_j}       \\
+	\pqty{\kappa_{z,j} - \kappa_{z,j-1}}e^{ -\pqty{\kappa_{z,j} + \kappa_{z,j-1}}z_j} &
+	\pqty{\kappa_{z,j} + \kappa_{z,j-1}}e^{ -\pqty{\kappa_{z,j} - \kappa_{z,j-1}}z_j}
+	}                                                                                     \\
 \end{align*}
 
 
@@ -787,15 +787,15 @@ Evanescant solution
 
 To go from the first interface to the last we just need to apply the matrices in sequence.
 \begin{align*}
-	\vb{E}_N &= \vb{L}\cdot\vb{E}_0 & \vb{L} &= \vb{T}_N\cdot\vb{T}_{N-1}\cdots\vb{T}_2\cdot\vb{T}_{1} = \prod_{n=1}^N \vb{T}_n 
+	\vb{E}_N & = \vb{L}\cdot\vb{E}_0 & \vb{L} & = \vb{T}_N\cdot\vb{T}_{N-1}\cdots\vb{T}_2\cdot\vb{T}_{1} = \prod_{n=1}^N \vb{T}_n
 \end{align*}
 
 \begin{align*}
-	\pmqty{t\\ 0} &= \pmqty{L_{11} & L_{12}\\L_{21}&L_{22}}\cdot\pmqty{1\\r}
+	\pmqty{t \\ 0} &= \pmqty{L_{11} & L_{12}\\L_{21}&L_{22}}\cdot\pmqty{1\\r}
 \end{align*}
 
 \begin{align*}
-	r &= -\frac{L_{21}}{L_{22}} & t = L_{11} - \frac{L_{12}L_{21}}{L_{22}}  = \frac{\det{\vb{L}}}{L_{22}}
+	r & = -\frac{L_{21}}{L_{22}} & t = L_{11} - \frac{L_{12}L_{21}}{L_{22}}  = \frac{\det{\vb{L}}}{L_{22}}
 \end{align*}
 
 Let's note that $\det{\vb{L}} = \prod_{j=1}^N\frac{k_{j-1}}{k_{j}} = \frac{k_0}{k_N}$ if $k_j > 0$ and $0$ otherwise.
@@ -835,8 +835,8 @@ Let's note that $\det{\vb{L}} = \prod_{j=1}^N\frac{k_{j-1}}{k_{j}} = \frac{k_0}{
 \label{sub:roughness}
 
 \begin{align*}
-	\vb{L} &= \int\dd{z} p_j\pqty{z}\vb{T}_N\cdots\vb{T}_j\pqty{z}\cdots\cdot\vb{T}_{1} \\
-	&= \vb{T}_N\cdots\pqty{\int\dd{z} p_j\pqty{z}\vb{T}_j\pqty{z}}\cdots\cdot\vb{T}_{1}
+	\vb{L} & = \int\dd{z} p_j\pqty{z}\vb{T}_N\cdots\vb{T}_j\pqty{z}\cdots\cdot\vb{T}_{1}        \\
+	       & = \vb{T}_N\cdots\pqty{\int\dd{z} p_j\pqty{z}\vb{T}_j\pqty{z}}\cdots\cdot\vb{T}_{1}
 \end{align*}
 
 \begin{align*}
@@ -844,46 +844,46 @@ Let's note that $\det{\vb{L}} = \prod_{j=1}^N\frac{k_{j-1}}{k_{j}} = \frac{k_0}{
 \end{align*}
 
 \begin{align*}
-	\int\dd{z}p_j\pqty{z}e^{i\pqty{k_{z,j} \pm k_{z,j-1}}z} &= 
-	e^{i\pqty{k_{z,j} \pm k_{z,j-1}}z_j} 
+	\int\dd{z}p_j\pqty{z}e^{i\pqty{k_{z,j} \pm k_{z,j-1}}z} & =
+	e^{i\pqty{k_{z,j} \pm k_{z,j-1}}z_j}
 	e^{-\frac{1}{2}\pqty{k_{z,j} \pm k_{z,j-1}}^2\sigma_j^2}
 \end{align*}
 
 \begin{align*}
-	\int\dd{z}p_j\pqty{z} \vb{T}_j\pqty{z} \\= \frac{1}{2k_{z,j}}\pmqty{
-		\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2} &
-		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2}  \\
-		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2} &
-		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2}
-		}
+	\int\dd{z}p_j\pqty{z} \vb{T}_j\pqty{z}                   \\= \frac{1}{2k_{z,j}}\pmqty{
+	\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2} &
+	\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2}   \\
+	\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2} &
+	\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2}
+	}
 \end{align*}
 
 \begin{align*}
-	\int\dd{z}p_j\pqty{z} \vb{T}_j\pqty{z} &\approx \frac{1}{2k_{z,j}}\pmqty{
-		2k_{z,j}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
-		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2}  \\
-		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2} &
-		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
-			e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2}
-		}
+	\int\dd{z}p_j\pqty{z} \vb{T}_j\pqty{z}                 & \approx \frac{1}{2k_{z,j}}\pmqty{
+	2k_{z,j}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j}            &
+	\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2}                                     \\
+	\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} + k_{z,j-1}}^2\sigma_j^2} &
+	\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+	e^{-\frac{1}{2}\pqty{k_{z,j} - k_{z,j-1}}^2\sigma_j^2}
+	}
 \end{align*}
 
 \subsection{Slope} % (fold)
 \label{sub:slope}
 
 \begin{align*}
-	\vb{T}_j &= \frac{1}{2k_{z,j}}\pmqty{
-		\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
-		\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}  \\
-		\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
-		\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
-		} \\
+	\vb{T}_j                                                      & = \frac{1}{2k_{z,j}}\pmqty{
+	\pqty{k_{z,j} + k_{z,j-1}}e^{-i\pqty{k_{z,j} - k_{z,j-1}}z_j} &
+	\pqty{k_{z,j} - k_{z,j-1}}e^{-i\pqty{k_{z,j} + k_{z,j-1}}z_j}                               \\
+	\pqty{k_{z,j} - k_{z,j-1}}e^{ i\pqty{k_{z,j} + k_{z,j-1}}z_j} &
+	\pqty{k_{z,j} + k_{z,j-1}}e^{ i\pqty{k_{z,j} - k_{z,j-1}}z_j}
+	}                                                                                           \\
 \end{align*}
 
 \begin{align*}
@@ -892,91 +892,91 @@ Let's note that $\det{\vb{L}} = \prod_{j=1}^N\frac{k_{j-1}}{k_{j}} = \frac{k_0}{
 \end{align*}
 
 \begin{align*}
-	\vb{T}_j &= \frac{1}{2k_{z,j}}\pmqty{
-		2k_{z,j}e^{-i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j} &
-		\dv{k_{z}}{z} \Delta z_{j,j-1}e^{-i2k_{z,j}z_j}  \\
-		\dv{k_{z}}{z} \Delta z_{j,j-1}e^{ i2k_{z,j}z_j} &
-		2k_{z,j}e^{ i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j}
-		} \\
+	\vb{T}_j                                        & = \frac{1}{2k_{z,j}}\pmqty{
+	2k_{z,j}e^{-i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j} &
+	\dv{k_{z}}{z} \Delta z_{j,j-1}e^{-i2k_{z,j}z_j}                               \\
+	\dv{k_{z}}{z} \Delta z_{j,j-1}e^{ i2k_{z,j}z_j} &
+	2k_{z,j}e^{ i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j}
+	}                                                                             \\
 \end{align*}
 
 \begin{align*}
-	\vb{T}_j &\approx \frac{1}{2k_{z,j}}\pmqty{
-		2k_{z,j}\pqty{1 - i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j + \ldots} &
-		\dv{k_{z}}{z} \Delta z_{j,j-1}e^{-i2k_{z,j}z_j}  \\
-		\dv{k_{z}}{z} \Delta z_{j,j-1}e^{ i2k_{z,j}z_j} &
-		2k_{z,j}\pqty{1 +  i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j + \ldots}
-		} \\
+	\vb{T}_j                                                       & \approx \frac{1}{2k_{z,j}}\pmqty{
+	2k_{z,j}\pqty{1 - i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j + \ldots} &
+	\dv{k_{z}}{z} \Delta z_{j,j-1}e^{-i2k_{z,j}z_j}                                                    \\
+	\dv{k_{z}}{z} \Delta z_{j,j-1}e^{ i2k_{z,j}z_j}                &
+	2k_{z,j}\pqty{1 +  i\dv{k_{z}}{z} \Delta z_{j,j-1}z_j + \ldots}
+	}                                                                                                  \\
 \end{align*}
 
 \begin{align*}
-	\vb{T}_j &\approx \mathbb{1} 
-		+ \dv{k_{z}}{z} \Delta z_{j,j-1} z_j \pmqty{-i & 0 \\ 0 & i}
-		+ \frac{1}{2k_{z,j}}\dv{k_{z}}{z} \Delta z_{j,j-1}\pmqty{
-		0 &
-		e^{-i2k_{z,j}z_j}  \\
-		e^{ i2k_{z,j}z_j} &
-		0} \\
+	\vb{T}_j                                       & \approx \mathbb{1}
+	+ \dv{k_{z}}{z} \Delta z_{j,j-1} z_j \pmqty{-i & 0                  \\ 0 & i}
+	+ \frac{1}{2k_{z,j}}\dv{k_{z}}{z} \Delta z_{j,j-1}\pmqty{
+	0                                              &
+	e^{-i2k_{z,j}z_j}                                                   \\
+	e^{ i2k_{z,j}z_j}                              &
+	0}                                                                  \\
 \end{align*}
 
 \begin{align*}
-	\vb{T}_j &\approx \mathbb{1} 
-		+ \Delta k_{z,j,j-1} z_j \pmqty{-i & 0 \\ 0 & i}
-		+ \frac{\Delta k_{z,j,j-1}}{2k_{z,j}}\pmqty{
-		0 &
-		e^{-i2k_{z,j}z_j}  \\
-		e^{ i2k_{z,j}z_j} &
-		0} \\
+	\vb{T}_j                           & \approx \mathbb{1}
+	+ \Delta k_{z,j,j-1} z_j \pmqty{-i & 0                  \\ 0 & i}
+	+ \frac{\Delta k_{z,j,j-1}}{2k_{z,j}}\pmqty{
+	0                                  &
+	e^{-i2k_{z,j}z_j}                                       \\
+	e^{ i2k_{z,j}z_j}                  &
+	0}                                                      \\
 \end{align*}
 
 \begin{align*}
-	\vb{T}_j &\approx2k_{z,j} \pqty{\mathbb{1} 
-			+ \Delta k_{z,j,j-1} z_j \pmqty{-i & 0 \\ 0 & i}}
-		+ \Delta k_{z,j,j-1}\pmqty{
-		0 &
-		e^{-i2k_{z,j}z_j}  \\
-		e^{ i2k_{z,j}z_j} &
-		0} \\
+	\vb{T}_j                           & \approx2k_{z,j} \pqty{\mathbb{1}
+	+ \Delta k_{z,j,j-1} z_j \pmqty{-i & 0                                \\ 0 & i}}
+	+ \Delta k_{z,j,j-1}\pmqty{
+	0                                  &
+	e^{-i2k_{z,j}z_j}                                                     \\
+	e^{ i2k_{z,j}z_j}                  &
+	0}                                                                    \\
 \end{align*}
 
 \begin{align*}
 	\prod_{j=0}^N \vb{T}_j = \mathbb{1} + \sum_{j=0}^N\frac{1}{2k_{z,j}}\dv{k_{z}}{z} \Delta z_{j,j-1}\pmqty{
-		0 &
-		e^{-i2k_{z,j}z_j}  \\
-		e^{ i2k_{z,j}z_j} &
-		0} + \mathcal{O}\pqty{\Delta z^2}
+	0                 &
+	e^{-i2k_{z,j}z_j}   \\
+	e^{ i2k_{z,j}z_j} &
+	0} + \mathcal{O}\pqty{\Delta z^2}
 \end{align*}
 
 \begin{align*}
 	\prod_{j=0}^N \vb{T}_j = \mathbb{1} + \int_\text{top}^\text{bottom} \dd{z} \frac{1}{2k_{z}\pqty{z}}\dv{k_{z}}{z} \pmqty{
-		0 &
-		e^{-i2k_{z}\pqty{z}z}  \\
-		e^{ i2k_{z}\pqty{z}z} &
-		0}
+	0                     &
+	e^{-i2k_{z}\pqty{z}z}   \\
+	e^{ i2k_{z}\pqty{z}z} &
+	0}
 \end{align*}
 
 \begin{align*}
 	\prod_{j=0}^N \vb{T}_j = \mathbb{1} + \int \dd{z} \frac{1}{2k_{z}\pqty{z}}\dv{k_{z}}{z} \pmqty{
-		0 &
-		e^{-i2k_{z}\pqty{z}z}  \\
-		e^{ i2k_{z}\pqty{z}z} &
-		0}
+	0                     &
+	e^{-i2k_{z}\pqty{z}z}   \\
+	e^{ i2k_{z}\pqty{z}z} &
+	0}
 \end{align*}
 
 \begin{align*}
 	\prod_{j=0}^N \vb{T}_j = \mathbb{1} + \int \dd{z} \frac{1}{2k_{z}\pqty{z}}\dv{k_{z}}{z} \pmqty{
-		0 &
-		e^{-i2k_{z}\pqty{z}z}  \\
-		e^{ i2k_{z}\pqty{z}z} &
-		0}
+	0                     &
+	e^{-i2k_{z}\pqty{z}z}   \\
+	e^{ i2k_{z}\pqty{z}z} &
+	0}
 \end{align*}
 
 \begin{align*}
 	\prod_{j=0}^N \vb{T}_j = \mathbb{1} + \int_{k_{z,\text{top}}}^{k_{z,\text{bottom}}}  \frac{\dd{k_z}}{2k_{z}} \pmqty{
-		0 &
-		e^{-i2k_{z}z\pqty{k_{z}}}  \\
-		e^{ i2k_{z}z\pqty{k_{z}}} &
-		0}
+	0                         &
+	e^{-i2k_{z}z\pqty{k_{z}}}   \\
+	e^{ i2k_{z}z\pqty{k_{z}}} &
+	0}
 \end{align*}
 
 
@@ -998,49 +998,49 @@ We can find this matrix with the help $\vb{E}$
 
 So that,
 \begin{align*}
-	\vb{M}_j &= \vb{S}_j\pqty{z_{j+1}} \cdot \vb{S}^{-1}_j\pqty{z_{j}}
+	\vb{M}_j & = \vb{S}_j\pqty{z_{j+1}} \cdot \vb{S}^{-1}_j\pqty{z_{j}}
 \end{align*}
 
 \begin{align*}
-	\vb{M}_j 
-	&=
+	\vb{M}_j
+	                                & =
 	\pmqty{
-		e^{ik_{z,j}z_{j+1}} & 
-		e^{-ik_{z,j}z_{j+1}}  \\
-		k_{z,j} e^{ik_{z,j}z_{j+1}} & 
-		-k_{z,j} e^{-ik_{z,j}z_{j+1}}
+	e^{ik_{z,j}z_{j+1}}             &
+	e^{-ik_{z,j}z_{j+1}}                                   \\
+	k_{z,j} e^{ik_{z,j}z_{j+1}}     &
+	-k_{z,j} e^{-ik_{z,j}z_{j+1}}
 	} \frac{1}{2k_{z,j}}\pmqty{
-		k_{z,j} e^{-ik_{z,j}z_j} & 
-		e^{-ik_{z,j}z_j}  \\
-		k_{z,j} e^{ik_{z,j}z_j} & 
-		-e^{ik_{z,j}z_j}
-		} \\
+	k_{z,j} e^{-ik_{z,j}z_j}        &
+	e^{-ik_{z,j}z_j}                                       \\
+	k_{z,j} e^{ik_{z,j}z_j}         &
+	-e^{ik_{z,j}z_j}
+	}                                                      \\
 	% &= \frac{1}{2k_{z,j}}\pmqty{
 	% 	e^{ik_{z,j}z_{j+1}}k_{z,j} e^{-ik_{z,j}z_j} + e^{-ik_{z,j}z_{j+1}}k_{z,j} e^{ik_{z,j}z_j} &
 	% 	e^{ik_{z,j}z_{j+1}}e^{-ik_{z,j}z_j} - e^{-ik_{z,j}z_{j+1}}e^{ik_{z,j}z_j} \\
 	% 	k_{z,j} e^{ik_{z,j}z_{j+1}}k_{z,j} e^{-ik_{z,j}z_j} - k_{z,j} e^{-ik_{z,j}z_{j+1}}k_{z,j} e^{ik_{z,j}z_j} &
 	% 	k_{z,j} e^{ik_{z,j}z_{j+1}}e^{-ik_{z,j}z_j} + k_{z,j} e^{-ik_{z,j}z_{j+1}}e^{ik_{z,j}z_j}
 	% } \\
-	&= \frac{1}{2k_{z,j}} 
+	                                & = \frac{1}{2k_{z,j}}
 	\pmqty{
-		\cos\pqty{k_{z,j}d_j} &
-		i k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j} \\
-		i k_{z,j} \sin\pqty{k_{z,j}d_j} &
+	\cos\pqty{k_{z,j}d_j}           &
+	i k_{z,j}^{-1}\sin\pqty{k_{z,j}d_j}                    \\
+	i k_{z,j} \sin\pqty{k_{z,j}d_j} &
 		\cos\pqty{k_{z,j}d_j}
 	}
 \end{align*}
 
 To go from the first interface to the last we just need to apply the matrices in sequence.
 \begin{align*}
-	\vb{L} &= \vb{S}_N\pqty{z_N}^{-1}\cdot\vb{M}_{N-1}\cdot\vb{M}_{N-2} \cdots \vb{M}_{2}\cdot\vb{M}_{1}\cdot \vb{S}_0\pqty{z_1}
+	\vb{L} & = \vb{S}_N\pqty{z_N}^{-1}\cdot\vb{M}_{N-1}\cdot\vb{M}_{N-2} \cdots \vb{M}_{2}\cdot\vb{M}_{1}\cdot \vb{S}_0\pqty{z_1}
 \end{align*}
 
 \begin{align*}
 	r = -e^{i2k_z\pqty{a}a}\frac{
-		k_z\pqty{b} - k_z\pqty{a} + \pqty{b-a} k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}  
-		}{
-		k_z\pqty{b} + k_z\pqty{a} - \pqty{b-a}k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}  
-		}
+		k_z\pqty{b} - k_z\pqty{a} + \pqty{b-a} k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}
+	}{
+		k_z\pqty{b} + k_z\pqty{a} - \pqty{b-a}k_z\pqty{a} k_z\pqty{b}  - \int_a^b \dd{z} k_{z}^2\pqty{z}
+	}
 \end{align*}
 
 

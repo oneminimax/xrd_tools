@@ -1,4 +1,4 @@
-from xrd_tools.cristal_structure.general_cristal_structures import Cubic, Hexagonal, Orthorhombic, Tetragonal
+from xrd_tools.cristal_structures.general_cristal_structures import Cubic, Hexagonal, Orthorhombic, Tetragonal
 
 
 class No59(Orthorhombic):  # Pmmn

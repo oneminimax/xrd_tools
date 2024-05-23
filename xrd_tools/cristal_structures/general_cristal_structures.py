@@ -3,8 +3,8 @@ from typing import Tuple
 import numpy as np
 from numpy.typing import NDArray
 
-from xrd_tools.cristal_structure.form_factor import ITCFct
-from xrd_tools.cristal_structure.wyckoff import Position
+from xrd_tools.cristal_structures.form_factor import ITCFct
+from xrd_tools.cristal_structures.wyckoff import Position
 
 LEVI_CIVITA = np.zeros((3, 3, 3))
 LEVI_CIVITA[0, 1, 2] = LEVI_CIVITA[1, 2, 0] = LEVI_CIVITA[2, 0, 1] = 1
@@ -12,7 +12,6 @@ LEVI_CIVITA[0, 2, 1] = LEVI_CIVITA[2, 1, 0] = LEVI_CIVITA[1, 0, 2] = -1
 
 
 class GeneralStructure(object):
-
     """General notation :
 
     a     : lattice parameters (ex : a1, a2, etc)
@@ -443,18 +442,3 @@ class Atom(object):
             return self.formFactorFct(q)
         else:
             return self.form_factor
-
-
-# def GA_GB_GC_to_cristalStructure(GA, GB, GC):
-#     VG = np.abs(np.dot(GA, np.cross(GB, GC)))
-
-#     Ra = 2 * np.pi / VG * np.cross(GB, GC)
-#     Rb = 2 * np.pi / VG * np.cross(GC, GA)
-#     Rc = 2 * np.pi / VG * np.cross(GA, GB)
-
-#     a_length, b_length, a3_length = np.sqrt(np.sum(Ra**2)), np.sqrt(np.sum(Rb**2)), np.sqrt(np.sum(Rc**2))
-#     alpha = np.rad2deg(np.arccos(np.dot(Rb, Rc) / (b_length * a3_length)))
-#     beta = np.rad2deg(np.arccos(np.dot(Ra, Rc) / (a_length * a3_length)))
-#     gamma = np.rad2deg(np.arccos(np.dot(Ra, Rb) / (a_length * b_length)))
-
-#     return GeneralStructure([a_length, b_length, a3_length], [alpha, beta, gamma])
