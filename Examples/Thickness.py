@@ -36,6 +36,8 @@ ax1.set_ylabel("Intensity")
 ax3.set_xlabel("Distance (nm)")
 ax2.set_ylabel("AG(x)")
 
+fig.tight_layout()
+
 ag_model = Model(ag_fct)
 params = ag_model.make_params()
 params["wave_vector_g"].vary = False

@@ -1,6 +1,6 @@
 import numpy as np
 
-from xrd_tools import geometry as Geo
+from xrd_tools import geometry as geo
 
 
 class CirstalInSpace(object):
@@ -42,5 +42,5 @@ class CirstalInSpace(object):
     def angle2xyz(self, wave_length, two_theta, theta_source, phi):
         theta_detector = two_theta - theta_source
         return np.array(
-            Geo.theta_source_theta_detector_phi_2_wave_vector_x_y_z(wave_length, theta_source, theta_detector, phi)
+            geo.theta_source_theta_detector_phi_2_wave_vector_x_y_z(wave_length, theta_source, theta_detector, phi)
         )

@@ -10,8 +10,14 @@ def centroid(wave_vector, amplitude, expo=1):
     return np.dot(wave_vector, amplitude**expo) / np.sum(amplitude**expo)
 
 
-def width(wave_vector, amplitude):
-    return np.sqrt(np.dot(wave_vector**2, amplitude) / np.sum(amplitude))
+def power_width(wave_vector, amplitude, expo=1, threshold=0):
+
+    subs = amplitude > threshold
+
+    power_ave = np.dot(wave_vector[subs] ** expo, amplitude[subs]) / np.sum(amplitude[subs])
+    sign_ave = np.sign(power_ave)
+
+    return sign_ave * np.power(np.abs(power_ave), 1.0 / expo)
 
 
 def signal_area(wave_vector, amplitude):
@@ -41,14 +47,14 @@ def estimate_noise_level(wave_vector, amplitude, noise_poly_order=0):
     return noise_level
 
 
-def calculate_ag(wave_vector, amplitude, amplitude_error, x_max=130, x_step=2):
-    x = np.arange(0, x_max, x_step)
+def calculate_ag(wave_vector, amplitude, amplitude_error, x_max=130, x_step=2, window_fct=np.hanning):
+    x = np.arange(-x_max, x_max + x_step, x_step)
     ag, abs_ag_error, arg_ag_error = fourier_transform(
-        wave_vector, amplitude, x, window_fct=np.hanning, direct_y_error=amplitude_error, error_output=True
+        wave_vector, amplitude, x, window_fct=window_fct, direct_y_error=amplitude_error, error_output=True
     )
 
-    ag = ag / ag[0]
-    abs_ag_error = abs_ag_error / np.abs(ag[0])
+    ag = ag / np.max(np.abs(ag))
+    abs_ag_error = abs_ag_error / np.max(np.abs(ag))
 
     return x, ag, abs_ag_error, arg_ag_error
 
